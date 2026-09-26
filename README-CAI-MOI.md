@@ -77,7 +77,7 @@ Xuất 1080×1920 rồi mở phim cho tôi xem.
 | internet | npm install · font · ChatCut | Remotion render lại được khi offline sau lần đầu (font đã tải) — CHƯA đo |
 
 ## Lấy gói từ GitHub (từ 26/09/2026)
-Kho: `github.com/erocathanh/demo-bien-tap-video-chatcut` (RIÊNG TƯ — phim mẫu có mặt và giọng người thật; cần được cấp quyền xem).
+Kho: `github.com/erocathanh/demo-bien-tap-video-chatcut` (CÔNG KHAI từ 26/09/2026 theo quyết của chủ phim). Phim mẫu có mặt và giọng người thật: chỉ dùng để học, không đăng lại.
 ```bash
 git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
 ```

@@ -12,7 +12,7 @@ git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claud
 cd ~/.claude/skills/demo-bien-tap-video-chatcut/scripts/remotion && npm install
 bash render.sh broll          # phải in RESULT PASS
 ```
-Bản này là **v2.2** (26/09/2026). Kho để RIÊNG TƯ vì phim mẫu có mặt và giọng người thật — cần được cấp quyền mới clone được.
+Bản này là **v2.2** (26/09/2026). Kho CÔNG KHAI theo quyết của chủ phim (26/09/2026). Phim mẫu có mặt và giọng người thật: dùng để học, **không đăng lại, không cắt ghép đưa lên mạng**.
 Hướng dẫn từng bước có dòng «Kiểm»: **[README-CAI-MOI.md](README-CAI-MOI.md)** · cách dùng: **[SKILL.md](SKILL.md)** · danh sách tệp + md5: [MANIFEST.md](MANIFEST.md).
 
 ## Chưa cài Remotion? Vẫn demo được
