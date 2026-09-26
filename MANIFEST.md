@@ -1,9 +1,9 @@
-# MANIFEST — demo-bien-tap-video-chatcut v2.2 (2026-09-26 16:44 London)
+# MANIFEST — demo-bien-tap-video-chatcut v2.2 (2026-09-26 16:49 London)
 
 md5(8)    cỡ(byte)  tệp
 b8713ad8        111  .gitignore
 b8a2ed0c       6037  README-CAI-MOI.md
-47f28b23      18059  SKILL.md
+ce4d44fe      18563  SKILL.md
 945846a3    2211558  assets/b-roll/broll-1-dong.mp4
 40ed58a5        100  assets/b-roll/broll-1.props.json
 4ce52276    1775700  assets/b-roll/broll-2-dong.mp4
