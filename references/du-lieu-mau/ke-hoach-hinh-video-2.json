@@ -1,0 +1,367 @@
+{
+ "_note": "Visual plan for the sample video (18 sentences). word = the word in the sentence that triggers the object. Icons 22-38 are the SVGs of assets/icon/bo-03-svg.",
+ "rows": {
+  "1": {
+   "layout": "split",
+   "kind": "stairs",
+   "level": 1,
+   "shown": 3,
+   "pill": "BA CẤP",
+   "word": "ba cấp",
+   "objects": [
+    {
+     "word": "chủ doanh nghiệp",
+     "icon": "icons/icon-22-owner.svg"
+    }
+   ],
+   "chunks": [
+    4,
+    3,
+    3,
+    2,
+    3
+   ]
+  },
+  "2": {
+   "kind": "stairs",
+   "level": 1,
+   "shown": 1,
+   "word": "Cấp một",
+   "objects": [
+    {
+     "word": "hỏi",
+     "icon": "icons/icon-09-question.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    2,
+    3,
+    2
+   ]
+  },
+  "3": {
+   "kind": "grid",
+   "objects": [
+    {
+     "word": "mở",
+     "icon": "icons/icon-14-laptop-cursor.svg"
+    },
+    {
+     "word": "gõ",
+     "icon": "icons/icon-23-chat-question.svg"
+    },
+    {
+     "word": "nhận",
+     "icon": "icons/icon-24-chat-answer.svg"
+    }
+   ],
+   "chunks": [
+    4,
+    3,
+    4
+   ]
+  },
+  "4": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "tra cứu",
+     "icon": "icons/icon-25-search.svg"
+    },
+    {
+     "word": "mạng",
+     "icon": "icons/icon-26-globe.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    3,
+    2,
+    4
+   ],
+   "early": true
+  },
+  "5": {
+   "kind": "contrast",
+   "strike_word": "vặt",
+   "objects": [
+    {
+     "word": "hỏi",
+     "icon": "icons/icon-23-chat-question.svg"
+    },
+    {
+     "word": "bản sắc",
+     "icon": "icons/icon-12-brand-profile.svg"
+    }
+   ],
+   "chunks": [
+    4,
+    3,
+    3
+   ]
+  },
+  "6": {
+   "layout": "split",
+   "kind": "stairs",
+   "level": 2,
+   "shown": 2,
+   "word": "Cấp hai",
+   "objects": [
+    {
+     "word": "bản sắc",
+     "icon": "icons/icon-12-brand-profile.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    3,
+    3
+   ]
+  },
+  "7": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "tài liệu",
+     "icon": "icons/icon-13-file-stack.svg"
+    },
+    {
+     "word": "AI",
+     "icon": "icons/icon-02-claude.png"
+    }
+   ],
+   "chunks": [
+    4,
+    2,
+    2,
+    2
+   ]
+  },
+  "8": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "bạn",
+     "icon": "icons/icon-22-owner.svg"
+    },
+    {
+     "word": "công việc",
+     "icon": "icons/icon-27-task-board.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    4,
+    3,
+    3
+   ],
+   "early": true
+  },
+  "9": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "giúp",
+     "icon": "icons/icon-02-claude.png"
+    },
+    {
+     "word": "tệp",
+     "icon": "icons/icon-13-file-stack.svg"
+    },
+    {
+     "word": "fanpage",
+     "icon": "icons/icon-16-fanpage-post.svg"
+    },
+    {
+     "word": "kịch bản",
+     "icon": "icons/icon-17-script-page.svg"
+    },
+    {
+     "word": "báo cáo",
+     "icon": "icons/icon-19-report.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    3,
+    3,
+    3,
+    3
+   ]
+  },
+  "10": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "bạn",
+     "icon": "icons/icon-10-overloaded.svg"
+    },
+    {
+     "word": "gõ",
+     "icon": "icons/icon-28-keyboard.svg"
+    },
+    {
+     "word": "lệnh",
+     "icon": "icons/icon-15-command.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    3,
+    4,
+    3
+   ],
+   "early": true
+  },
+  "11": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "AI",
+     "icon": "icons/icon-02-claude.png"
+    },
+    {
+     "word": "dây chuyền",
+     "icon": "icons/icon-29-conveyor.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    3,
+    3,
+    2
+   ],
+   "early": true
+  },
+  "12": {
+   "layout": "split",
+   "kind": "stairs",
+   "level": 3,
+   "shown": 3,
+   "word": "Cấp ba",
+   "objects": [
+    {
+     "word": "tự chạy",
+     "icon": "icons/icon-30-gear.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    2,
+    4
+   ]
+  },
+  "13": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "lặp",
+     "icon": "icons/icon-31-loop.svg"
+    },
+    {
+     "word": "vận hành",
+     "icon": "icons/icon-20-calendar.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    4,
+    3,
+    2
+   ]
+  },
+  "14": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "AI",
+     "icon": "icons/icon-02-claude.png"
+    },
+    {
+     "word": "email",
+     "icon": "icons/icon-32-email.svg"
+    },
+    {
+     "word": "lịch hẹn",
+     "icon": "icons/icon-20-calendar.svg"
+    },
+    {
+     "word": "tin nhắn",
+     "icon": "icons/icon-33-message.svg"
+    },
+    {
+     "word": "thẻ việc",
+     "icon": "icons/icon-34-task-card.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    3,
+    4,
+    2
+   ]
+  },
+  "15": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "rảnh tay",
+     "icon": "icons/icon-35-relax.svg"
+    },
+    {
+     "word": "làm chủ",
+     "icon": "icons/icon-36-dashboard.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    2,
+    2,
+    4,
+    2
+   ]
+  },
+  "16": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "làm thuê",
+     "icon": "icons/icon-37-chain-broken.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    2
+   ]
+  },
+  "17": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "làm chủ",
+     "icon": "icons/icon-36-dashboard.svg"
+    }
+   ],
+   "chunks": [
+    4
+   ]
+  },
+  "18": {
+   "layout": "split",
+   "kind": "single",
+   "objects": [
+    {
+     "word": "theo dõi",
+     "icon": "icons/icon-38-follow.svg"
+    }
+   ],
+   "chunks": [
+    3,
+    3,
+    3,
+    4
+   ]
+  }
+ }
+}

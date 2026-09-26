@@ -1,0 +1,22 @@
+{
+  "name": "demo-bien-tap-video-remotion",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Remotion compositions used by the demo-bien-tap-video-chatcut skill (BrollDong, CaptionOverVideo, IconOverlay, IconStory, IconStage)",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@remotion/cli": "4.0.471",
+    "@remotion/google-fonts": "4.0.471",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.471"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc"
+  }
+}

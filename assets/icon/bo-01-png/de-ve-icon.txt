@@ -1,0 +1,15 @@
+Draw a SET of 8 flat vector-style icons for motion graphics overlays on a vertical video. Each icon is ONE separate PNG,
+1024x1024, TRANSPARENT background (alpha), no drop shadow, no text, no background card, centered with ~10% padding.
+Style: consistent across all 8 — flat, rounded corners, 2 tones max per icon, clean silhouettes readable at 200px.
+Palette ONLY: navy #0B1C33, gold #D4AF37, cream #F5F0E6, terracotta #D97757, white #FFFFFF. No other colors.
+Files and what each shows:
+icon-01-video-file.png      a film/video file: rounded rectangle document with a small play triangle; cream body, navy details
+icon-02-claude.png          the Claude asterisk mark: a 12-spoke terracotta asterisk (like the Claude logo shape), nothing else
+icon-03-timeline.png        a video timeline: two horizontal tracks with a few navy/gold clip blocks and a gold playhead line
+icon-04-transcript.png      a transcript sheet: three short text lines on a cream sheet, the middle line struck through in terracotta
+icon-05-broll-image.png     an image card: cream rounded card with a small navy mountain-and-sun picture glyph
+icon-06-export.png          export/download: a navy rounded square with a gold downward arrow into a tray
+icon-07-clock.png           a stopwatch: navy body, gold hand pointing to about 2 o'clock, cream face
+icon-08-check.png           a checkmark badge: gold circle with a navy check mark
+Rules: no gradients, no 3D, no photo textures, no letters or numbers anywhere, no extra objects. Every icon must be fully
+opaque shapes on a fully transparent background.

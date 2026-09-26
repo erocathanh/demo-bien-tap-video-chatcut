@@ -1,0 +1,30 @@
+[
+ {
+  "clip": "canh-cap-1-hoi-dap.mp4",
+  "from": 0,
+  "to": 630,
+  "frames": 630,
+  "got": 630
+ },
+ {
+  "clip": "canh-cap-2-giao-viec.mp4",
+  "from": 630,
+  "to": 1314,
+  "frames": 684,
+  "got": 684
+ },
+ {
+  "clip": "canh-cap-3-tu-chay.mp4",
+  "from": 1314,
+  "to": 1779,
+  "frames": 465,
+  "got": 465
+ },
+ {
+  "clip": "canh-ket-lam-chu-may.mp4",
+  "from": 1779,
+  "to": 1996,
+  "frames": 217,
+  "got": 217
+ }
+]

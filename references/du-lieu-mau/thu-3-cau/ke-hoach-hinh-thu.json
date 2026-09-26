@@ -1,0 +1,58 @@
+{
+ "rows": {
+  "1": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "bản sắc",
+     "icon": "icons/icon-12-brand-profile.svg"
+    },
+    {
+     "word": "AI",
+     "icon": "icons/icon-02-claude.png"
+    }
+   ]
+  },
+  "2": {
+   "kind": "single",
+   "objects": [
+    {
+     "word": "AI",
+     "icon": "icons/icon-02-claude.png"
+    },
+    {
+     "word": "tệp",
+     "icon": "icons/icon-13-file-stack.svg"
+    },
+    {
+     "word": "máy tính",
+     "icon": "icons/icon-14-laptop-cursor.svg"
+    }
+   ],
+   "chunks": [
+    2,
+    3,
+    3,
+    3
+   ]
+  },
+  "3": {
+   "kind": "flow",
+   "objects": [
+    {
+     "word": "Tạo",
+     "icon": "icons/icon-15-command.svg"
+    },
+    {
+     "word": "fanpage",
+     "icon": "icons/icon-16-fanpage-post.svg"
+    },
+    {
+     "word": "kịch bản",
+     "icon": "icons/icon-17-script-page.svg"
+    }
+   ],
+   "layout": "split"
+  }
+ }
+}

@@ -1,0 +1,5 @@
+Draw THREE separate photorealistic vertical images, each exactly 1080x1920 pixels (portrait 9:16), saved as PNG in the current directory with these exact names. They are B-roll cutaways for a Vietnamese small-business AI course video. STRICT: absolutely no readable text, letters, numbers, logos or watermarks anywhere (screens and papers must show only abstract shapes/blurred UI). Clean modern office, soft daylight, navy blue + warm gold + cream palette, shallow depth of field. No recognisable faces.
+1) vsl-broll-1-ban-sac-thuong-hieu.png — a brand guideline book open on a desk with colour swatches (navy, gold, cream), a laptop beside it glowing softly, as if feeding the brand identity into an AI.
+2) vsl-broll-2-ai-thao-tac-may-tinh.png — close-up of a laptop screen where files and folders are being organised automatically by glowing abstract light trails, the hands of the owner resting away from the keyboard with a coffee cup.
+3) vsl-broll-3-bao-cao-tong-hop.png — a tablet on a desk showing abstract colourful bar and pie charts (no numbers), a printed summary report next to it, top-down view.
+After saving, verify each file exists and report its pixel size.

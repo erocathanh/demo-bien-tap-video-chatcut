@@ -1,0 +1,6 @@
+scripts/remotion/node_modules/
+scripts/remotion/out/
+.DS_Store
+*.zip
+references/ghi-chu-noi-bo.md
+__pycache__/

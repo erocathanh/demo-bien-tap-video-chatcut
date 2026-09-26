@@ -1,0 +1,23 @@
+Draw a SET of 13 flat vector-style icons for motion graphics overlays on a vertical video. Each icon is ONE separate PNG,
+TRANSPARENT background (alpha), no drop shadow, no background card, centered with ~10% padding. Native size from the image
+tool is fine (1254x1254 was accepted last time) — do NOT resize.
+Style: MUST match the existing set in ../icon-set-01/ (open xem-8-icon.png there first): flat, rounded corners, 2 tones max per
+icon (3 only where stated), clean silhouettes readable at 200px.
+Palette ONLY: navy #0B1C33, gold #D4AF37, cream #F5F0E6, terracotta #D97757, white #FFFFFF. No other colors.
+No letters, no numbers, no words anywhere. The only allowed glyphs are the ones named below (question mark, chevron, check).
+Files and what each shows:
+icon-09-question.png        a speech bubble with a single bold question mark; cream bubble, navy question mark
+icon-10-overloaded.png      a simple person figure (no face details) holding a tall wobbly stack of boxes/folders; navy figure, gold and cream stack
+icon-11-robot-idle.png      a friendly small robot standing relaxed with arms down, nothing in its hands; cream body, navy visor, gold antenna
+icon-12-brand-profile.png   a brand profile folder/card: cream card with a gold circle emblem and three navy color swatch dots
+icon-13-file-stack.png      a stack of three document sheets fanned slightly; cream sheets, navy corner folds
+icon-14-laptop-cursor.png   an open laptop with a white arrow mouse cursor on its navy screen; cream body
+icon-15-command.png         a terminal/command window: navy rounded window with a gold prompt chevron and a short gold underscore line only
+icon-16-fanpage-post.png    a social post card: cream card with a navy round avatar dot, a gold image block and two navy line bars
+icon-17-script-page.png     a script page: cream sheet with a navy clapper-board glyph at top and four short navy line bars
+icon-18-bar-chart.png       a bar chart: four rounded vertical bars rising left to right in gold, navy baseline
+icon-19-report.png          a report: cream sheet with a small gold pie chart top-left and three navy line bars
+icon-20-calendar.png        a weekly calendar: navy top band with two binder rings, cream body with 7 empty rounded cells in one row
+icon-21-gift.png            a gift box: terracotta box with a gold ribbon and bow
+Rules: no gradients, no 3D, no photo textures, no extra objects. Fully opaque shapes on a fully transparent background;
+the four corners must be alpha 0. Save all 13 into this folder with exactly these names; do not overwrite other files.

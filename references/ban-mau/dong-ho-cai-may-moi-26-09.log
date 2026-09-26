@@ -1,0 +1,80 @@
+# Sổ bấm giờ — cài gói demo-bien-tap-video-chatcut v2.0 vào thư mục TRỐNG (giả máy mới), 26/09/2026, giờ London
+# máy thử: macOS Apple Silicon · npm cache của máy có sẵn (máy mới thật: npm install lâu hơn, ước 1–3 phút — CHƯA đo)
+15:13:08 BƯỚC 0 giải nén zip vào thư mục trống <thư-mục-trống>
+MANIFEST.md
+README-CAI-MOI.md
+SKILL.md
+assets
+references
+scripts
+15:13:09 BƯỚC 1 công cụ: node v24.13.0 · ffprobe version 9.0.1 · whisper có
+15:13:09 BƯỚC 3a npm install từ số 0 (node_modules có trước? không)
+15:13:28 npm install rc=0 ·  added 185 packages in 19s 
+15:13:28 BƯỚC 3b bash render.sh broll
+render BrollDong 22s
+PASS broll-1-dong.mp4 1080x1920 frames=91
+render BrollDong 5s
+PASS broll-2-dong.mp4 1080x1920 frames=81
+render BrollDong 4s
+PASS broll-3-dong.mp4 1080x1920 frames=70
+RESULT PASS
+15:13:59 xong render.sh broll
+15:14:13 so clip 1 với bản mẫu: PSNR average:42.946949
+15:14:13 so clip 2 với bản mẫu: PSNR average:42.293518
+15:14:13 so clip 3 với bản mẫu: PSNR average:41.306372
+15:14:13 BƯỚC 4 verify-export trên bản mẫu (câu đã xoá + câu phải còn)
+md5        410e998a66ff9e7c2d33d84e712d63af
+PASS md5 matches known-good render
+size       1080x1920 · 32.042667s · audio=aac
+PASS vertical 1080x1920
+PASS has audio
+PASS no black frames
+loudness   mean -20.8 dB
+sheet      assets/ban-mau-da-ra/vsl-chatcut-broll-codex-contact.png (look at it: edges + b-roll placement)
+PASS removed phrase not heard (whisper small; it mishears some words, read the text below)
+PASS positive control heard: gửi tặng skill
+  heard: Tối nay, ở buổi 1, bí mật AI, Thanh đang cùng bạn gỡ một câu hỏi,
+  heard: Có AI rồi vì sao chủ vẫn ôm hết việc?
+  heard: Ngạp bản sắc thương hiệu để AI hiểu đúng doanh nghiệp,
+  heard: Giao AI xử lý tệp và thao tác trên máy tính,
+  heard: Tạo bài fanpage và kịch bản bằng một lệnh,
+  heard: Phần tích khảo sát, xuất báo cáo tổng hợp.
+  heard: Tự động hóa việc lập mỗi ngày không phải nhắc.
+  heard: Bình luật email của bạn dưới bài này,
+  heard: Thanh gửi tặng skill vừa làm mẫu.
+RESULT PASS
+15:14:36 BƯỚC 4b đối chứng âm: câu CÒN trong phim đưa vào ô «đã xoá»
+md5        410e998a66ff9e7c2d33d84e712d63af
+PASS md5 matches known-good render
+size       1080x1920 · 32.042667s · audio=aac
+PASS vertical 1080x1920
+PASS has audio
+PASS no black frames
+loudness   mean -20.8 dB
+sheet      assets/ban-mau-da-ra/vsl-chatcut-broll-codex-contact.png (look at it: edges + b-roll placement)
+FAIL removed phrase still audible: gửi tặng skill
+PASS positive control heard: tạo bài fanpage
+  heard: Tối nay, ở buổi 1, bí mật AI, Thanh đang cùng bạn gỡ một câu hỏi,
+  heard: Có AI rồi vì sao chủ vẫn ôm hết việc?
+  heard: Ngạp bản sắc thương hiệu để AI hiểu đúng doanh nghiệp,
+  heard: Giao AI xử lý tệp và thao tác trên máy tính,
+  heard: Tạo bài fanpage và kịch bản bằng một lệnh,
+  heard: Phần tích khảo sát, xuất báo cáo tổng hợp.
+  heard: Tự động hóa việc lập mỗi ngày không phải nhắc.
+  heard: Bình luật email của bạn dưới bài này,
+  heard: Thanh gửi tặng skill vừa làm mẫu.
+RESULT FAIL
+15:15:08 BƯỚC 3c bash render.sh stage (video sân khấu 65 s)
+render IconStage 29s
+PASS video-2-ba-cap-do-ai.mp4 1080x1920 frames=1959
+RESULT PASS
+15:15:39 BƯỚC 3d bash render.sh story (icon khớp lời 36 s)
+render IconStory 27s
+PASS icon-story-phim-buoi-1.mp4 1080x1920 frames=1091
+RESULT PASS
+15:16:08 so video sân khấu với bản mẫu v03b: PSNR average:43.795602
+15:16:09 blackdetect video sân khấu: 0 đoạn đen
+15:16:22 tiếng trong video sân khấu: aac
+15:16:22 tìm chuỗi thư mục người dùng macOS (Users + dấu gạch) trong gói (trừ node_modules, out): 0 tệp
+15:16:23    (đối chứng: node_modules sinh ra khi cài có 6 tệp chứa chuỗi đó — đúng là thước bắt được, và node_modules KHÔNG nằm trong zip)
+MANIFEST: 159 tệp ghi · lệch md5/thiếu 0 · thừa ngoài manifest 1 ['scripts/remotion/package-lock.json']
