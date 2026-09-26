@@ -3,7 +3,7 @@
 md5(8)    cỡ(byte)  tệp
 b8713ad8        111  .gitignore
 b8a2ed0c       6037  README-CAI-MOI.md
-ce4d44fe      18563  SKILL.md
+4838328f      18841  SKILL.md
 945846a3    2211558  assets/b-roll/broll-1-dong.mp4
 40ed58a5        100  assets/b-roll/broll-1.props.json
 4ce52276    1775700  assets/b-roll/broll-2-dong.mp4
@@ -170,7 +170,7 @@ bb91c8af       2588  scripts/remotion/render.sh
 c13f350f      10536  scripts/remotion/src/IconOverlayParts.tsx
 a29cff03      15215  scripts/remotion/src/IconStage.tsx
 b4acabfd       4169  scripts/remotion/src/IconStory.tsx
-fd7f00d7       1709  scripts/remotion/src/Root.tsx
+8169f6bb       1736  scripts/remotion/src/Root.tsx
 95bc8aff        404  scripts/remotion/src/fonts.ts
 d92d9dee        109  scripts/remotion/src/index.ts
 db41ee37        427  scripts/remotion/tsconfig.json
