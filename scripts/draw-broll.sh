@@ -29,14 +29,15 @@ if [ "$check_only" = "0" ]; then
   fi
 fi
 
+command -v ffprobe >/dev/null 2>&1 || { echo "FAIL thiếu ffprobe (đi kèm FFmpeg) để đo cỡ ảnh"; exit 3; }
 fail=0
 for name in "$@"; do
   p="$out/$name"
   if [ ! -s "$p" ]; then echo "FAIL missing $name"; fail=1; continue; fi
-  w=$(sips -g pixelWidth "$p" | awk '/pixelWidth/{print $2}')
-  h=$(sips -g pixelHeight "$p" | awk '/pixelHeight/{print $2}')
-  if [ "$w" = "1080" ] && [ "$h" = "1920" ]; then echo "PASS $name ${w}x${h}"
-  else echo "FAIL $name is ${w}x${h}, expected 1080x1920"; fail=1; fi
+  # ffprobe works on macOS, Windows Git Bash and Linux (sips is macOS only); strip \r from Windows output
+  wh=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=nw=1:nk=1 "$p" | tr -d '\r' | paste -sd x -)
+  if [ "$wh" = "1080x1920" ]; then echo "PASS $name $wh"
+  else echo "FAIL $name is ${wh:-unreadable}, expected 1080x1920"; fail=1; fi
 done
 echo "Now LOOK at every image: no letters, no numbers, no logos. Codex sometimes bakes text in anyway."
 [ "$fail" = "0" ] && echo "RESULT PASS" || echo "RESULT FAIL"
