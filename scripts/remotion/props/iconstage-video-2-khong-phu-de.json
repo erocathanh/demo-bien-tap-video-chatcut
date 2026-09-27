@@ -1,0 +1,581 @@
+{
+ "durationInFrames": 1996,
+ "scenes": [
+  {
+   "id": "c1",
+   "from": 0,
+   "to": 161,
+   "layout": "split",
+   "blank": 0,
+   "items": [
+    {
+     "t": "pill",
+     "at": 26,
+     "text": "BA CẤP",
+     "x": 50,
+     "y": 10
+    },
+    {
+     "t": "stairs",
+     "at": 30,
+     "x": 50,
+     "y": 40,
+     "steps": 3,
+     "shown": 3,
+     "active": 1,
+     "w": 64,
+     "ping": true
+    },
+    {
+     "t": "icon",
+     "at": 85,
+     "src": "icons/icon-22-owner.svg",
+     "x": 24,
+     "y": 19,
+     "size": 20
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "from": 161,
+   "to": 273,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "pill",
+     "at": 4,
+     "text": "CẤP 1",
+     "x": 50,
+     "y": 22
+    },
+    {
+     "t": "stairs",
+     "at": 8,
+     "x": 50,
+     "y": 70,
+     "steps": 3,
+     "shown": 1,
+     "active": 1,
+     "w": 64,
+     "ping": true
+    },
+    {
+     "t": "icon",
+     "at": 43,
+     "src": "icons/icon-09-question.svg",
+     "x": 24,
+     "y": 31,
+     "size": 20
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "from": 273,
+   "to": 406,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 9,
+     "src": "icons/icon-14-laptop-cursor.svg",
+     "x": 28.5,
+     "y": 46,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 48,
+     "src": "icons/icon-23-chat-question.svg",
+     "x": 50.0,
+     "y": 46,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 81,
+     "src": "icons/icon-24-chat-answer.svg",
+     "x": 71.5,
+     "y": 46,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c4",
+   "from": 406,
+   "to": 513,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 4,
+     "src": "icons/icon-25-search.svg",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    },
+    {
+     "t": "icon",
+     "at": 66,
+     "src": "icons/icon-26-globe.svg",
+     "x": 50.0,
+     "y": 59,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c5",
+   "from": 513,
+   "to": 630,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 14,
+     "src": "icons/icon-23-chat-question.svg",
+     "x": 50,
+     "y": 34,
+     "size": 26
+    },
+    {
+     "t": "line",
+     "at": 26,
+     "d": "M 350 683 L 730 623",
+     "strike": true
+    },
+    {
+     "t": "icon",
+     "at": 77,
+     "src": "icons/icon-12-brand-profile.svg",
+     "x": 50,
+     "y": 60,
+     "size": 26,
+     "motion": "spring"
+    }
+   ]
+  },
+  {
+   "id": "c6",
+   "from": 630,
+   "to": 728,
+   "layout": "split",
+   "blank": 3,
+   "items": [
+    {
+     "t": "pill",
+     "at": 4,
+     "text": "CẤP 2",
+     "x": 50,
+     "y": 10
+    },
+    {
+     "t": "stairs",
+     "at": 8,
+     "x": 50,
+     "y": 40,
+     "steps": 3,
+     "shown": 2,
+     "active": 2,
+     "w": 64,
+     "ping": true
+    },
+    {
+     "t": "icon",
+     "at": 60,
+     "src": "icons/icon-12-brand-profile.svg",
+     "x": 24,
+     "y": 19,
+     "size": 20
+    }
+   ]
+  },
+  {
+   "id": "c7",
+   "from": 728,
+   "to": 817,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 16,
+     "src": "icons/icon-13-file-stack.svg",
+     "x": 27,
+     "y": 46,
+     "size": 26
+    },
+    {
+     "t": "line",
+     "at": 28,
+     "d": "M 440 883 Q 540 793 640 883",
+     "head": true
+    },
+    {
+     "t": "icon",
+     "at": 34,
+     "src": "icons/icon-02-claude.png",
+     "x": 73,
+     "y": 46,
+     "size": 26
+    }
+   ]
+  },
+  {
+   "id": "c8",
+   "from": 817,
+   "to": 928,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 4,
+     "src": "icons/icon-22-owner.svg",
+     "x": 27,
+     "y": 46,
+     "size": 26
+    },
+    {
+     "t": "line",
+     "at": 50,
+     "d": "M 440 883 Q 540 793 640 883",
+     "head": true
+    },
+    {
+     "t": "icon",
+     "at": 56,
+     "src": "icons/icon-27-task-board.svg",
+     "x": 73,
+     "y": 46,
+     "size": 26
+    }
+   ]
+  },
+  {
+   "id": "c9",
+   "from": 928,
+   "to": 1080,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 12,
+     "src": "icons/icon-02-claude.png",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    },
+    {
+     "t": "icon",
+     "at": 27,
+     "src": "icons/icon-13-file-stack.svg",
+     "x": 17.75,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 58,
+     "src": "icons/icon-16-fanpage-post.svg",
+     "x": 39.25,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 89,
+     "src": "icons/icon-17-script-page.svg",
+     "x": 60.75,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 117,
+     "src": "icons/icon-19-report.svg",
+     "x": 82.25,
+     "y": 59,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c10",
+   "from": 1080,
+   "to": 1203,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 4,
+     "src": "icons/icon-10-overloaded.svg",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    },
+    {
+     "t": "icon",
+     "at": 53,
+     "src": "icons/icon-28-keyboard.svg",
+     "x": 39.25,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 70,
+     "src": "icons/icon-15-command.svg",
+     "x": 60.75,
+     "y": 59,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c11",
+   "from": 1203,
+   "to": 1314,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 4,
+     "src": "icons/icon-02-claude.png",
+     "x": 27,
+     "y": 46,
+     "size": 26
+    },
+    {
+     "t": "line",
+     "at": 47,
+     "d": "M 440 883 Q 540 793 640 883",
+     "head": true
+    },
+    {
+     "t": "icon",
+     "at": 53,
+     "src": "icons/icon-29-conveyor.svg",
+     "x": 73,
+     "y": 46,
+     "size": 26
+    }
+   ]
+  },
+  {
+   "id": "c12",
+   "from": 1314,
+   "to": 1414,
+   "layout": "split",
+   "blank": 3,
+   "items": [
+    {
+     "t": "pill",
+     "at": 4,
+     "text": "CẤP 3",
+     "x": 50,
+     "y": 10
+    },
+    {
+     "t": "stairs",
+     "at": 8,
+     "x": 50,
+     "y": 40,
+     "steps": 3,
+     "shown": 3,
+     "active": 3,
+     "w": 64,
+     "ping": true
+    },
+    {
+     "t": "icon",
+     "at": 41,
+     "src": "icons/icon-30-gear.svg",
+     "x": 24,
+     "y": 19,
+     "size": 20
+    }
+   ]
+  },
+  {
+   "id": "c13",
+   "from": 1414,
+   "to": 1513,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 17,
+     "src": "icons/icon-31-loop.svg",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    },
+    {
+     "t": "icon",
+     "at": 62,
+     "src": "icons/icon-20-calendar.svg",
+     "x": 50.0,
+     "y": 59,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c14",
+   "from": 1513,
+   "to": 1656,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 4,
+     "src": "icons/icon-02-claude.png",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    },
+    {
+     "t": "icon",
+     "at": 43,
+     "src": "icons/icon-32-email.svg",
+     "x": 17.75,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 65,
+     "src": "icons/icon-20-calendar.svg",
+     "x": 39.25,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 88,
+     "src": "icons/icon-33-message.svg",
+     "x": 60.75,
+     "y": 59,
+     "size": 18
+    },
+    {
+     "t": "icon",
+     "at": 110,
+     "src": "icons/icon-34-task-card.svg",
+     "x": 82.25,
+     "y": 59,
+     "size": 18
+    }
+   ]
+  },
+  {
+   "id": "c15",
+   "from": 1656,
+   "to": 1779,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 24,
+     "src": "icons/icon-35-relax.svg",
+     "x": 27,
+     "y": 46,
+     "size": 26
+    },
+    {
+     "t": "line",
+     "at": 48,
+     "d": "M 440 883 Q 540 793 640 883",
+     "head": true
+    },
+    {
+     "t": "icon",
+     "at": 54,
+     "src": "icons/icon-36-dashboard.svg",
+     "x": 73,
+     "y": 46,
+     "size": 26
+    }
+   ]
+  },
+  {
+   "id": "c16",
+   "from": 1779,
+   "to": 1831,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 9,
+     "src": "icons/icon-37-chain-broken.svg",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    }
+   ]
+  },
+  {
+   "id": "c17",
+   "from": 1831,
+   "to": 1890,
+   "layout": "full",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 7,
+     "src": "icons/icon-36-dashboard.svg",
+     "x": 50,
+     "y": 40,
+     "size": 30,
+     "motion": "spring"
+    }
+   ]
+  },
+  {
+   "id": "c18",
+   "from": 1890,
+   "to": 1996,
+   "layout": "split",
+   "blank": 3,
+   "items": [
+    {
+     "t": "icon",
+     "at": 8,
+     "src": "icons/icon-38-follow.svg",
+     "x": 50,
+     "y": 19,
+     "size": 30,
+     "motion": "spring"
+    }
+   ]
+  }
+ ],
+ "captions": [],
+ "audio": "tieng-video-2-moi.mp3",
+ "face": {
+  "video": "nen-sach.mp4",
+  "startFrame": 150,
+  "objectPosition": "50% 30%"
+ }
+}

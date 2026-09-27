@@ -229,6 +229,8 @@ def main():
     ap.add_argument("--audio")
     ap.add_argument("--face", help="video:startFrame:objectPosition (video relative to the Remotion public/ folder)")
     ap.add_argument("--out", help="write the props JSON to this file (UTF-8, LF) instead of stdout")
+    ap.add_argument("--no-captions", action="store_true",
+                    help="leave captions empty: the clip goes to ChatCut, which makes the one caption layer from the speech")
     a = ap.parse_args()
 
     rows = parse_script(a.script)
@@ -264,7 +266,7 @@ def main():
         report.append(f"# c{r['n']} {r['stage']:5} {s_from}-{s_to} ({(s_to - s_from) / FPS:.1f}s) {spec['kind']:8} items={len(items)} ats={ats}")
     for k, c in enumerate(captions):  # each chunk lasts until the next one starts (or the end)
         c["to"] = min(captions[k + 1]["from"] if k + 1 < len(captions) else end_all, c.pop("cut"))  # never spill into the next scene
-    props = {"durationInFrames": end_all, "scenes": scenes, "captions": captions}
+    props = {"durationInFrames": end_all, "scenes": scenes, "captions": [] if a.no_captions else captions}
     if a.audio:
         props["audio"] = a.audio
     if a.face:

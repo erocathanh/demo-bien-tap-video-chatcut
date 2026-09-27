@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # render.sh — render the sample clips of the skill with the bundled Remotion mini-project.
-# Usage (from anywhere):  bash scripts/remotion/render.sh [broll|stage|story|all] [out_dir]
+# Usage (from anywhere):  bash scripts/remotion/render.sh [broll|stage|stage-chatcut|story|all] [out_dir]
 #   broll  3 moving b-roll clips from the 3 PNGs (BrollDong, no fade)        ~10 s each   (default: install check)
 #   stage  video 2 "3 levels of AI" (IconStage, one stage per sentence)       ~30-70 s, 66.5 s long, 1996 frames
+#   stage-chatcut  same video WITHOUT captions, for ChatCut to caption     ~30-70 s, 1996 frames -> out/video-2-khong-phu-de.mp4
 #   story  day-1 film icon overlay (IconStory, icons that follow the words)   ~40 s, 36 s long, no audio
 # Needs: node >= 18, `npm ci` done once in this folder, ffprobe for the check.
 # Works with macOS /bin/bash 3.2 and Windows Git Bash (tools there print CRLF, so every reading strips \r).
@@ -43,7 +44,7 @@ render() {  # $1 composition  $2 props  $3 out  $4 expected frames
   echo "render $1 $(( $(date +%s) - t0 ))s"
   check "$3" "$4"
 }
-case "$WHAT" in broll|stage|story|all) ;; *) echo "usage: render.sh [broll|stage|story|all] [out_dir]"; exit 2 ;; esac
+case "$WHAT" in broll|stage|stage-chatcut|story|all) ;; *) echo "usage: render.sh [broll|stage|stage-chatcut|story|all] [out_dir]"; exit 2 ;; esac
 if [ "$WHAT" = broll ] || [ "$WHAT" = all ]; then
   render BrollDong props/broll-1.json "$OUT/broll-1-dong.mp4" 91
   render BrollDong props/broll-2.json "$OUT/broll-2-dong.mp4" 81
@@ -51,6 +52,9 @@ if [ "$WHAT" = broll ] || [ "$WHAT" = all ]; then
 fi
 if [ "$WHAT" = stage ] || [ "$WHAT" = all ]; then
   render IconStage props/iconstage-video-2.json "$OUT/video-2-ba-cap-do-ai.mp4" 1996
+fi
+if [ "$WHAT" = stage-chatcut ] || [ "$WHAT" = all ]; then
+  render IconStage props/iconstage-video-2-khong-phu-de.json "$OUT/video-2-khong-phu-de.mp4" 1996
 fi
 if [ "$WHAT" = story ] || [ "$WHAT" = all ]; then
   render IconStory props/iconstory-phim-buoi-1.json "$OUT/icon-story-phim-buoi-1.mp4" 1091

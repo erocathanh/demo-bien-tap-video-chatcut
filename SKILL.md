@@ -78,16 +78,20 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
                                                            1996 khung · có tiếng · không chữ phụ đề ⇒ RESULT PASS
    Máy không dựng được (Windows ARM, npm hỏng, không mạng) ⇒ dùng bản dựng sẵn assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4
 2  Skill chatcut:chatcut-plugin-basics-claude (một lần mỗi phiên)
-3  create_project → manage_timelines update 1080×1920       (🔴 dự án mới mặc định NGANG)
-4  import_media create_session → bash scripts/upload.sh <token> <endpoint> <video-2-khong-phu-de.mp4>
+3  create_project {"compositionWidth":1080,"compositionHeight":1920,"fps":30}   (🔴 thiếu hai số này thì dự án mặc định NGANG)
+4  import_media create_session → bash scripts/upload.sh <token> <endpoint> <video-2-khong-phu-de.mp4>   (đo: 10 giây)
 5  edit_item adds [{"type":"video","assetId":A,"fromFrame":0,"trackId":"V1","fit":"cover"}]
 6  (tuỳ chọn) read_script → apply_script gạch ~~câu~~ ⇒ hình tự cắt theo tiếng vì hình và tiếng nằm chung một clip
-7  edit_captions enable ⇒ set_sources {"sources":[{"trackId":"V1"}]} ⇒ refresh
+7  edit_captions enable ⇒ set_sources {"sources":[{"trackId":"V1"}]} ⇒ style + layout đặt chữ DƯỚI thẻ sân khấu ⇒ refresh
+     style  {"font":"Be Vietnam Pro","sizePx":56,"fontWeight":"700","color":"#FFFFFF","backgroundColor":"#0B1628","backgroundOpacity":0.9,"backgroundRadius":16}
+     layout {"sourceId":"<V1 source>","left":75,"top":1480,"width":930,"height":105}   (kiểu mặc định đặt chữ ở y ~1414, chạm mép thẻ ở y 1440)
 8  smooth_audio → submit_export {"format":"video","resolution":"1080p"} → track_export (hỏi lại mỗi ≥ 10 giây)
 9  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>"   (link sống 1 ngày)
 10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã xoá, nếu có>" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng».
+Đo trên Mac 27/09: dựng 29 giây · tải lên 10 giây · bóc lời có ngay · gạch 1 câu 1996 → 1887 khung · xuất trên mây 22,7 giây · verify-export PASS ·
+cả phần ChatCut khoảng 3 phút. Bản ra: `references/ban-mau/video-icon-ke-chuyen-chatcut-v3-contact.png` (10 khung).
 Tự làm video mới từ kịch bản của mình (TTS → mốc chữ → kế hoạch hình → icon → props → dựng): `references/quy-trinh/video-san-khau-theo-cau.md`.
 
 ---
