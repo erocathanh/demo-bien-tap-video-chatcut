@@ -75,7 +75,8 @@ Remotion (bộ dựng video trên máy) chỉ làm **hình + tiếng**, **không
 phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa được bằng chữ.
 ```
 1  bash scripts/remotion/render.sh stage-chatcut          (thời hạn 600000 ms) ⇒ scripts/remotion/out/video-2-khong-phu-de.mp4
-                                                           1996 khung · có tiếng · không chữ phụ đề ⇒ RESULT PASS
+                                                           bộ dựng tự kiểm khổ · 1996 khung · có luồng tiếng ⇒ RESULT PASS
+                                                           (không phụ đề: bộ kiểm không nhìn được chữ — mở vài khung ra xem)
    Máy không dựng được (Windows ARM, npm hỏng, không mạng) ⇒ dùng bản dựng sẵn assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4
 2  Skill chatcut:chatcut-plugin-basics-claude (một lần mỗi phiên)
 3  create_project {"compositionWidth":1080,"compositionHeight":1920,"fps":30}   (🔴 thiếu hai số này thì dự án mặc định NGANG)
