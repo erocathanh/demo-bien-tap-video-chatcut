@@ -201,11 +201,11 @@ CaptionOverVideo  phụ đề chạy đè lên video nền
 ## Bản đồ thư mục
 ```
 README.md · README-CAI-MOI.md (+ -MAC · -WINDOWS)   cho người dùng
-SKILL.md                 tệp này · MANIFEST.md mọi tệp + md5 8 ký tự + cỡ
+SKILL.md                 tệp này · MANIFEST.md mọi tệp + md5 8 ký tự + cỡ (kiểm: bash scripts/kiem-manifest.sh)
 assets/  phim-mau/ (phim buổi 1 có tiếng · nền sạch · phim ngắn 10 s) · b-roll/ (3 ảnh + 3 clip) · icon/ (38 icon)
          ban-mau-da-ra/ (bản ra mẫu + bảng khung) · nguyen-lieu-video-2/ (video icon dựng sẵn, có và không phụ đề + props + mốc chữ)
-references/  mcp-call-sequence.md · nguon-chatcut-docs.md · quy-trinh/ · du-lieu-mau/ · ban-mau/ (md5, sổ bấm giờ) · gop-y-windows/ (lượt thử Windows 27/09)
-scripts/  kiem-may.sh (+ .ps1) · py.sh · upload.sh · verify-export.sh · render-broll-dong.sh · check-caption-band.sh · draw-broll.sh ·
+references/  mcp-call-sequence.md · nguon-chatcut-docs.md · quy-trinh/ · du-lieu-mau/ · ban-mau/ (md5, sổ bấm giờ) · gop-y-windows/ (lượt thử Windows 27/09 + bản báo lỗi ChatCut, chưa gửi)
+scripts/  kiem-may.sh (+ .ps1) · kiem-manifest.sh · py.sh · upload.sh · verify-export.sh · render-broll-dong.sh · check-caption-band.sh · draw-broll.sh ·
           make_stage_props.py · make_clusters.py · measure_empty_stage.py · make_icons_svg*.py · lam-bang-khung.py · path-length.mjs · remotion/
 ```
 
@@ -214,4 +214,4 @@ scripts/  kiem-may.sh (+ .ps1) · py.sh · upload.sh · verify-export.sh · rend
 
 ## CHANGELOG
 - **2026-09-25 → 26** v1.0–v2.2a — claude-video-ai-builder, claude-video-studio-pm: demo «Sửa phim bằng sửa chữ» (1 phút 30 giây, md5 trùng giữa các lượt) · b-roll động · Remotion icon khớp lời + sân khấu theo câu · gói tự đủ · nguyên liệu dựng sẵn · che ô chat Zoom (tên + số điện thoại người tham dự) ở 3 giây đầu phim mẫu. Lịch sử chi tiết: git log.
-- **2026-09-27** v3.0 — claude-video-ai-builder (Owner: «xem như ta build mới» cho người mới tinh; PM claude-video-studio-pm soi): làm lại cho người mới tinh trên macOS + Windows, dựa trên **lượt cài và chạy thật trên Windows 11 ngày 27/09/2026** (log `references/gop-y-windows/LOG-LOI-WINDOWS_v1.0.md`). README một câu + khối «Dành cho AI agent» · bước 0 tự kiểm máy (`kiem-may.sh`/`.ps1`) và hỏi MỘT câu gom · luật thuyết minh lời thường · tài liệu cài tách Mac/Windows · «Video icon kể chuyện» đi qua ChatCut (Remotion không phụ đề, ChatCut làm phụ đề một lớp) · bỏ tên «Quy trình C», bỏ đường nối ChatCut bằng `add-json`, gỡ `IconOverlay` khỏi Root · mỗi video MỘT bản mẫu · mã lỗi đã sửa: B1–B6 · M1–M8 · M10–M14 · m1–m6 · m8–m11 · m14 · m17 · m19–m23 (B7 chỉ có lối vượt, chờ ChatCut sửa P5; P1–P6 báo đội ChatCut).
+- **2026-09-27** v3.0 — claude-video-ai-builder (Owner: «xem như ta build mới» cho người mới tinh; PM claude-video-studio-pm soi): làm lại cho người mới tinh trên macOS + Windows, dựa trên **lượt cài và chạy thật trên Windows 11 ngày 27/09/2026** (log `references/gop-y-windows/LOG-LOI-WINDOWS_v1.0.md`). README một câu + khối «Dành cho AI agent» · bước 0 tự kiểm máy (`kiem-may.sh`/`.ps1`) và hỏi MỘT câu gom · luật thuyết minh lời thường · tài liệu cài tách Mac/Windows · «Video icon kể chuyện» đi qua ChatCut (Remotion không phụ đề, ChatCut làm phụ đề một lớp) · bỏ tên «Quy trình C», bỏ đường nối ChatCut bằng `add-json`, gỡ `IconOverlay` khỏi Root · mỗi video MỘT bản mẫu · mã lỗi đã sửa: B1–B6 · M1–M14 · m1–m12 · m14–m23 (m7 = MANIFEST sinh lại ở commit cuối) · **chưa sửa:** m13 (phông Be Vietnam Pro vẫn tải từ Google Fonts ở lần dựng đầu ⇒ lần đầu cần mạng) · B7 chỉ có lối vượt (`upload.sh` chép phim ra Downloads + hướng dẫn «Click to relink»), chờ ChatCut sửa P5 · P1–P6 viết thành `references/gop-y-windows/BAO-LOI-CHATCUT_v1.0.md`, gửi hay không do Owner quyết.
