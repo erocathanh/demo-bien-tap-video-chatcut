@@ -4,7 +4,8 @@
 #   kept_phrase    optional positive control: text that MUST still be heard; if Whisper misses it,
 #                  the removed-phrase check is not trustworthy (the ruler is broken, not the edit)
 #   expected_md5   optional: compare byte-for-byte with a known-good render
-#   removed_phrase optional: text that must NOT be heard any more (checked with local Whisper)
+#   removed_phrase optional: text that must NOT be heard any more (checked with local Whisper); pass "" when
+#                  no sentence was struck — the kept phrase is still checked
 # Writes a contact sheet <name>-contact.png next to the file, or into <skill>/out/ when the file sits inside
 # the skill's assets/ (so running the README checks never overwrites a tracked file).
 # Exit code 0 = all checks passed, 1 = at least one check failed.
@@ -13,7 +14,7 @@ set -uo pipefail
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 export PYTHONUTF8=1  # Windows: without it whisper cannot write Vietnamese text and exits 0 with no file
 
-f="${1:?usage: verify-export.sh <export.mp4> [expected_md5] [removed_phrase]}"
+f="${1:?usage: verify-export.sh <export.mp4> [expected_md5] [removed_phrase] [kept_phrase]}"
 want_md5="${2:-}"
 removed="${3:-}"
 kept="${4:-}"
@@ -86,7 +87,9 @@ if [ "$(printf 'Ở buổi 1,' | norm)" != "$(printf 'ở buổi một' | norm)"
   echo "FAIL text normaliser self-test (perl -Mutf8) — the removed-phrase check cannot be trusted on this machine"; fail=1
 fi
 
-if [ -n "$removed" ]; then
+# Whisper runs when there is anything to listen for: a removed phrase, a kept phrase, or both
+# (a video with no sentence struck still gets its positive control checked).
+if [ -n "$removed" ] || [ -n "$kept" ]; then
   if command -v whisper >/dev/null; then
     wd=$(mktemp -d)
     wlog="$sheet_dir/${name%.*}-whisper.log"
@@ -97,15 +100,20 @@ if [ -n "$removed" ]; then
     wrc=$?
     txt=$(cat "$wd"/*.txt 2>/dev/null | tr -d '\r')
     rm -rf "$wd"
+    # compare normalised strings held in variables: no pipe into grep -q, which can lose a match under pipefail
+    heard=$(printf '%s' "$txt" | norm)
     if [ -z "$txt" ]; then
       echo "FAIL whisper produced no text (exit $wrc) — last lines of $wlog:"; tail -5 "$wlog" | sed 's/^/  /'; fail=1
-    elif printf '%s' "$txt" | norm | grep -qF "$(printf '%s' "$removed" | norm)"; then
-      echo "FAIL removed phrase still audible: $removed"; fail=1
-    else
-      echo "PASS removed phrase not heard (whisper small; it mishears some words, read the text below)"
+    elif [ -n "$removed" ]; then
+      rn=$(printf '%s' "$removed" | norm)
+      case "$heard" in
+        *"$rn"*) echo "FAIL removed phrase still audible: $removed"; fail=1 ;;
+        *) echo "PASS removed phrase not heard (whisper small; it mishears some words, read the text below)" ;;
+      esac
     fi
     if [ -n "$txt" ] && [ -n "$kept" ]; then
-      if printf '%s' "$txt" | norm | grep -qF "$(printf '%s' "$kept" | norm)"; then
+      kn=$(printf '%s' "$kept" | norm)
+      if case "$heard" in *"$kn"*) true ;; *) false ;; esac; then
         echo "PASS positive control heard: $kept"
       else
         echo "FAIL positive control NOT heard: $kept (whisper ruler unreliable here, check by ear)"; fail=1
@@ -113,7 +121,7 @@ if [ -n "$removed" ]; then
     fi
     printf '%s\n' "$txt" | sed 's/^/  heard: /'
   else
-    echo "SKIP whisper not installed; removed-phrase check not run"
+    echo "SKIP whisper not installed; speech check (removed / kept phrase) not run"
     speech_skipped=1
   fi
 fi

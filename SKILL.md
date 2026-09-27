@@ -88,7 +88,7 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
      layout {"sourceId":"<V1 source>","left":75,"top":1480,"width":930,"height":105}   (kiểu mặc định đặt chữ ở y ~1414, chạm mép thẻ ở y 1440)
 8  smooth_audio → submit_export {"format":"video","resolution":"1080p"} → track_export (hỏi lại mỗi ≥ 10 giây)
 9  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>"   (link sống 1 ngày)
-10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã xoá, nếu có>" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
+10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã xoá, không gạch thì để \"\">" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng».
 Đo trên Mac 27/09: dựng 29 giây · tải lên 10 giây · bóc lời có ngay · gạch 1 câu 1996 → 1887 khung · xuất trên mây 22,7 giây · verify-export PASS ·
