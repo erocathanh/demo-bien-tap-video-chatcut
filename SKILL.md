@@ -210,6 +210,15 @@ scripts/  kiem-may.sh (+ .ps1) · kiem-manifest.sh · py.sh · upload.sh · veri
           make_stage_props.py · make_clusters.py · measure_empty_stage.py · make_icons_svg*.py · lam-bang-khung.py · path-length.mjs · remotion/
 ```
 
+## Người bảo trì — trước khi đẩy bản mới
+```bash
+# 1. không lộ thư mục người dùng: macOS /Users/<tên>/ · Windows C:\Users\<tên> · Git Bash /c/Users/<tên> (dạng đã che «…» không tính)
+git grep -nE '/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+|/[a-z]/Users/[A-Za-z0-9._-]+' -- .     # phải KHÔNG ra dòng nào
+# 2. commit cuối: sinh lại danh sách tệp rồi kiểm
+bash scripts/kiem-manifest.sh --write && git add MANIFEST.md && git commit -m "Regenerate MANIFEST.md" && bash scripts/kiem-manifest.sh
+```
+Đối chứng cho thước 1 (27/09): một tệp thử có đủ ba dạng (Mac, Windows, Git Bash) với tên người thật ⇒ bắt đủ 3 dòng; dạng đã che bằng «…» không bị bắt. Đừng chép ba dòng thử đó vào gói — thước sẽ bắt chính chúng.
+
 ## Giá — theo tài liệu, trích nguyên văn
 *«Manual timeline editing, uploads, project browsing, transcription, and exporting do not consume credits.»* — chatcut.io/docs/credits-policy (đọc 25/09/2026).
 
