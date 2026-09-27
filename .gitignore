@@ -4,3 +4,4 @@ scripts/remotion/out/
 *.zip
 references/ghi-chu-noi-bo.md
 __pycache__/
+/out/

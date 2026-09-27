@@ -5,9 +5,13 @@
 #                  the removed-phrase check is not trustworthy (the ruler is broken, not the edit)
 #   expected_md5   optional: compare byte-for-byte with a known-good render
 #   removed_phrase optional: text that must NOT be heard any more (checked with local Whisper)
-# Writes a contact sheet next to the file: <name>-contact.png
+# Writes a contact sheet <name>-contact.png next to the file, or into <skill>/out/ when the file sits inside
+# the skill's assets/ (so running the README checks never overwrites a tracked file).
 # Exit code 0 = all checks passed, 1 = at least one check failed.
+# Works with macOS /bin/bash 3.2 and Windows Git Bash (tools there print CRLF, so every reading strips \r).
 set -uo pipefail
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+export PYTHONUTF8=1  # Windows: without it whisper cannot write Vietnamese text and exits 0 with no file
 
 f="${1:?usage: verify-export.sh <export.mp4> [expected_md5] [removed_phrase]}"
 want_md5="${2:-}"
@@ -16,6 +20,13 @@ kept="${4:-}"
 fail=0
 
 [ -s "$f" ] || { echo "FAIL file missing or empty: $f"; exit 1; }
+for tool in ffprobe ffmpeg; do
+  command -v "$tool" >/dev/null 2>&1 || { echo "FAIL thiếu $tool (bộ FFmpeg) — chưa kiểm được video. Cài FFmpeg rồi chạy lại."; exit 1; }
+done
+probe() {  # $1 stream selector ("" for container)  $2 entry  -> one value, no CR, no trailing comma
+  if [ -n "$1" ]; then ffprobe -v error -select_streams "$1" -show_entries "$2" -of default=nw=1:nk=1 "$f"
+  else ffprobe -v error -show_entries "$2" -of default=nw=1:nk=1 "$f"; fi | tr -d '\r' | head -1
+}
 
 md5v=$(if command -v md5 >/dev/null; then md5 -q "$f"; else md5sum "$f" | cut -d" " -f1; fi)
 echo "md5        $md5v"
@@ -26,10 +37,10 @@ if [ -n "$want_md5" ]; then
   esac
 fi
 
-w=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$f")
-h=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$f")
-dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")
-acodec=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 "$f")
+w=$(probe v:0 stream=width)
+h=$(probe v:0 stream=height)
+dur=$(probe "" format=duration)
+acodec=$(probe a:0 stream=codec_name)
 echo "size       ${w}x${h} · ${dur}s · audio=${acodec:-NONE}"
 if [ "$w" = "1080" ] && [ "$h" = "1920" ]; then echo "PASS vertical 1080x1920"; else echo "FAIL not 1080x1920"; fail=1; fi
 if [ -n "$acodec" ]; then echo "PASS has audio"; else echo "FAIL no audio stream"; fail=1; fi
@@ -45,20 +56,26 @@ echo "loudness   mean ${mean} dB"
 if awk -v m="${mean:--99}" 'BEGIN{exit !(m < -40)}'; then echo "FAIL audio nearly silent"; fail=1; fi
 
 # Contact sheet: first frame, 8 evenly spaced frames, last frame. Edges are where cuts break.
-base="${f%.*}"
+fabs="$(cd "$(dirname "$f")" && pwd)/$(basename "$f")"
+case "$fabs" in
+  "$SKILL_DIR"/assets/*) sheet_dir="$SKILL_DIR/out" ;;
+  *) sheet_dir="$(dirname "$fabs")" ;;
+esac
+mkdir -p "$sheet_dir"
+name="$(basename "$f")"
+sheet="$sheet_dir/${name%.*}-contact.png"
 tmp=$(mktemp -d)
 i=0
 # Use the VIDEO stream length: audio often runs a few ms longer, and seeking past the last frame yields nothing.
-vdur=$(ffprobe -v error -select_streams v:0 -show_entries stream=duration -of csv=p=0 "$f")
+vdur=$(probe v:0 stream=duration)
 for p in 0.00 0.11 0.22 0.33 0.44 0.55 0.66 0.77 0.88 LAST; do
   if [ "$p" = "LAST" ]; then t=$(awk -v d="$vdur" 'BEGIN{printf "%.3f", d-0.1}')
   else t=$(awk -v d="$vdur" -v p="$p" 'BEGIN{printf "%.3f", d*p}'); fi
   ffmpeg -v error -y -ss "$t" -i "$f" -frames:v 1 -vf scale=144:-1 "$tmp/$i.png"
   i=$((i+1))
 done
-inputs=""; for j in $(seq 0 9); do inputs="$inputs -i $tmp/$j.png"; done
-# shellcheck disable=SC2086
-ffmpeg -v error -y $inputs -filter_complex hstack=10 "${base}-contact.png" && echo "sheet      ${base}-contact.png (look at it: edges + b-roll placement)"
+inputs=(); for j in 0 1 2 3 4 5 6 7 8 9; do inputs+=(-i "$tmp/$j.png"); done
+ffmpeg -v error -y "${inputs[@]}" -filter_complex hstack=10 "$sheet" && echo "sheet      $sheet (look at it: edges + b-roll placement)"
 rm -rf "$tmp"
 
 if [ -n "$removed" ]; then
@@ -67,7 +84,8 @@ if [ -n "$removed" ]; then
     whisper "$f" --model small --language vi --output_format txt --output_dir "$wd" >/dev/null 2>&1
     txt=$(cat "$wd"/*.txt 2>/dev/null)
     rm -rf "$wd"
-    norm() { tr '[:upper:]' '[:lower:]' | tr -d '.,?!'; }
+    # perl lowercases Vietnamese capitals too (GNU tr on Git Bash/Linux only lowers ASCII)
+    norm() { perl -Mutf8 -CSD -0777 -pe '$_=lc; tr/\r\n.,?!/ /; s/\s+/ /g; s/^ | $//g'; }
     if [ -z "$txt" ]; then echo "FAIL whisper produced no text"; fail=1
     elif printf '%s' "$txt" | norm | grep -qF "$(printf '%s' "$removed" | norm)"; then
       echo "FAIL removed phrase still audible: $removed"; fail=1
@@ -84,8 +102,11 @@ if [ -n "$removed" ]; then
     printf '%s\n' "$txt" | sed 's/^/  heard: /'
   else
     echo "SKIP whisper not installed; removed-phrase check not run"
+    speech_skipped=1
   fi
 fi
 
-[ "$fail" = "0" ] && echo "RESULT PASS" || echo "RESULT FAIL"
+if [ "$fail" != "0" ]; then echo "RESULT FAIL"
+elif [ "${speech_skipped:-0}" = "1" ]; then echo "RESULT PASS (speech not checked: whisper missing)"
+else echo "RESULT PASS"; fi
 exit "$fail"
