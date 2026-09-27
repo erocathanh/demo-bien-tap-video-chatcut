@@ -17,6 +17,7 @@ Mọi đường dẫn tính từ thư mục gốc của skill (thư mục chứa
 | phim buổi 1 có icon khớp lời (IconStory, `render.sh story`) | `assets/ban-mau-da-ra/phim-buoi-1-v8b-icon-khop-loi.mp4` | 36,45 giây · md5 `65e08c24` |
 | sổ bấm giờ lượt diễn tập | `dong-ho-dien-tap-25-09.log` (thư mục này) | trọn lượt 1 phút 30 giây |
 | sổ bấm giờ cài trên máy mới | `dong-ho-cai-may-moi-26-09.log` (thư mục này) | Mac, ghi khi thử gói trên thư mục trống (nhắc tới bản mẫu cũ đã bỏ ở v3.0) |
+| sổ bấm giờ «như người mới» v3.0 | `dong-ho-nguoi-moi-v3-27-09.log` (thư mục này) | Mac, 27/09: clone nhánh vào thư mục trống, npm cache trống, làm đúng README · kiểm a–i · 118 giây · git status sạch |
 | sổ bấm giờ cài trên Windows | `dong-ho-cai-may-windows-27-09.log` (thư mục này) | Windows 11 x64 i9, 27/09/2026 — từng bước cài, dựng, tải lên ChatCut, kèm lỗi gặp |
 | góp ý từ lượt thử Windows | `references/gop-y-windows/` | nhật ký lỗi (mã B · M · m · P), đề xuất đường B, 4 ảnh bằng chứng, bản báo lỗi tiếng Anh cho ChatCut `BAO-LOI-CHATCUT_v1.0.md` (CHƯA gửi) |
 
