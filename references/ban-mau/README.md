@@ -9,6 +9,7 @@ Mọi đường dẫn tính từ thư mục gốc của skill (thư mục chứa
 | phim ngắn 3 câu để thử nhanh | `assets/phim-mau/phim-ngan-10s-3-cau.mp4` | 10,5 giây · md5 `d34e5295` (cắt 10,0–20,5 giây của phim nguồn) |
 | **bản ra demo ChatCut (ảnh tĩnh, cũ)** | `assets/ban-mau-da-ra/vsl-chatcut-broll-codex.mp4` | 32,04 giây · md5 **`46c7b4d5`** — hai lượt chạy ra trùng từng byte |
 | **bản ra demo ChatCut (3 clip b-roll động)** | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` | 32,04 giây · md5 **`5656a249`** · verify-export PASS |
+| **bản ra demo ChatCut + phụ đề CHỈ trên b-roll** (Windows 27/09) | `assets/ban-mau-da-ra/dien-tap-broll-dong-phu-de-broll.mp4` | 32,04 giây · md5 **`29735955`** · Quy trình A + phụ đề ChatCut chỉ trên b-roll, dựng trên Windows 11 x64 · bảng khung `-contact.png` cùng thư mục |
 | 3 clip b-roll động (không fade) | `assets/b-roll/broll-{1,2,3}-dong.mp4` | 91 · 81 · 70 khung · md5 `945846a3` · `4ce52276` · `66b145e8` |
 | 3 ảnh b-roll (Codex vẽ) | `assets/b-roll/vsl-broll-*.png` | 1080×1920 · 0 chữ, 0 logo |
 | phim buổi 1 có icon khớp lời (IconStory) | `assets/ban-mau-da-ra/phim-buoi-1-v8b-icon-khop-loi.mp4` | 36,45 giây · md5 `65e08c24` |
@@ -18,6 +19,8 @@ Mọi đường dẫn tính từ thư mục gốc của skill (thư mục chứa
 | ảnh ghép 3 b-roll | `broll-codex-3-tam.png` (thư mục này) | |
 | sổ bấm giờ lượt diễn tập | `dong-ho-dien-tap-25-09.log` (thư mục này) | trọn lượt 1 phút 30 giây |
 | sổ bấm giờ cài trên máy mới | `dong-ho-cai-may-moi-26-09.log` (thư mục này) | ghi khi thử gói trên thư mục trống |
+| sổ bấm giờ cài trên Windows | `dong-ho-cai-may-windows-27-09.log` (thư mục này) | Windows 11 x64 i9, 27/09/2026 — từng bước cài, dựng, tải lên ChatCut, kèm lỗi gặp |
+| góp ý từ lượt thử Windows | `references/gop-y-windows/` | nhật ký lỗi (mã B · M · m · P), đề xuất đường B, 4 ảnh bằng chứng |
 
 ⚠️ Phim nguồn là phim **buổi 1 (24/09/2026)**: giọng nói «ở buổi một», dải chữ «BUỔI 1 · 24/09/2026».
 Diễn vào ngày khác thì xem mục «Phim nguồn mang ngày cũ» trong `SKILL.md`, đừng chỉ đổi dải chữ.

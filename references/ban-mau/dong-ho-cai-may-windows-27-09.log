@@ -1,0 +1,149 @@
+# Sổ bấm giờ — cài gói demo-bien-tap-video-chatcut (commit 2b39584) lên máy WINDOWS THẬT, 27/09/2026, giờ London (GMT Standard Time, +01:00)
+# máy thử: Windows 11 Home 10.0.26200 · i9-14900HX · 32 GB RAM · RTX 4070 Laptop · Claude desktop (tab Code)
+# shell: Bash tool = Git for Windows bash 5.3.9 (MSYS2) · PowerShell tool = Windows PowerShell 5.1
+# trước khi cài: KHÔNG có node/npm/ffmpeg/ffprobe/whisper/bash-trên-PATH-PowerShell · python/python3 = stub Microsoft Store · git core.autocrlf=true
+# npm cache TRỐNG (máy mới thật — log Mac 26/09 có cache sẵn)
+11:3x BƯỚC 0 git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
+      178 tệp · pack 81,66 MiB · 185 MB trên đĩa · KHÔNG có .gitattributes ⇒ 120 tệp chữ (.sh .py .mjs .json .md .svg .ts .tsx .txt .log) ra CRLF
+      skill hiện trong danh sách skill của phiên NGAY sau clone (không cần mở phiên mới)
+11:36:08 BƯỚC 1a winget install OpenJS.NodeJS.LTS  ⇒ node v24.19.0 · npm 11.17.0 · 33s · có hộp UAC (Owner bấm Yes)
+11:36:41 BƯỚC 1b winget install Gyan.FFmpeg        ⇒ ffmpeg/ffprobe 9.0.2 full_build · 185s (tải ~200 MB từ GitHub)
+         winget in: "Path environment variable modified; restart your shell to use the new value."
+         Kiểm trong phiên đang mở: Git Bash node=MISSING ffprobe=MISSING · PowerShell node=False  ⇒ BẪY PATH (phải khởi động lại Claude desktop)
+         tạm vượt: export PATH="/c/Program Files/nodejs:<thư mục bin của Gyan.FFmpeg>:$PATH"
+         whisper: KHÔNG cài (tuỳ chọn; cần Python thật + torch) ⇒ phần nghe lại lời chưa thử trên Windows — (cập nhật: cài lúc 11:51, BƯỚC 1d; thử nghe lại lời từ 12:01)
+11:37:57 BƯỚC 3a npm install (cache trống)  ⇒ rc=0 · added 185 packages in 29s · 30s tổng
+         npm warn allow-scripts: esbuild@0.28.0 (postinstall) CHƯA được chạy ⇒ đã thử: esbuild 0.28.0 vẫn transform được TS
+         đã có đủ gói win32: @remotion/compositor-win32-x64-msvc · @esbuild/win32-x64
+         npm 11.17 SỬA package-lock.json (bỏ 11 dòng "peer": true — git diff --stat: 11 deletions) ⇒ repo bẩn
+11:40:50 BƯỚC 3b bash render.sh broll
+render BrollDong 138s   (lượt đầu: tải chrome-headless-shell 149.0.7790.0, 270 MB vào node_modules/.remotion)
+FAIL .../out/broll-1-dong.mp4 size 1080x1920
+render BrollDong 10s
+FAIL .../out/broll-2-dong.mp4 size 1080x1920
+render BrollDong 10s
+FAIL .../out/broll-3-dong.mp4 size 1080x1920
+RESULT FAIL
+11:43:30 xong render.sh broll · rc=1 · 160s tổng
+         FAIL OAN: ffprobe.exe in "1080,1920,\r\n"; render.sh dùng tr -d ',\n' ⇒ còn "1080x1920\r" ⇒ so chuỗi trượt
+         đo lại đúng cách (tr -d ',\r\n'): broll-1 1080x1920 frames=91 · broll-2 1080x1920 frames=81 · broll-3 1080x1920 frames=70
+         so với assets/b-roll/: PSNR 44.36 · 43.47 · 42.74  (Mac 26/09: 42.95 · 42.29 · 41.31) ⇒ video ĐÚNG, chỉ bộ kiểm sai
+11:43:57 BƯỚC 4 verify-export trên bản mẫu (đúng câu lệnh README)
+md5        46c7b4d5939a049118fb2a5657326038
+PASS md5 matches known-good render
+size       1080x1920 · 32.042667s · audio=aac
+PASS vertical 1080x1920
+PASS has audio
+PASS no black frames
+loudness   mean -20.8 dB
+sheet      assets/ban-mau-da-ra/vsl-chatcut-broll-codex-contact.png (look at it: edges + b-roll placement)
+SKIP whisper not installed; removed-phrase check not run
+RESULT PASS   (4s)
+         PASS vì Git Bash tự bỏ cặp "\r\n" cuối trong $(...) — bản xuất ChatCut không có ICC profile nên không có dấu phẩy thừa
+         TÁC DỤNG PHỤ: ghi đè tệp CÓ TRONG REPO assets/ban-mau-da-ra/vsl-chatcut-broll-codex-contact.png (992155 ⇒ 441054 byte) ⇒ repo bẩn
+11:4x BƯỚC 4c đối chứng: verify-export.sh trên phim mẫu assets/phim-mau/phim-buoi-1-co-tieng.mp4 (đúng 1080x1920, có aac)
+size       1080,x1920, · 36.360000s · audio=aac
+RESULT FAIL   ⇒ FAIL OAN: tệp có ICC profile ⇒ ffprobe csv in thêm dấu phẩy cuối "1080," (không riêng Windows)
+11:4x BƯỚC 3b-sửa (thử lệnh sửa B2/M2, không đổi repo): ffprobe … -of default=nw=1:nk=1 | tr -d '\r' | paste -sd x -
+         ⇒ 1080x1920 trên phim-buoi-1-co-tieng.mp4 (có ICC) và vsl-chatcut-broll-codex.mp4 (không ICC)
+         ⇒ 3 bản render broll: PASS broll-1/2/3 1080x1920 (lệnh cũ ra «1080x1920\r»)
+         đường dẫn dài nhất sau npm install + Chrome: 222 ký tự (tên user 5 chữ; giới hạn 260)
+11:4x BƯỚC 2 upload.sh — thử riêng đoạn python3 (không gọi ChatCut): python3 = stub Store
+Python was not found; run without arguments to install from the Microsoft Store, ...
+rc=49   ⇒ trên Windows chưa cài Python: phim ĐÃ tải lên xong (node) nhưng KHÔNG in assetId; tệp tạm không bị xoá
+         thay bằng node -e (node đã bắt buộc): in đúng "A1 phim.mp4"
+11:4x ChatCut MCP: plugin 1.10.14 có sẵn; Owner Authenticate giữa phiên ⇒ 60 tool ChatCut hiện NGAY trong phiên đang mở
+11:45:27 BƯỚC 3c bash render.sh stage (video sân khấu «3 cấp độ AI»)
+render IconStage 64s
+FAIL .../out/video-2-ba-cap-do-ai.mp4 size 1080x1920   (FAIL oan, cùng lỗi \r như broll)
+RESULT FAIL
+         md5 0f258eaee8c90d8f138334295e236dbe  ≠  182cc1e4 (README-CAI-MOI.md:86 hứa «ra đúng video mẫu 26/09, md5 182cc1e4»)
+11:4x BƯỚC 3c lượt 2 (thư mục ra khác) · render IconStage 70s
+         md5 0f258eaee8c90d8f138334295e236dbe  ⇒ TẤT ĐỊNH TRÊN CÙNG MÁY WINDOWS, nhưng KHÁC md5 máy Mac
+         so với assets/nguyen-lieu-video-2/video-2-tao-lai.mp4 (182cc1e4): cùng h264 1996 khung · aac 3118 khung · 66.533333 s · PSNR 45.21 · 0 đoạn đen
+         ⇒ đổi máy thì so PSNR/bảng khung, KHÔNG so md5
+11:4x giọng TTS có sẵn trên Windows: chỉ en-US (David · Zira · Mark) — KHÔNG có giọng tiếng Việt
+11:49:20 BƯỚC 1c winget install Python.Python.3.12 --scope user ⇒ 3.12.10 · 80s
+         Python312 có python.exe + pythonw.exe, KHÔNG có python3.exe; py launcher có
+         phiên mới (PATH nạp lại từ registry): python ⇒ Python312\python.exe · python3 ⇒ WindowsApps\python3.exe (STUB, rc 49) · whisper ⇒ Python312\Scripts
+         stdout khi bị chuyển hướng: encoding cp1252 · utf8_mode 0
+11:51:20 BƯỚC 1d python -m pip install -U openai-whisper ⇒ torch 2.14.0+cpu · whisper 20250625 · 533s (~181 MB+ tải) · cảnh báo Scripts chưa trên PATH (phiên cũ)
+11:5x QUY TRÌNH B bước 6 make_stage_props.py (kịch bản mẫu + tieng-video-2-moi.json + ke-hoach-hinh-video-2.json --audio --face)
+         T1 nguyên văn «python3 scripts/make_stage_props.py …»  ⇒ rc 49 «Python was not found» (stub Store)
+         T2 python.exe                                           ⇒ rc 1 UnicodeEncodeError 'Ấ' (cp1252) · props.json 0 byte
+         T3 PYTHONUTF8=1 python.exe                              ⇒ rc 0 · 18 câu · 190 chữ · 68 sự kiện · 66 phụ đề
+            md5 thô 97d535bd (CRLF) · bỏ CR ⇒ 832a9dbf = TRÙNG TỪNG BYTE props-iconstage-moi.json
+11:5x QUY TRÌNH B bước 7 npx remotion render … IconStage --props=<t3.json> ⇒ rc 0 · 66s · md5 0f258eae (= render.sh stage)
+11:5x QUY TRÌNH B bước 8
+         measure_empty_stage.py (python.exe)        ⇒ UnicodeDecodeError byte 0x8f (open() không encoding) · cả trên props của repo
+         measure_empty_stage.py (PYTHONUTF8=1)      ⇒ 18 cảnh · vượt 0,6s: 0
+         lam-bang-khung.py (chưa có Pillow)         ⇒ ModuleNotFoundError: No module named 'PIL'
+         pip install pillow 12.3.0 (10s) ⇒ chạy được, 3 bảng · NHÃN GIÂY BÉ XÍU (font /System/Library/Fonts của Mac không có ⇒ load_default)
+         verify-export.sh trên bản render Remotion  ⇒ size «1080,x1920,» ⇒ RESULT FAIL oan (ICC profile)
+11:5x Remotion Studio (remotion studio, cổng 3000) chạy trên Windows; mở IconStage trong khung trình duyệt Claude desktop — thấy track tiếng, nền, 18 cảnh
+11:5x make_icons_svg.py + make_icons_svg_set03.py ⇒ 30 svg · trùng byte với git: 0/30 · trùng sau khi bỏ CR: 30/30 (open(..,"w") ghi CRLF)
+12:01 QUY TRÌNH B bước 3 whisper tieng-video-2-moi.mp3 --model small --language vi --word_timestamps True --output_format json (nguyên văn)
+         rc 0 SAU 117s nhưng KHÔNG ghi tệp nào: «Skipping … due to UnicodeEncodeError: 'charmap' … 'ấ'» ⇒ HỎNG IM LẶNG
+12:04 cùng lệnh + PYTHONUTF8=1 ⇒ rc 0 · 59s · 190 chữ = mẫu Mac 190 chữ · lời trùng (cả chỗ nghe sai «thuận», «gó»)
+12:05 BƯỚC 4 + whisper (bản sao trong thư mục tạm, không đụng repo)
+         không cờ      ⇒ FAIL whisper produced no text · FAIL positive control NOT heard ⇒ RESULT FAIL (tệp ĐÚNG mà báo hỏng)
+         PYTHONUTF8=1  ⇒ PASS removed phrase not heard · PASS positive control heard: gửi tặng skill · RESULT PASS (9 dòng heard trùng log Mac)
+         đối chứng âm  ⇒ FAIL removed phrase still audible: gửi tặng skill ⇒ RESULT FAIL (đúng thiết kế)
+12:0x PowerShell riêng của học viên (ExecutionPolicy mặc định Restricted): «npm -v» ⇒ npm.ps1 cannot be loaded because running scripts is disabled · «npm.cmd -v» ⇒ 11.17.0
+         (tool PowerShell của Claude Code chạy ở Process=Bypass nên không gặp)
+12:15:09 QUY TRÌNH A (Owner duyệt «yes») — dự án ChatCut mới
+         create_project ⇒ mặc định 1920×1080 NGANG (đúng cảnh báo repo) · manage_timelines update 1080×1920 ⇒ OK
+         editor mở trong khung trình duyệt Claude desktop (browserHandoff.url)
+12:15:47 upload.sh NGUYÊN VĂN (phim + 3 clip) ⇒ rc 5 sau 3s «upload helper failed» — CHƯA tới đoạn python3
+         nguyên nhân (đọc trọn tệp lỗi, tail -5 của upload.sh che mất): LỖI PLUGIN ChatCut 1.10.14 trên Windows —
+         helper đưa đường tệp tạm Windows vào bộ lọc ffmpeg «ametadata=print:file=C:\Users\…\…waveform….txt»
+         ⇒ «No option name near 'Users…'» (dấu ':' và '\' phá cú pháp bộ lọc) ⇒ MỌI VIDEO CÓ TIẾNG không tải lên được
+         4 tệp đã được ĐĂNG KÝ (placeholder) nhưng 0 tệp có byte trên mây; tệp tạm chatcut-upload* bị bỏ lại
+12:1x đường loopback (serve-local-media.mjs + import_media relink_from_editor, 4 tệp) ⇒ 0/4
+         «Could not fetch the local file from the helper … in-app browser may block loopback requests (ERR_BLOCKED_BY_CLIENT)»
+         ⇒ khung trình duyệt tích hợp của Claude desktop chặn 127.0.0.1 ⇒ đường «preferred» của plugin không dùng được
+12:2x helper chạy lại từng mã tệp cũ (--asset-id) với TMPDIR=. (cwd thư mục tạm) ⇒ 12s
+         3 clip b-roll (không tiếng) ⇒ OK đúng mã cũ · phim có tiếng ⇒ VẪN lỗi (helper đổi «.» thành đường tuyệt đối C:\…)
+         ⇒ còn đúng một đường: người dùng bấm «Click to relink» trên thẻ phim trong editor và tự chọn tệp
+         Owner KẸT: hộp chọn tệp của Windows không mở tới %USERPROFILE%\.claude\skills\… ⇒ agent chép phim vào Downloads
+         (md5 1DAF71FD = bản gốc) + đưa đường dẫn vào clipboard ⇒ Owner dán, Enter ⇒ relink xong, giữ đúng mã tệp cũ
+12:2x browse_assets: 4/4 ready · cloud available · phim -17,3 LUFS · bóc lời ~8s (ETA 6s)
+      edit_item phim ⇒ V1 0–1090f · read_script ⇒ 15 câu đúng chữ
+      apply_script gạch [s13] «Hẹn bạn xem buổi hai …» ⇒ «V1 … → 2 item(s), 32s» (36,3 → 32,0 s, như Mac)
+      find_transcript ×3 ⇒ 304→395f · 424→505f · 637→707f (TRÙNG Mac)
+      edit_item 3 clip lên V2 (không fade) · smooth_audio ⇒ 1 crossfade + 1 fadeIn + 1 fadeOut · skipped 3 no_audio (như Mac)
+      preview_timeline 9 khung: b-roll đúng chỗ · phụ đề nhảy từ «mỗi ngày, không phải nhắc» sang «…gửi tặng skill» (câu 13 đã mất)
+12:22:06 submit_export 1080p ⇒ render 11:21:58Z → 11:22:27Z = 28,9s · 14.676.568 byte
+12:2x curl -fsSL tải về 2s · verify-export (PYTHONUTF8=1) 34s:
+md5        5656a249cbf5cf32150680cec01c0059
+PASS md5 matches known-good render      ⇐ TRÙNG TỪNG BYTE bản Mac (ChatCut render trên mây)
+size       1080x1920 · 32.042667s · audio=aac
+PASS vertical 1080x1920 · PASS has audio · PASS no black frames · loudness mean -20.8 dB
+PASS removed phrase not heard · PASS positive control heard: gửi tặng skill
+RESULT PASS
+12:3x ĐỐI CHỨNG (agent rà sót phát hiện, PM chạy lại): verify-export trên phim gốc CHƯA cắt, câu đã xoá = câu demo
+         heard: «Hẹn bạn xem buổi 2, bí mật AI cùng thanh tối mai.» ⇒ vẫn «PASS removed phrase not heard»
+         ⇒ THƯỚC MÙ: Whisper viết «hai» thành «2», so chuỗi không bao giờ khớp — lỗi mọi hệ, kể cả Mac
+12:2x–12:3x PHỤ ĐỀ CHATCUT CHỈ TRÊN B-ROLL (Owner giao; dự án dien-tap-windows-27-09; KHÔNG xuất lại)
+         edit_captions enable ⇒ nguồn V1 + V2 (như repo cảnh báo) · set_sources V1 · refresh ⇒ 23 thẻ
+         style Be Vietnam Pro 56 px đậm, nền #0B1628 94 % · layout left 75 top 1255 width 930 height 105
+         (đo trên khung gốc: dải phụ đề in sẵn x 75–1000 · y 1255–1360 · chữ ~58 px)
+         ẩn 16/23 thẻ ngoài b-roll: set_card_style opacity 0 + backgroundOpacity 0
+         (chỉ opacity 0 ⇒ khung nền vẫn hiện · style cả lớp opacity 0 rồi thẻ opacity 1 ⇒ «changes: []», không ăn)
+         soát 10 khung ⇒ chồng 2 lớp chữ ở mép b-roll (khung 302 · 400 · 712) · cue_override không chỉnh được thời gian thẻ
+         edit_item kéo 3 b-roll khớp thẻ: 301–407 @0,8585 · 421–517 @0,8438 · 635–719 @0,8334 · refresh
+         preview_timeline 12 khung (60 · 300 · 302 · 380 · 405 · 408 · 422 · 515 · 518 · 636 · 718 · 720) ⇒ sạch
+12:4x ĐƯỜNG B MỚI (B-2; Owner chốt «Remotion dựng hình, ChatCut biên tập»): props iconstage-video-2 với captions: []
+         npx remotion render IconStage ⇒ rc 0 · 59s · h264 1996 khung · aac · 66,53 s · soát 3 khung: KHÔNG có chữ phụ đề
+         soát mọi video trong repo: KHÔNG có video quay mặt Owner nói trước máy quay (chỉ ô webcam Zoom ~3 s đầu phim-buoi-1)
+13:12:41 XUẤT bản phụ đề-trên-b-roll (Owner: «em xuất và đưa vào reference hay assets») · submit_export 1080p
+         render trên mây 12:12:33Z → 12:12:53,9Z = 20,8s · 14.955.307 byte · curl -fsSL tải về
+         verify-export (PYTHONUTF8=1; câu đã xoá «Hẹn bạn xem» — cụm không số để tránh M13) 27s:
+md5        29735955941608d08f92b789b3f49d6a
+size       1080x1920 · 32.042667s · audio=aac
+PASS vertical 1080x1920 · PASS has audio · PASS no black frames · loudness mean -20.8 dB
+PASS removed phrase not heard · PASS positive control heard: gửi tặng skill
+RESULT PASS
+         soát 12 khung trên tệp mp4 (300 · 302 · 380 · 405 · 408 · 422 · 515 · 518 · 636 · 718 · 720 · 850): mép b-roll sạch
+         khung 850 vẫn lóe «tối mai!» của câu đã xoá (lỗi đã biết số 1 của repo; bản Mac 5656a249 cũng có)
+git status sau toàn bộ lượt thử: M assets/ban-mau-da-ra/vsl-chatcut-broll-codex-contact.png (do BƯỚC 4) · M scripts/remotion/package-lock.json (do npm install)
