@@ -202,7 +202,7 @@ CaptionOverVideo  phụ đề chạy đè lên video nền
 ## Bản đồ thư mục
 ```
 README.md · README-CAI-MOI.md (+ -MAC · -WINDOWS)   cho người dùng
-SKILL.md                 tệp này · MANIFEST.md mọi tệp + md5 8 ký tự + cỡ (kiểm: bash scripts/kiem-manifest.sh)
+SKILL.md                 tệp này · MANIFEST.md mọi tệp + md5 8 ký tự + cỡ (kiểm: bash scripts/kiem-manifest.sh — trong bản clone nó so nội dung ĐÃ COMMIT, tệp sửa tay chưa commit vẫn PASS; muốn biết có ai sửa thì xem git status)
 assets/  phim-mau/ (phim buổi 1 có tiếng · nền sạch · phim ngắn 10 s) · b-roll/ (3 ảnh + 3 clip) · icon/ (38 icon)
          ban-mau-da-ra/ (bản ra mẫu + bảng khung) · nguyen-lieu-video-2/ (video icon dựng sẵn, có và không phụ đề + props + mốc chữ)
 references/  mcp-call-sequence.md · nguon-chatcut-docs.md · quy-trinh/ · du-lieu-mau/ · ban-mau/ (md5, sổ bấm giờ) · gop-y-windows/ (lượt thử Windows 27/09 + bản báo lỗi ChatCut, chưa gửi)
