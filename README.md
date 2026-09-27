@@ -1,37 +1,42 @@
 # demo-bien-tap-video-chatcut
 
-Skill cho Claude Code: **biên tập video bằng cách sửa chữ** với ChatCut.io qua MCP — gạch một câu trong bản chữ là phim tự cắt
-câu đó, chèn b-roll động đúng câu đang nói, xuất mp4 dọc 1080×1920. Kèm bộ Remotion dựng **icon khớp lời** và **video sân khấu
-theo câu**. Gói tự đủ: phim mẫu, icon, b-roll, mini-project Remotion, hướng dẫn cài máy mới.
+> **🤖 Dành cho AI agent — đọc trước khi làm gì khác.** Người dùng có thể chỉ gõ «Cài skill này và chạy thử cho tôi» kèm link repo này. Như vậy là đủ:
+> 1. **Tải về đúng chỗ:** `git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut` (Windows: `%USERPROFILE%\.claude\skills\demo-bien-tap-video-chatcut`, chạy trong Git Bash; KHÔNG đặt trong OneDrive, Desktop hay Documents). Máy không có git thì tải `…/archive/refs/heads/main.zip` và giải nén vào cùng chỗ đó.
+> 2. **Kiểm máy trước mọi việc:** `bash scripts/kiem-may.sh` (chỉ đọc, không cài gì). Đọc các dòng `CÀI:` rồi hỏi người dùng **MỘT câu gom**: thiếu mấy thứ, cài mất bao lâu, họ phải bấm gì. Cài xong nếu script báo «cửa sổ Claude này chưa thấy» thì bảo người dùng tắt hẳn Claude, mở lại, gõ «tiếp tục»; rồi chạy lại `kiem-may.sh`.
+> 3. **Nói lời thường** trước và sau mỗi bước: đang làm gì · để làm gì · bao lâu · người dùng có phải bấm gì không. Không dùng từ chuyên môn, không dán log cho người dùng (luật đầy đủ: mục «Thuyết minh» trong `SKILL.md`).
+> 4. **Plugin ChatCut:** chưa có thì hướng dẫn người dùng gõ `/plugin`, cài ChatCut, rồi `/mcp` → ChatCut → **Authenticate** và đăng nhập trên trình duyệt; sau đó mở phiên Claude mới.
+> 5. **Lệnh dài** (`npm ci`, lần render đầu tải thêm ~270 MB) chạy với thời hạn **10 phút** (600000 ms), mỗi lệnh một lần gọi riêng — không gộp bằng `&&`.
+> 6. Trong lúc cài, **mở bản mẫu** `assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4` cho người dùng xem trước.
+> 7. Rồi đọc `SKILL.md` từ bước 0 và làm **«Video icon kể chuyện»** (mặc định), hoặc «Sửa phim bằng sửa chữ» nếu người dùng muốn.
 
-Số đo thật (25–26/09/2026): phim 36 giây → cắt một câu + chèn 3 b-roll trong **1 phút 30 giây**; video sân khấu 65 giây render 33 giây.
+Làm video dọc 1080×1920 bằng cách **nói với Claude**. Bạn không cần biết dựng phim, không cần mở phần mềm nào khác.
 
-## Cài nhanh
-```bash
-git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
-cd ~/.claude/skills/demo-bien-tap-video-chatcut/scripts/remotion && npm install
-bash render.sh broll          # phải in RESULT PASS
+| Bạn sẽ làm được | Trông như thế nào (bản mẫu có sẵn trong gói) | Mất bao lâu |
+|---|---|---|
+| **Video icon kể chuyện** — giọng đọc + mỗi câu một cảnh icon + phụ đề | `assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4` (66 giây) | lần đầu khoảng 15–25 phút (gồm cài đặt), lần sau khoảng 5 phút |
+| **Sửa phim bằng sửa chữ** — gạch một câu là phim tự cắt câu đó, chèn hình minh hoạ đúng câu đang nói | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` (32 giây) | khoảng 2–4 phút |
+
+## Ba bước
+
+**1. Cài Claude Code** (trợ lý AI chạy trên máy tính của bạn) — làm theo hướng dẫn chính thức: https://docs.claude.com/claude-code
+Có tài khoản **ChatCut** (trang biên tập video trên mạng, https://chatcut.io). Tài khoản miễn phí là đủ để thử.
+
+**2. Mở Claude Code và dán đúng câu này:**
+```text
+Cài skill này và chạy thử cho tôi: https://github.com/erocathanh/demo-bien-tap-video-chatcut
 ```
-Bản này là **v2.2** (26/09/2026). Kho CÔNG KHAI theo quyết của chủ phim (26/09/2026). Phim mẫu có mặt và giọng người thật: dùng để học, **không đăng lại, không cắt ghép đưa lên mạng**.
-Hướng dẫn từng bước có dòng «Kiểm»: **[README-CAI-MOI.md](README-CAI-MOI.md)** · cách dùng: **[SKILL.md](SKILL.md)** · danh sách tệp + md5: [MANIFEST.md](MANIFEST.md).
 
-## Chưa cài Remotion? Vẫn demo được
-Máy chỉ có Claude Code + ChatCut: đi **Quy trình C** — `references/quy-trinh/ghep-nguyen-lieu-san-chatcut.md` — tải nguyên liệu dựng sẵn
-(`assets/nguyen-lieu-video-2/`: tiếng · 4 cảnh icon · bản render trọn) lên ChatCut và ghép, không cần node. Cài Remotion sau cũng được.
-Nói với Claude «demo tạo video có remotion icon» (đã cài Remotion) ⇒ `render.sh stage` ra đúng video mẫu 26/09 (md5 `182cc1e4`).
+**3. Làm theo lời Claude.** Claude sẽ tự xem máy bạn còn thiếu gì, hỏi bạn **một lần** trước khi cài, rồi làm tiếp.
+Bạn chỉ phải: bấm **Yes** khi máy hỏi quyền cài, đăng nhập ChatCut khi được nhắc, và có thể phải tắt hẳn Claude rồi mở lại một lần
+(Claude sẽ nói rõ lúc nào). Trong lúc chờ, Claude mở bản mẫu cho bạn xem trước.
 
-## Cần có
-- macOS hoặc Linux · Node ≥ 18 · ffmpeg/ffprobe · Whisper (tuỳ chọn, để kiểm bản ra và lấy mốc từng chữ)
-- Claude Code + tài khoản ChatCut (cho phần sửa phim bằng sửa chữ). Phần Remotion chạy không cần ChatCut.
-- Không cần khoá API: icon và b-roll đã vẽ sẵn trong `assets/`.
+## Muốn tự làm từng bước?
+- Cài đặt bằng tay, có dòng «Kiểm» sau mỗi bước: **[README-CAI-MOI.md](README-CAI-MOI.md)** (dẫn sang bản [macOS](README-CAI-MOI-MAC.md) hoặc [Windows](README-CAI-MOI-WINDOWS.md)).
+- Cách Claude làm từng video, số đo, lỗi đã biết: **[SKILL.md](SKILL.md)**. Danh sách tệp kèm mã kiểm (md5): [MANIFEST.md](MANIFEST.md).
 
-## Trong repo
-| thư mục | có gì |
-|---|---|
-| `assets/` | phim mẫu có tiếng · nền sạch · 3 ảnh + 3 clip b-roll · 38 icon (PNG + SVG) · 5 bản ra mẫu + bảng khung (bản Owner duyệt 26/09: `video-2-tao-lai-ghep-chatcut-v02.mp4`) · `nguyen-lieu-video-2/` nguyên liệu dựng sẵn cho máy chưa có Remotion |
-| `references/` | chuỗi lệnh MCP · quy trình · luật rút từ video mẫu · dữ liệu mẫu · số đo |
-| `scripts/` | tải lên · kiểm bản xuất · b-roll động · sinh icon SVG · sinh props · bảng khung |
-| `scripts/remotion/` | mini-project Remotion 4.0.471 (5 composition) + `render.sh` tự kiểm |
+## Máy dùng được
+macOS (Apple Silicon hoặc Intel) · Windows 10/11 bản x64 · Linux. Windows trên chip ARM (Snapdragon) chỉ làm được «Sửa phim bằng sửa chữ».
+Cần khoảng 3 GB đĩa trống và mạng internet. Không cần khoá API nào: icon và hình minh hoạ đã vẽ sẵn trong gói.
 
 ## Giấy phép
-© Eroca Thanh. Dùng để học. Phim mẫu có giọng người thật — dùng để học trong lớp, không đăng lại.
+© Eroca Thanh. Dùng để học. Phim mẫu có giọng người thật — chỉ dùng để học, không đăng lại, không cắt ghép đưa lên mạng.

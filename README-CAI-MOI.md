@@ -1,86 +1,75 @@
-# Cài skill `demo-bien-tap-video-chatcut` trên máy mới — từ số 0
+# Cài bằng tay — phần chung cho mọi máy
 
-Làm lần lượt từ trên xuống. Mỗi bước có dòng **Kiểm** để biết đã đúng hay chưa. Máy thử: macOS (Apple Silicon hoặc Intel).
-Trên Linux các bước giống hệt, chỉ khác lệnh cài (`apt` thay `brew`).
+> Thường bạn **không cần** đọc tệp này: dán câu trong `README.md` là Claude tự làm hết. Tệp này dành cho ai muốn tự làm
+> từng bước, hoặc cho Claude tra khi có bước hỏng. Mỗi bước có dòng **Kiểm** để biết đã đúng chưa.
 
-## 0. Giải nén vào chỗ Claude Code đọc skill
+**Làm theo hệ máy của bạn:** 👉 **[macOS](README-CAI-MOI-MAC.md)** · 👉 **[Windows](README-CAI-MOI-WINDOWS.md)**
+Hai tệp đó lo phần cài phần mềm (bước 1). Các bước dưới đây giống nhau trên mọi máy.
+Trên Windows, mọi lệnh ở đây chạy trong **Git Bash** (cửa sổ dòng lệnh đi kèm Git — Claude Code trên Windows cũng dùng nó), không dùng PowerShell.
+
+## 0. Tải bộ công cụ về đúng chỗ
 ```bash
-mkdir -p ~/.claude/skills
+git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
 cd ~/.claude/skills/demo-bien-tap-video-chatcut
 ```
-**Kiểm:** `ls` thấy `SKILL.md  README-CAI-MOI.md  MANIFEST.md  assets  references  scripts`.
-Muốn thử mà chưa cài hẳn thì giải nén vào thư mục bất kỳ — mọi script tự tìm đường theo chỗ nó nằm, không cần đường dẫn cố định.
+**Kiểm:** `ls` thấy `SKILL.md  README.md  MANIFEST.md  assets  references  scripts`.
+Đã có bản cũ (trước v3.0) thì xoá thư mục cũ rồi tải lại — bản cũ trên Windows mang kiểu xuống dòng khác làm lệch mã kiểm.
 
-## 1. Công cụ dòng lệnh
+## 0.5 Kiểm máy — chỉ xem, không cài gì
 ```bash
-# Homebrew (bỏ qua nếu đã có): https://brew.sh
-brew install node ffmpeg        # node ≥ 18 · ffmpeg kèm ffprobe
-pip3 install -U openai-whisper  # TUỲ CHỌN — để verify-export nghe lại lời và để lấy mốc từng chữ
+bash scripts/kiem-may.sh
 ```
-**Kiểm:**
-```bash
-node -v        # v18 trở lên
-ffprobe -version | head -1
-whisper --help | head -1   # nếu đã cài
-```
+In một dòng cho mỗi phần mềm (✅ có · ⚠️ đã cài nhưng cửa sổ này chưa thấy · ❌ thiếu · ➖ tuỳ chọn), kết luận máy làm được video nào,
+và các dòng `CÀI:` là lệnh cài còn thiếu. **Kiểm:** mã thoát 0 = đủ hết · 1 = thiếu thứ bắt buộc · 2 = chỉ thiếu thứ tuỳ chọn.
 
-## 2. Claude Code + plugin ChatCut (phần sửa phim bằng sửa chữ)
-1. Cài Claude Code: https://docs.claude.com/claude-code — đăng nhập tài khoản của bạn.
-2. Nối ChatCut vào Claude Code — chọn MỘT trong hai đường:
-   - cài plugin ChatCut trong Claude Code (`/plugin`, tìm «chatcut») — plugin đăng ký máy chủ MCP `plugin:chatcut:chatcut`; hoặc
-   - đăng ký thẳng máy chủ MCP ở phạm vi người dùng (lệnh theo tài liệu của plugin ChatCut):
-     ```bash
-     claude mcp add-json --scope user chatcut '{"type":"http","url":"https://api.chatcut.io/api/external-mcp/mcp","oauth_resource":"https://api.chatcut.io/api/external-mcp/mcp","headers":{"x-chatcut-mcp-client":"claude_code","x-chatcut-mcp-surface":"embedded-preview"}}'
-     ```
-   Đã có một trong hai thì đừng thêm cái kia (hai bản đăng ký trùng nhau).
-3. Gõ `/mcp` → chọn ChatCut → **Authenticate** → đăng nhập tài khoản ChatCut trên trình duyệt (một lần).
-4. **Mở một phiên Claude Code MỚI** sau khi cài plugin — phiên mở trước lúc cài KHÔNG thấy tool.
+## 1. Cài phần mềm còn thiếu
+Theo tệp của hệ máy: [macOS](README-CAI-MOI-MAC.md) · [Windows](README-CAI-MOI-WINDOWS.md). Xong chạy lại `bash scripts/kiem-may.sh`.
 
-**Kiểm:** trong phiên mới, nhờ Claude «liệt kê dự án ChatCut của tôi» ⇒ ra danh sách (có thể rỗng), không ra lỗi 401.
-Đối chứng: ở một phiên đã mở TRƯỚC khi cài plugin, cùng câu đó sẽ không tìm thấy tool — đúng như thế là máy đang nói thật.
+## 2. Plugin ChatCut (để Claude điều khiển trang biên tập ChatCut)
+1. Trong Claude Code gõ `/plugin`, tìm và cài **ChatCut** (nếu không thấy, thêm kho plugin của ChatCut theo hướng dẫn trên chatcut.io rồi tìm lại).
+2. Gõ `/mcp` → chọn ChatCut → **Authenticate** → đăng nhập ChatCut trên trình duyệt (một lần).
+3. **Mở một phiên Claude Code MỚI** — phiên mở trước lúc cài plugin không thấy công cụ ChatCut.
 
-## 3. Remotion (phần dựng icon / b-roll động / sân khấu theo câu)
+**Kiểm:** trong phiên mới, nhờ Claude «liệt kê dự án ChatCut của tôi» ⇒ ra danh sách (có thể rỗng), không báo lỗi 401.
+⚠️ Chỉ dùng plugin. Đăng ký ChatCut bằng lệnh `claude mcp add-json` thì biên tập được nhưng **không tải phim lên được** (thiếu công cụ tải của plugin).
+
+## 3. Bộ dựng video (Remotion)
+Hai lệnh, chạy **riêng từng lệnh**. Nhờ Claude chạy thì dặn thời hạn 10 phút — lần đầu có thể quá 2 phút mặc định.
 ```bash
 cd ~/.claude/skills/demo-bien-tap-video-chatcut/scripts/remotion
-npm install              # tải remotion 4.0.471 + react 19 — khoảng 1–3 phút, cần mạng
-bash render.sh broll     # render 3 clip b-roll động từ 3 ảnh mẫu
+npm ci
 ```
-**Kiểm:** dòng cuối in `RESULT PASS`, và có 3 dòng `PASS broll-N-dong.mp4 1080x1920 frames=91/81/70`.
-Lần render đầu tải thêm Chrome headless cho Remotion (tự động) và font Be Vietnam Pro từ Google Fonts — cần mạng.
-Muốn thử thêm: `bash render.sh stage` (video 65 giây, khoảng 35 giây render) · `bash render.sh story` · `bash render.sh all`.
-Tệp ra nằm ở `scripts/remotion/out/`. So với bản mẫu trong `assets/ban-mau-da-ra/` bằng mắt (render Remotion không trùng md5 từng byte).
+```bash
+cd ~/.claude/skills/demo-bien-tap-video-chatcut/scripts/remotion
+bash render.sh broll
+```
+**Kiểm:** dòng cuối `RESULT PASS`, có 3 dòng `PASS broll-N-dong.mp4 1080x1920 frames=91/81/70`.
+Lần render đầu tự tải thêm một trình duyệt ẩn (~270 MB) và phông chữ tiếng Việt — cần mạng. Lần sau không tải nữa.
+Dùng `npm ci` chứ không `npm install`: `npm ci` cài đúng bản đã khoá và không sửa tệp nào của bộ công cụ.
 
-## 4. Kiểm bộ đo trên một bản ra có sẵn
+## 4. Kiểm bộ kiểm — có cả đối chứng âm
 ```bash
 cd ~/.claude/skills/demo-bien-tap-video-chatcut
-bash scripts/verify-export.sh assets/ban-mau-da-ra/vsl-chatcut-broll-codex.mp4 46c7b4d5 \
-  "Hẹn bạn xem buổi hai" "gửi tặng skill"
+bash scripts/verify-export.sh assets/ban-mau-da-ra/vsl-chatcut-broll-codex.mp4 46c7b4d5 "Hẹn bạn xem buổi hai" "gửi tặng skill"
 ```
-**Kiểm:** `RESULT PASS` (có whisper thì thêm dòng «removed phrase not heard» và «positive control heard»).
-Đối chứng âm: đổi câu thứ ba thành một câu CÒN trong phim, ví dụ `"gửi tặng skill"` ⇒ phải ra `RESULT FAIL`.
+**Kiểm:** `RESULT PASS`. Đã cài Whisper (công cụ nghe lại lời) thì có thêm «removed phrase not heard» và «positive control heard».
 
-## 5. Chạy demo
-Mở `SKILL.md`, làm theo mục «① Chuẩn bị» rồi «② Gõ gì». Câu mẫu (thay đường dẫn):
+Đối chứng âm — chạy trên phim **CHƯA cắt**, câu «đã xoá» thật ra vẫn còn ⇒ **phải** ra `FAIL removed phrase still audible`:
+```bash
+bash scripts/verify-export.sh assets/phim-mau/phim-buoi-1-co-tieng.mp4 "" "Hẹn bạn xem buổi hai" "gửi tặng skill"
+bash scripts/verify-export.sh assets/phim-mau/phim-buoi-1-co-tieng.mp4 "" "Tối nay, ở buổi một" "gửi tặng skill"
 ```
-Chạy skill demo-bien-tap-video-chatcut. Phim: assets/phim-mau/phim-buoi-1-co-tieng.mp4, tôi đồng ý tải lên ChatCut.
-Xoá câu «Hẹn bạn xem buổi hai Bí mật AI cùng Thanh tối mai».
-Chèn 3 clip b-roll động trong assets/b-roll/ vào 3 câu «Nạp bản sắc thương hiệu», «Giao AI xử lý tệp», «Phân tích khảo sát».
-Xuất 1080×1920 rồi mở phim cho tôi xem.
-```
+Hai lệnh này chỉ có nghĩa khi đã cài Whisper; thiếu Whisper thì bộ kiểm in `RESULT PASS (speech not checked: whisper missing)`.
+Lần đầu Whisper tải mô hình khoảng 480 MB. Ảnh ghép khung hình của bước này ghi vào thư mục `out/`, không đụng tệp nào của bộ công cụ.
+**Kiểm cuối:** `git status --short` không in dòng nào.
+
+## 5. Làm video
+Mở `SKILL.md`, bắt đầu từ bước 0. Hoặc nói với Claude: «làm Video icon kể chuyện» / «demo sửa phim bằng sửa chữ».
 
 ## Thứ KHÔNG có trong gói — bạn tự có
 | cần | vì sao | nếu thiếu |
 |---|---|---|
-| tài khoản ChatCut | phim được tải lên máy chủ của họ để biên tập | không chạy được phần ①–② của SKILL.md; phần Remotion vẫn chạy |
-| Claude Code + tài khoản | máy gọi các lệnh | — |
-| khoá Codex / Gemini / máy vẽ ảnh | chỉ cần khi muốn VẼ MỚI ảnh b-roll hoặc icon | icon và b-roll mẫu đã vẽ sẵn trong `assets/` — không cần khoá để chạy demo |
-| internet | npm install · font · ChatCut | Remotion render lại được khi offline sau lần đầu (font đã tải) — CHƯA đo |
-
-## Lấy gói từ GitHub (từ 26/09/2026)
-Kho: `github.com/erocathanh/demo-bien-tap-video-chatcut` (CÔNG KHAI từ 26/09/2026 theo quyết của chủ phim). Phim mẫu có mặt và giọng người thật: chỉ dùng để học, không đăng lại.
-```bash
-git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
-```
-Máy **chỉ có ChatCut, chưa có node/Remotion**: vẫn chạy được demo ngay — đi **Quy trình C** (`references/quy-trinh/ghep-nguyen-lieu-san-chatcut.md`):
-nguyên liệu đã dựng sẵn ở `assets/nguyen-lieu-video-2/` (tiếng · 4 cảnh icon · bản render trọn), chỉ tải lên ChatCut và ghép.
-Cài Remotion sau (`cd scripts/remotion && npm install`) thì `bash render.sh stage` ra đúng video mẫu 26/09 (md5 `182cc1e4`, tất định giữa các lượt).
+| tài khoản ChatCut | video được tải lên trang ChatCut để cắt, thêm phụ đề và xuất | chỉ dựng được phần hình icon trên máy |
+| Claude Code + tài khoản | Claude gọi mọi lệnh | — |
+| khoá Codex / Gemini / máy vẽ ảnh | chỉ cần khi muốn VẼ MỚI hình minh hoạ | icon và hình mẫu đã vẽ sẵn trong `assets/` |
+| internet | tải bộ dựng · phông chữ · ChatCut | — |

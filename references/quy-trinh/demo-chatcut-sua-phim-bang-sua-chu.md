@@ -1,4 +1,4 @@
-# Quy trình A — sửa phim bằng cách sửa chữ (ChatCut qua MCP)
+# Sửa phim bằng sửa chữ — ChatCut qua MCP (tài liệu kỹ thuật, nhãn nội bộ: quy trình A)
 
 Người dùng gõ MỘT câu cho Claude Code → Claude gọi ChatCut qua MCP → phim dọc được cắt một câu, chèn ba b-roll đúng câu
 đang nói, xuất mp4 về máy. Không mở giao diện ChatCut, không bấm gì trong đó.
@@ -18,7 +18,8 @@ Người dùng gõ MỘT câu cho Claude Code → Claude gọi ChatCut qua MCP �
 2  import_media create_session → scripts/upload.sh (phim + 3 clip, một lệnh)
 3  edit_item thêm phim vào V1 → read_script → apply_script gạch ~~câu~~
 4  find_transcript từng câu nhận b-roll → edit_item 3 clip lên V2 đúng khung, không fade
-5  smooth_audio → submit_export → track_export → tải về → verify-export.sh → mở xem
+5  smooth_audio → submit_export → track_export → tải về (curl -fsSL --create-dirs -o "out/<tên>.mp4" "<link>") → verify-export.sh → mở xem
+   mở xem: macOS open "<tệp>" · Git Bash start "" "$(cygpath -w "<tệp>")" · PowerShell Invoke-Item "<tệp>"
 ```
 Số đo 25/09/2026: trọn lượt **1 phút 30 giây** (ảnh tĩnh) · **2 phút 17 giây** (3 clip động) · vừa làm vừa kể: 3 phút 30 giây.
 Người dùng bấm: 1 câu gõ + 1 lần đồng ý tải lên.

@@ -11,7 +11,7 @@
 | 1 | `create_project` | `{"name":"dien-tap-demo-25-09"}` | `projectId` · `timelineId` | 09:25:44 |
 | 2 | `manage_timelines` | `{"projectId":P,"action":"update","timelineId":T,"width":1080,"height":1920}` | — (🔴 dự án mới mặc định **1920×1080 ngang**) | |
 | 3 | `import_media` | `{"projectId":P,"action":"create_session"}` | `token` · `endpoint` (sống 30 phút) | |
-| 4 | Bash `scripts/upload.sh <token> <endpoint> <phim.mp4> <clip1.mp4> <clip2.mp4> <clip3.mp4>` (v1.4: clip động, 28 giây; ảnh cũ: 10 giây) | tối đa 4 tệp một lệnh | 4 dòng `assetId tên-tệp` | 09:26:12 · **10 giây** |
+| 4 | Bash `bash scripts/upload.sh <token> <endpoint> <phim.mp4> <clip1.mp4> <clip2.mp4> <clip3.mp4>` (v1.4: clip động, 28 giây; ảnh cũ: 10 giây) | tối đa 4 tệp một lệnh | 4 dòng `assetId tên-tệp` | 09:26:12 · **10 giây** |
 | 5 | `edit_item` | `{"projectId":P,"adds":[{"type":"video","assetId":PHIM,"fromFrame":0,"trackId":"V1","fit":"cover"}]}` | — | |
 | 6 | `read_script` | `{"projectId":P}` | `timelineMd` (bản bóc lời có ngay, **không phải chờ**) | |
 | 7 | `apply_script` | `{"projectId":P,"timelineMd":"<bản gạch ~~câu~~>"}` — mẫu: `du-lieu-mau/timeline-gach-cau.md` | báo «36.4s → 32s» | |
@@ -20,7 +20,7 @@
 | 10 | `smooth_audio` | `{"projectId":P}` | 1 chồng tiếng + 2 mờ tiếng · với clip động: báo `skipped 3 no_audio` — ĐÚNG, clip b-roll không có tiếng | |
 | 11 | `submit_export` | `{"projectId":P,"format":"video","resolution":"1080p","name":"<tên>.mp4"}` | `renderId` | 09:26:51 |
 | 12 | `track_export` | `{"action":"status","projectId":P,"renderIds":R}` — hỏi lại mỗi ≥10 giây | `downloadUrl` (S3, sống **1 ngày**) | render **17,7 giây** |
-| 13 | Bash `curl -s -o <tệp> "<downloadUrl>"` rồi `scripts/verify-export.sh <tệp> 5656a249 "<câu đã xoá>" "<câu phải còn>"` (bản ảnh tĩnh cũ: `46c7b4d5`) | | `RESULT PASS` | 09:27:14 · **tổng 1 phút 30 giây** |
+| 13 | Bash `curl -fsSL --create-dirs -o "out/<tệp>.mp4" "<downloadUrl>"` (`-f`: link hết hạn thì báo lỗi, không lưu tệp rác; PowerShell dùng `curl.exe`) rồi `scripts/verify-export.sh <tệp> 5656a249 "<câu đã xoá>" "<câu phải còn>"` (bản ảnh tĩnh cũ: `46c7b4d5`) | | `RESULT PASS` | 09:27:14 · **tổng 1 phút 30 giây** |
 
 ## Bốn chỗ gõ sai tham số đã cắn (đo 25/09) — đừng mò lại
 ```
