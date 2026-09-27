@@ -20,7 +20,7 @@
 | 10 | `smooth_audio` | `{"projectId":P}` | 1 chồng tiếng + 2 mờ tiếng · với clip động: báo `skipped 3 no_audio` — ĐÚNG, clip b-roll không có tiếng | |
 | 11 | `submit_export` | `{"projectId":P,"format":"video","resolution":"1080p","name":"<tên>.mp4"}` | `renderId` | 09:26:51 |
 | 12 | `track_export` | `{"action":"status","projectId":P,"renderIds":R}` — hỏi lại mỗi ≥10 giây | `downloadUrl` (S3, sống **1 ngày**) | render **17,7 giây** |
-| 13 | Bash `curl -fsSL --create-dirs -o "out/<tệp>.mp4" "<downloadUrl>"` (`-f`: link hết hạn thì báo lỗi, không lưu tệp rác; PowerShell dùng `curl.exe`) rồi `scripts/verify-export.sh <tệp> 5656a249 "<câu đã xoá>" "<câu phải còn>"` (bản ảnh tĩnh cũ: `46c7b4d5`) | | `RESULT PASS` | 09:27:14 · **tổng 1 phút 30 giây** |
+| 13 | Bash `curl -fsSL --create-dirs -o "out/<tệp>.mp4" "<downloadUrl>"` (`-f`: link hết hạn thì báo lỗi, không lưu tệp rác; PowerShell dùng `curl.exe`) rồi `scripts/verify-export.sh <tệp> 5656a249 "<câu đã xoá>" "<câu phải còn>"` | | `RESULT PASS` | 09:27:14 · **tổng 1 phút 30 giây** |
 
 ## Bốn chỗ gõ sai tham số đã cắn (đo 25/09) — đừng mò lại
 ```

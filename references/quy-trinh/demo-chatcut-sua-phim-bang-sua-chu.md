@@ -1,4 +1,4 @@
-# Sửa phim bằng sửa chữ — ChatCut qua MCP (tài liệu kỹ thuật, nhãn nội bộ: quy trình A)
+# Sửa phim bằng sửa chữ — ChatCut qua MCP (tài liệu kỹ thuật)
 
 Người dùng gõ MỘT câu cho Claude Code → Claude gọi ChatCut qua MCP → phim dọc được cắt một câu, chèn ba b-roll đúng câu
 đang nói, xuất mp4 về máy. Không mở giao diện ChatCut, không bấm gì trong đó.
@@ -21,8 +21,8 @@ Người dùng gõ MỘT câu cho Claude Code → Claude gọi ChatCut qua MCP �
 5  smooth_audio → submit_export → track_export → tải về (curl -fsSL --create-dirs -o "out/<tên>.mp4" "<link>") → verify-export.sh → mở xem
    mở xem: macOS open "<tệp>" · Git Bash start "" "$(cygpath -w "<tệp>")" · PowerShell Invoke-Item "<tệp>"
 ```
-Số đo 25/09/2026: trọn lượt **1 phút 30 giây** (ảnh tĩnh) · **2 phút 17 giây** (3 clip động) · vừa làm vừa kể: 3 phút 30 giây.
-Người dùng bấm: 1 câu gõ + 1 lần đồng ý tải lên.
+Số đo 25/09/2026: trọn lượt **2 phút 17 giây** (3 clip động — bản mẫu hiện hành) · bản ảnh tĩnh cũ (đã bỏ ở v3.0) 1 phút 30 giây · vừa làm vừa kể: khoảng 3 phút 30 giây (ước).
+Người dùng bấm: macOS 1 câu gõ + 1 lần đồng ý tải lên · Windows thêm 1 lần «Click to relink» cho phim có tiếng (lỗi plugin P5).
 
 ## Bẫy đã gặp
 1. Phiên đang chạy lúc cắm MCP không thấy tool — mở phiên mới.

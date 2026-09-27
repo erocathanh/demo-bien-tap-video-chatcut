@@ -27,18 +27,22 @@ bộ kiểm báo sai «Bộ kiểm báo chưa đạt, nhưng phim thật ra đú
 
 ## Bước 0 — Claude tự làm trước mọi việc
 ```
-1. bash scripts/kiem-may.sh              chỉ đọc, ~10 giây. Mã thoát 0 đủ · 1 thiếu bắt buộc · 2 chỉ thiếu tuỳ chọn.
+1. bash "$SKILL_DIR/scripts/kiem-may.sh"   chỉ đọc, vài giây (Mac đo dưới 1 giây). Mã thoát 0 đủ · 1 thiếu bắt buộc · 2 chỉ thiếu tuỳ chọn.
 2. Có dòng «CÀI:» ⇒ hỏi người dùng MỘT câu gom, ví dụ:
      «Máy anh còn thiếu 3 phần mềm (Node.js, FFmpeg, Python), cài khoảng 5 phút. Windows sẽ hỏi quyền — anh bấm Yes. Tôi cài nhé?»
+     (5 phút là số đo Windows 27/09: Node.js 33 giây · FFmpeg 185 giây · Python 80 giây.)
    Chỉ thiếu thứ tuỳ chọn (Whisper, Pillow) ⇒ hỏi có muốn cài không, nói rõ bỏ qua vẫn làm được video.
-3. Trong lúc cài: mở bản mẫu cho người dùng xem — «đây là thứ anh sẽ tự làm được sau khoảng 10 phút»
+3. Trong lúc cài: mở bản mẫu cho người dùng xem — «đây là thứ anh sẽ tự làm được hôm nay»
      macOS  open "assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4"
      Windows start "" "$(cygpath -w assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4)"
-4. Cài xong mà kiem-may.sh báo «ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy» ⇒ bảo người dùng tắt HẲN Claude, mở lại, gõ «tiếp tục»;
-   rồi chạy lại kiem-may.sh.
-5. Thiếu plugin ChatCut ⇒ hướng dẫn: /plugin marketplace add ChatCut-Inc/agent-plugin → /plugin install chatcut@chatcut-inc → /mcp → ChatCut → Authenticate → mở phiên Claude mới.
-6. Bộ dựng video chưa cài ⇒ cd scripts/remotion && npm ci   (lệnh riêng, thời hạn 600000 ms)
-   rồi bash scripts/remotion/render.sh broll   (lệnh riêng, thời hạn 600000 ms) ⇒ RESULT PASS.
+4. Cài xong mà kiem-may.sh báo «ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy» ⇒ bảo người dùng tắt HẲN Claude, mở lại, DÁN LẠI câu ban đầu
+   (Claude Code trong Terminal: `claude --continue`); rồi chạy lại kiem-may.sh.
+5. Thiếu plugin ChatCut ⇒ đưa người dùng tự gõ: /plugin marketplace add ChatCut-Inc/agent-plugin → /plugin install chatcut@chatcut-inc → /mcp → ChatCut → Authenticate.
+   Công cụ ChatCut chưa hiện thì bảo mở phiên Claude mới và dán lại câu ban đầu (máy thử Windows thấy ngay, không cần phiên mới).
+6. Bộ dựng video chưa cài ⇒ hai lệnh riêng, đường TUYỆT ĐỐI (tool Bash giữ nguyên thư mục giữa các lần gọi):
+     npm ci --prefix "$SKILL_DIR/scripts/remotion"        (thời hạn 600000 ms)
+     bash "$SKILL_DIR/scripts/remotion/render.sh" broll    (thời hạn 600000 ms) ⇒ RESULT PASS
+   $SKILL_DIR = thư mục chứa tệp này, thường là ~/.claude/skills/demo-bien-tap-video-chatcut.
 ```
 Lệnh cài từng hệ: [README-CAI-MOI-MAC.md](README-CAI-MOI-MAC.md) · [README-CAI-MOI-WINDOWS.md](README-CAI-MOI-WINDOWS.md). Không cài gì khi người dùng chưa đồng ý.
 
@@ -57,8 +61,8 @@ Mọi script `.sh` chạy được trên cả hai hệ; công cụ trên Windows
 ## Hai video làm được
 | tên | nói với Claude | bản mẫu | thời gian |
 |---|---|---|---|
-| **Video icon kể chuyện** (mặc định) | «demo tạo video có remotion icon» / «làm video icon kể chuyện» | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` | dựng 30–70 giây + ChatCut khoảng 2–3 phút |
-| **Sửa phim bằng sửa chữ** | «demo sửa phim bằng sửa chữ» | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` (md5 `5656a249`) | 1 phút 30 giây – 2 phút 17 giây |
+| **Video icon kể chuyện** (mặc định) | «demo tạo video có remotion icon» / «làm video icon kể chuyện» | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` | dựng 30–70 giây + ChatCut khoảng 3 phút (Mac 27/09) |
+| **Sửa phim bằng sửa chữ** | «demo sửa phim bằng sửa chữ» | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` (md5 `5656a249`) | 2 phút 17 giây (3 clip động, Mac 25/09) |
 | Video icon có mặt bạn (nâng cao) | cần bạn tự quay video dọc đọc kịch bản | — | xem `references/quy-trinh/video-san-khau-theo-cau.md` nhánh «có mặt bạn» |
 
 ## 🔴 Ba chốt cứng (mọi video)
@@ -81,6 +85,10 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
 2  Skill chatcut:chatcut-plugin-basics-claude (một lần mỗi phiên)
 3  create_project {"compositionWidth":1080,"compositionHeight":1920,"fps":30}   (🔴 thiếu hai số này thì dự án mặc định NGANG)
 4  import_media create_session → bash scripts/upload.sh <token> <endpoint> <video-2-khong-phu-de.mp4>   (đo: 10 giây)
+   🔴 Windows: phim này CÓ TIẾNG nên chắc chắn dính lỗi plugin P5. Trước khi tải, MỞ trang editor cho người dùng
+   (browserHandoff.url trong khung trình duyệt, Ctrl+Shift+B) để họ thấy thẻ «Click to relink».
+   upload.sh trả mã 6 = không có assetId ⇒ đọc lại 3 bước relink nó in ra bằng lời thường, CHỜ người dùng nhắn «xong»,
+   rồi browse_assets tìm đúng tên tệp để lấy assetId, mới sang bước 5.
 5  edit_item adds [{"type":"video","assetId":A,"fromFrame":0,"trackId":"V1","fit":"cover"}]
 6  (tuỳ chọn) read_script → apply_script gạch ~~câu~~ ⇒ hình tự cắt theo tiếng vì hình và tiếng nằm chung một clip
 7  edit_captions enable ⇒ set_sources {"sources":[{"trackId":"V1"}]} ⇒ style + layout đặt chữ DƯỚI thẻ sân khấu ⇒ refresh
@@ -130,9 +138,9 @@ Người dùng NHÌN THẤY dòng thời gian đổi theo từng bước: trong 
 |---|---|---|
 | tải phim 36 giây + 3 clip | 28 giây | phim có tiếng: bấm relink tay (lỗi plugin P5) · 3 clip 12 giây |
 | bóc lời | có ngay (lượt đầu ≤ 21 giây) | ~8 giây |
-| gạch câu + tra 3 câu + đặt b-roll + làm mượt tiếng | ~39 giây | tương đương |
-| xuất trên mây | 17,7–20,5 giây | 28,9 giây |
-| **tổng** | **1 phút 30 giây – 2 phút 17 giây** · vừa làm vừa kể 3 phút 30 giây | chưa bấm giờ trọn (có bước relink tay) |
+| gạch câu + tra 3 câu + đặt b-roll + làm mượt tiếng | ~39 giây (ước, không có sổ thô) | tương đương |
+| xuất trên mây | 20,5 giây (3 clip động) · 17,7 giây (ảnh tĩnh cũ) | 28,9 giây |
+| **tổng** | **2 phút 17 giây** (3 clip động, 25/09) · bản ảnh tĩnh cũ (đã bỏ ở v3.0) 1 phút 30 giây · vừa làm vừa kể khoảng 3 phút 30 giây (ước) | chưa bấm giờ trọn (có bước relink tay) |
 | mã kiểm bản ra | `5656a249` | `5656a249` — trùng từng byte |
 
 ### ③ Phụ đề ChatCut CHỈ trên đoạn b-roll (đã chạy thật trên Windows 27/09, soát 12 khung mép sạch)

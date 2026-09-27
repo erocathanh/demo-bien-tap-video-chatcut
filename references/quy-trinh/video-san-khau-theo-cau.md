@@ -1,4 +1,4 @@
-# Video icon kể chuyện — Remotion dựng hình, ChatCut biên tập (tài liệu kỹ thuật, nhãn nội bộ: quy trình B)
+# Video icon kể chuyện — Remotion dựng hình, ChatCut biên tập (tài liệu kỹ thuật)
 
 Mỗi câu nói là một cảnh riêng: thẻ nền bo góc, vật minh hoạ bật đúng lúc nói chữ của nó, hết câu thì cắt cứng sang cảnh sau.
 Học từ một Short mẫu (luật rút gọn: `tom-tat-luat-mau-07-08.md`).
@@ -15,10 +15,11 @@ xuất phim đều làm trong ChatCut. Phụ đề chỉ có MỘT lớp, sinh t
 
 ## Nhánh giọng AI — chạy lại video mẫu (đã chạy thật trên Mac 27/09/2026)
 ```
-1  bash scripts/remotion/render.sh stage-chatcut   ⇒ scripts/remotion/out/video-2-khong-phu-de.mp4 · 1996 khung · có tiếng · không phụ đề
+1  bash scripts/remotion/render.sh stage-chatcut   ⇒ scripts/remotion/out/video-2-khong-phu-de.mp4 · tự kiểm 1996 khung + có tiếng (không phụ đề: mở khung ra xem)
    máy không dựng được (Windows ARM, không cài được bộ dựng) ⇒ dùng bản dựng sẵn assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4
 2  create_project {"compositionWidth":1080,"compositionHeight":1920,"fps":30}   (truyền khổ ngay khi tạo ⇒ khỏi bước đổi khổ)
 3  import_media create_session → bash scripts/upload.sh <token> <endpoint> <clip.mp4>            đo: 10 giây
+   Windows: phim có tiếng ⇒ lỗi plugin P5 ⇒ upload.sh mã 6, người dùng bấm «Click to relink» một lần, rồi browse_assets lấy assetId
 4  edit_item adds [{"type":"video","assetId":A,"fromFrame":0,"trackId":"V1","fit":"cover"}]
 5  read_script ⇒ bóc lời có ngay (27 đoạn). Tuỳ chọn: apply_script gạch ~~câu~~ ⇒ hình cắt theo tiếng (cùng một clip)
    đo: gạch câu 7 ⇒ 1996 → 1887 khung, 2 đoạn trên V1
