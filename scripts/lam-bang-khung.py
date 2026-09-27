@@ -4,6 +4,10 @@
 import glob, os, sys
 from PIL import Image, ImageDraw, ImageFont
 
+# Windows: stdout/stderr default to cp1252 and CRLF; force UTF-8 and LF so output is identical on every OS.
+sys.stdout.reconfigure(encoding="utf-8", newline="\n")
+sys.stderr.reconfigure(encoding="utf-8")
+
 src_dir = sys.argv[1]
 out_dir = sys.argv[2]
 fps = float(sys.argv[3]) if len(sys.argv) > 3 else 2.0
@@ -19,10 +23,20 @@ pad = 6
 os.makedirs(out_dir, exist_ok=True)
 
 frames = sorted(glob.glob(os.path.join(src_dir, "k*.png")) + glob.glob(os.path.join(src_dir, "k*.jpg")))
-try:
-    font = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 30)
-except Exception:
-    font = ImageFont.load_default()
+# Seconds label font: macOS -> Windows -> Linux; last resort Pillow's own font at the same size (Pillow >= 10.1).
+font = None
+for cand in ("/System/Library/Fonts/Supplemental/Arial Bold.ttf", r"C:\Windows\Fonts\arialbd.ttf",
+             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", "DejaVuSans-Bold.ttf"):
+    try:
+        font = ImageFont.truetype(cand, 30)
+        break
+    except Exception:
+        pass
+if font is None:
+    try:
+        font = ImageFont.load_default(size=30)
+    except TypeError:  # Pillow < 10.1 has no size argument
+        font = ImageFont.load_default()
 
 per_sheet = cols * rows
 sheet_no = 0

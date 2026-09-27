@@ -142,6 +142,6 @@ if __name__ == "__main__":
     out = sys.argv[1]
     os.makedirs(out, exist_ok=True)
     for name, text in ICONS.items():
-        with open(os.path.join(out, name + ".svg"), "w") as fh:
+        with open(os.path.join(out, name + ".svg"), "w", encoding="utf-8", newline="\n") as fh:
             fh.write(text)
     print(f"wrote {len(ICONS)} svg to {out}")

@@ -12,7 +12,8 @@ Timing rules (sample 08 report, measured 26/09/2026):
 The script text is the truth: whisper mishears words ("ngạp" for "nạp"), so script tokens are aligned to whisper tokens
 with difflib and unmatched script tokens get times interpolated from their matched neighbours.
 
-Usage: make_stage_props.py <script.md> <whisper.json> <plan.json> [--audio voice.wav] [--face nen-sach.mp4:150:50% 30%] > props.json
+Usage: make_stage_props.py <script.md> <whisper.json> <plan.json> [--audio voice.wav] [--face nen-sach.mp4:150:50% 30%] [--out props.json]
+       (without --out the JSON goes to stdout)
 """
 import argparse
 import difflib
@@ -219,12 +220,15 @@ def caption_chunks(toks):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", newline="\n")  # Windows: cp1252 + CRLF by default
+    sys.stderr.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("script")
     ap.add_argument("whisper")
     ap.add_argument("plan")
     ap.add_argument("--audio")
-    ap.add_argument("--face", help="video:startFrame:objectPosition")
+    ap.add_argument("--face", help="video:startFrame:objectPosition (video relative to the Remotion public/ folder)")
+    ap.add_argument("--out", help="write the props JSON to this file (UTF-8, LF) instead of stdout")
     a = ap.parse_args()
 
     rows = parse_script(a.script)
@@ -264,9 +268,19 @@ def main():
     if a.audio:
         props["audio"] = a.audio
     if a.face:
-        v, sf, pos = a.face.split(":")
+        parts = a.face.rsplit(":", 2)  # rsplit: a Windows drive letter "D:" must not split the video name
+        if len(parts) != 3 or not parts[1].isdigit():
+            sys.exit(f"--face must be video:startFrame:objectPosition, got {a.face!r}")
+        v, sf, pos = parts
+        if v.startswith(("/", "\\")) or re.match(r"^[A-Za-z]:", v) or v.replace("\\", "/").startswith("public/"):
+            sys.exit(f"--face video must be a name relative to the Remotion public/ folder (e.g. nen-sach.mp4), got {v!r}")
         props["face"] = {"video": v, "startFrame": int(sf), "objectPosition": pos}
-    print(json.dumps(props, ensure_ascii=False, indent=1))
+    text = json.dumps(props, ensure_ascii=False, indent=1) + "\n"
+    if a.out:
+        with open(a.out, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(text)
+    else:
+        sys.stdout.write(text)
     events = sum(len(s["items"]) for s in scenes) + len(scenes)
     print("\n".join(report), file=sys.stderr)
     print(f"# sentences={len(rows)} · script words={total} · aligned by interpolation={unmatched} · "

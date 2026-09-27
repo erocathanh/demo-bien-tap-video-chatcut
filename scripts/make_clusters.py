@@ -106,8 +106,15 @@ props = {"video": "nen-sach.mp4", "videoStartFrame": 0, "durationInFrames": LAST
          "rampFrames": 9, "softBlur": 3, "softDim": 0.25, "clusters": clusters}
 
 if __name__ == "__main__":
-    print(json.dumps(props, ensure_ascii=False, indent=1))
     import sys
+    sys.stdout.reconfigure(encoding="utf-8", newline="\n")  # Windows: cp1252 + CRLF by default
+    sys.stderr.reconfigure(encoding="utf-8")
+    text = json.dumps(props, ensure_ascii=False, indent=1) + "\n"
+    if "--out" in sys.argv:  # make_clusters.py [--out props.json]; stdout by default
+        with open(sys.argv[sys.argv.index("--out") + 1], "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(text)
+    else:
+        sys.stdout.write(text)
     rest = [(0, clusters[0]["from"]), (clusters[-2]["to"], clusters[-1]["from"])]
     per10 = len(clusters) / (LAST_FRAME / FPS) * 10
     print(f"# clusters={len(clusters)} · per 10 s={per10:.2f} · rests(frames)={rest}", file=sys.stderr)

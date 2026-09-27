@@ -4,7 +4,12 @@ to the moment the first object starts to enter. Usage: measure_empty_stage.py pr
 import json
 import sys
 
-d = json.load(open(sys.argv[1]))
+# Windows: stdout/stderr default to cp1252 and CRLF; force UTF-8 and LF so output is identical on every OS.
+sys.stdout.reconfigure(encoding="utf-8", newline="\n")
+sys.stderr.reconfigure(encoding="utf-8")
+
+with open(sys.argv[1], encoding="utf-8") as fh:
+    d = json.load(fh)
 limit = float(sys.argv[2]) if len(sys.argv) > 2 else 0.6
 over = 0
 for s in d["scenes"]:
