@@ -32,9 +32,11 @@ Theo tệp của hệ máy: [macOS](README-CAI-MOI-MAC.md) · [Windows](README-C
    /plugin install chatcut@chatcut-inc
    ```
 2. Gõ `/mcp` → chọn ChatCut → **Authenticate** → đăng nhập ChatCut trên trình duyệt (một lần).
-3. **Mở một phiên Claude Code MỚI** — phiên mở trước lúc cài plugin không thấy công cụ ChatCut.
+3. Nhờ Claude «liệt kê dự án ChatCut của tôi». Chưa có công cụ ChatCut thì **mở một phiên Claude Code mới** rồi dán lại câu
+   bạn đã gõ lúc đầu (Claude Code trong Terminal: `claude --continue`). Máy thử Windows 27/09 thấy công cụ ngay sau Authenticate,
+   không cần mở phiên mới — tuỳ máy.
 
-**Kiểm:** trong phiên mới, nhờ Claude «liệt kê dự án ChatCut của tôi» ⇒ ra danh sách (có thể rỗng), không báo lỗi 401.
+**Kiểm:** nhờ Claude «liệt kê dự án ChatCut của tôi» ⇒ ra danh sách (có thể rỗng), không báo lỗi 401.
 ⚠️ Chỉ dùng plugin. Đăng ký ChatCut bằng lệnh `claude mcp add-json` thì biên tập được nhưng **không tải phim lên được** (thiếu công cụ tải của plugin).
 
 ## 3. Bộ dựng video (Remotion)

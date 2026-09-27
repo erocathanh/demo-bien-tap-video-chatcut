@@ -8,14 +8,18 @@
 - Lệnh `winget …` và `setx …` chạy được cả trong Git Bash lẫn PowerShell. Hai cờ `--accept-source-agreements --accept-package-agreements`
   là để máy mới không dừng lại chờ gõ «Y» đồng ý điều khoản (Claude không gõ thay được).
 - Không dán lệnh bash vào **PowerShell** (cửa sổ xanh mặc định): `&&`, `~`, `head` ở đó không chạy như trên Mac.
-- Đặt bộ công cụ ở `%USERPROFILE%\.claude\skills\demo-bien-tap-video-chatcut`. **Không** đặt trong OneDrive, Desktop hay Documents
+- Đặt bộ công cụ ở `~/.claude/skills/demo-bien-tap-video-chatcut` — viết đúng như vậy trong Git Bash. Trong File Explorer nó là
+  `C:\Users\<tên>\.claude\skills\demo-bien-tap-video-chatcut` (dạng `%USERPROFILE%\…` chỉ để nhận ra thư mục, dán vào Git Bash sẽ hỏng).
+  **Không** đặt trong OneDrive, Desktop hay Documents
   (đồng bộ OneDrive + thư mục tên tiếng Việt «Tài liệu» + đường dẫn quá dài dễ gây lỗi).
 
 ## Kiểm máy bằng PowerShell (khi chưa có Git Bash)
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kiem-may.ps1
+cd $env:USERPROFILE\.claude\skills\demo-bien-tap-video-chatcut
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/kiem-may.ps1
 ```
-`Bypass` chỉ áp cho đúng lần chạy này, không đổi cài đặt máy. Kết quả giống `kiem-may.sh`.
+`Bypass` chỉ áp cho đúng lần chạy này, không đổi cài đặt máy. Bản PowerShell kiểm cùng những thứ như `kiem-may.sh`,
+nhưng **chưa chạy thử trên Windows thật** — có Git Bash thì ưu tiên `bash scripts/kiem-may.sh`.
 
 ## Cần gì
 | phần mềm | để làm gì (nói thường) | bắt buộc? | lệnh cài | thời gian (đo 27/09) |
@@ -23,7 +27,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kiem-may.ps1
 | Git for Windows | tải bộ công cụ + chạy script `.sh` | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id Git.Git` | có sẵn trên máy thử |
 | Node.js ≥ 18 | chạy xưởng dựng video + công cụ tải phim của ChatCut | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS` | 33 giây (có hộp hỏi quyền — bấm **Yes**) |
 | FFmpeg | đọc và kiểm tra video | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id Gyan.FFmpeg` | 185 giây (tải ~200 MB) |
-| Python 3 thật (3.10–3.13) | công cụ phụ: chia phụ đề, làm bảng hình | bắt buộc cho «Video icon kể chuyện» | `winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user` | 80 giây |
+| Python 3 thật (3.8 trở lên; muốn cài Whisper thì 3.10–3.13) | công cụ phụ: chia phụ đề, làm bảng hình | bắt buộc cho «Video icon kể chuyện» | `winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user` | 80 giây |
 | Chữ tiếng Việt cho Python | tránh lỗi khi ghi chữ có dấu | nên có | `setx PYTHONUTF8 1` | tức thì |
 | Pillow | vẽ bảng hình có nhãn giây | tuỳ chọn | `python -m pip install pillow` | 10 giây |
 | Whisper | nghe lại lời trong video để kiểm câu đã xoá | tuỳ chọn | `python -m pip install -U openai-whisper` | 533 giây (~9 phút) — lệnh dài: chạy riêng, thời hạn 10 phút hoặc chạy nền |
@@ -38,11 +42,12 @@ Cửa sổ Claude đang mở không «nhìn thấy» phần mềm vừa cài. Ch
 - `python3` trên Windows thường chỉ là **lối tắt của Microsoft Store**, kể cả khi đã cài Python. Bộ công cụ tự gọi Python qua `bash scripts/py.sh …`.
 - Lần render đầu, tường lửa Windows có thể hỏi quyền mạng cho Node.js: bấm **Cho phép** hay **Huỷ** đều render được.
 - Mở video cho người dùng xem: Git Bash `start "" "$(cygpath -w "<tệp>.mp4")"` · PowerShell `Invoke-Item "<tệp>.mp4"`.
-- Khung trình duyệt trong app Claude: **Ctrl+Shift+B**.
+- Khung trình duyệt trong app Claude: **Ctrl+Shift+B** (theo tài liệu Claude desktop, chưa đo trên máy thử).
 - Tải bản xuất từ ChatCut: Git Bash `curl -fsSL --create-dirs -o "out/<tên>.mp4" "<link>"` · PowerShell dùng `curl.exe` (không phải `curl`).
 
-## Tải phim CÓ TIẾNG lên ChatCut có thể phải bấm tay một lần
-Plugin ChatCut bản 1.10.14 có lỗi trên Windows: phim có tiếng tải lên bị hỏng (hình minh hoạ không tiếng thì qua). Khi gặp lỗi này,
+## Tải phim CÓ TIẾNG lên ChatCut sẽ phải bấm tay một lần
+Plugin ChatCut bản 1.10.14 có lỗi trên Windows: phim có tiếng tải lên bị hỏng (hình minh hoạ không tiếng thì qua). Cả hai video
+của gói đều có tiếng, nên trên Windows **lần nào tải phim lên cũng gặp**. Khi đó
 `scripts/upload.sh` tự chép phim vào thư mục **Downloads** và chép sẵn đường dẫn vào bộ nhớ tạm. Bạn chỉ cần:
 bấm vào thẻ phim có chữ **«Click to relink»** trên trang ChatCut → trong cửa sổ hiện ra bấm ô **File name** → **Ctrl+V** → **Enter**. Xong nhắn «xong».
 Lỗi này nằm ở plugin ChatCut (mô tả tiếng Anh ở `references/gop-y-windows/BAO-LOI-CHATCUT_v1.0.md`, **chưa gửi** cho ChatCut). Khi ChatCut sửa thì bước bấm tay này sẽ bỏ.
@@ -50,7 +55,7 @@ Lỗi này nằm ở plugin ChatCut (mô tả tiếng Anh ở `references/gop-y-
 ## Số đo trên Windows (i9-14900HX, máy mới, 27/09/2026)
 | việc | Windows | Mac (để so) |
 |---|---|---|
-| `npm ci` | 30 giây (chưa có npm cache) | 19 giây |
+| cài bộ dựng video | 30 giây (`npm install`, chưa có npm cache; `npm ci` chưa đo trên Windows) | `npm ci` 10 giây (npm cache trống, 27/09) |
 | `render.sh broll` lần đầu | 160 giây (gồm tải trình duyệt ẩn 270 MB) | 31 giây |
 | `render.sh stage` | 64–70 giây | 29 giây |
 | Whisper 66 giây tiếng | 59 giây | 47 giây |

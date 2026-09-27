@@ -26,5 +26,5 @@ Máy Mac Intel: plugin ChatCut không kèm sẵn FFmpeg cho máy này ⇒ bắt 
 
 ## Số đo trên Mac (Apple Silicon, 25–26/09/2026)
 `npm ci` 10–19 giây (27/09: 10 giây với npm cache TRỐNG) · `render.sh broll` lần đầu 31 giây · `render.sh stage` 29 giây · Whisper 66 giây tiếng: 47 giây ·
-`verify-export.sh` có Whisper khoảng 23 giây · «Sửa phim bằng sửa chữ» trọn lượt 1 phút 30 giây – 2 phút 17 giây.
+`verify-export.sh` có Whisper khoảng 23 giây · «Sửa phim bằng sửa chữ» trọn lượt 2 phút 17 giây (3 clip b-roll động, 25/09; lượt dùng ảnh tĩnh cũ, đã bỏ ở v3.0, là 1 phút 30 giây).
 Lượt «như người mới» 27/09 (clone vào thư mục trống → kiểm máy → npm ci → dựng b-roll → bước 4 kèm 2 đối chứng âm): **2 phút**, sổ bấm giờ `references/ban-mau/dong-ho-nguoi-moi-v3-27-09.log`.
