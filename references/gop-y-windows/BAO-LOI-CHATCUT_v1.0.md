@@ -19,9 +19,10 @@ Severity key: **blocker** = a normal user cannot finish the task · **major** = 
 ## P5 — blocker: every video WITH AUDIO fails to upload on Windows
 **Where:** `skills/asset-import/scripts/upload-media.mjs`, lines 1428–1446 (waveform step).
 
-**What happens:** the helper builds an ffmpeg audio filter with the Windows temp path written straight into it:
+**What happens:** the helper builds an ffmpeg audio filter with a Windows temp file path written straight into it
+(as seen in the error output; path shortened here, the helper writes under TMPDIR / os.tmpdir()):
 ```
-ametadata=print:file=C:\Users\<user>\AppData\Local\Temp\chatcut-…-waveform-….txt
+ametadata=print:file=C:\Users\…\chatcut-…-waveform-….txt
 ```
 Inside an ffmpeg filter graph, `\` and `:` are special characters, so ffmpeg cannot parse the filter and stops with:
 ```
@@ -36,7 +37,7 @@ stream upload fine, so silent b-roll works and any talking video fails.
 **Things that do not help:** setting `TMPDIR=.` (the helper turns it into an absolute path again); retrying with
 `--asset-id`; deleting the asset and uploading again (same helper, same failure).
 
-**Suggested fix** (checked by hand with ffmpeg 9.0.2):
+**Suggested fix** (filter syntax checked by hand with ffmpeg; not yet tried inside the helper itself):
 - turn `\` into `/` and wrap the value in escaped quotes, for example
   `ametadata=print:file=\'C:/Users/…/x.txt\'`, or
 - escape twice: `C\\:/Users/…/x.txt`.
