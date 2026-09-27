@@ -30,7 +30,7 @@ if ! command -v node >/dev/null 2>&1; then
   echo "Thiếu Node.js — công cụ tải phim của ChatCut chạy bằng Node.js." >&2
   case "$plat" in
     darwin) echo "  Cài:  brew install node" >&2 ;;
-    win32)  echo "  Cài:  winget install -e --id OpenJS.NodeJS.LTS   (cài xong thoát hẳn Claude rồi mở lại)" >&2 ;;
+    win32)  echo "  Cài:  winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS   (cài xong thoát hẳn Claude rồi mở lại)" >&2 ;;
     *)      echo "  Cài Node.js 18+ bằng trình quản lý gói của máy" >&2 ;;
   esac
   exit 3
@@ -50,7 +50,7 @@ if ! command -v ffmpeg >/dev/null 2>&1; then
   bundle="$(dirname "$helper")/ffmpeg"
   if [ "$plat" = "win32" ] && [ ! -d "$bundle" ]; then
     echo "CẢNH BÁO: máy chưa có FFmpeg và bản FFmpeg đi kèm plugin bị hỏng trên Windows (lỗi plugin P1)." >&2
-    echo "  Cài:  winget install -e --id Gyan.FFmpeg   rồi thoát hẳn Claude và mở lại" >&2
+    echo "  Cài:  winget install -e --accept-source-agreements --accept-package-agreements --id Gyan.FFmpeg   rồi thoát hẳn Claude và mở lại" >&2
   elif [ "$plat-$arch" != "darwin-arm64" ] && [ "$plat-$arch" != "win32-x64" ]; then
     echo "CẢNH BÁO: máy chưa có FFmpeg và plugin không kèm FFmpeg cho máy này ($plat-$arch). Nên cài FFmpeg trước." >&2
   fi

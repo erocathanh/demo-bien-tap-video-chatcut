@@ -5,7 +5,8 @@
 
 ## Trước hết: chạy lệnh ở đâu
 - Mọi lệnh `bash …` chạy trong **Git Bash** (cửa sổ dòng lệnh đi kèm Git). Claude Code trên Windows tự dùng Git Bash — nhờ Claude chạy là được.
-- Lệnh `winget …` và `setx …` chạy được cả trong Git Bash lẫn PowerShell.
+- Lệnh `winget …` và `setx …` chạy được cả trong Git Bash lẫn PowerShell. Hai cờ `--accept-source-agreements --accept-package-agreements`
+  là để máy mới không dừng lại chờ gõ «Y» đồng ý điều khoản (Claude không gõ thay được).
 - Không dán lệnh bash vào **PowerShell** (cửa sổ xanh mặc định): `&&`, `~`, `head` ở đó không chạy như trên Mac.
 - Đặt bộ công cụ ở `%USERPROFILE%\.claude\skills\demo-bien-tap-video-chatcut`. **Không** đặt trong OneDrive, Desktop hay Documents
   (đồng bộ OneDrive + thư mục tên tiếng Việt «Tài liệu» + đường dẫn quá dài dễ gây lỗi).
@@ -19,13 +20,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kiem-may.ps1
 ## Cần gì
 | phần mềm | để làm gì (nói thường) | bắt buộc? | lệnh cài | thời gian (đo 27/09) |
 |---|---|---|---|---|
-| Git for Windows | tải bộ công cụ + chạy script `.sh` | bắt buộc | `winget install -e --id Git.Git` | có sẵn trên máy thử |
-| Node.js ≥ 18 | chạy xưởng dựng video + công cụ tải phim của ChatCut | bắt buộc | `winget install -e --id OpenJS.NodeJS.LTS` | 33 giây (có hộp hỏi quyền — bấm **Yes**) |
-| FFmpeg | đọc và kiểm tra video | bắt buộc | `winget install -e --id Gyan.FFmpeg` | 185 giây (tải ~200 MB) |
-| Python 3 thật (3.10–3.13) | công cụ phụ: chia phụ đề, làm bảng hình | bắt buộc cho «Video icon kể chuyện» | `winget install -e --id Python.Python.3.12 --scope user` | 80 giây |
+| Git for Windows | tải bộ công cụ + chạy script `.sh` | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id Git.Git` | có sẵn trên máy thử |
+| Node.js ≥ 18 | chạy xưởng dựng video + công cụ tải phim của ChatCut | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS` | 33 giây (có hộp hỏi quyền — bấm **Yes**) |
+| FFmpeg | đọc và kiểm tra video | bắt buộc | `winget install -e --accept-source-agreements --accept-package-agreements --id Gyan.FFmpeg` | 185 giây (tải ~200 MB) |
+| Python 3 thật (3.10–3.13) | công cụ phụ: chia phụ đề, làm bảng hình | bắt buộc cho «Video icon kể chuyện» | `winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user` | 80 giây |
 | Chữ tiếng Việt cho Python | tránh lỗi khi ghi chữ có dấu | nên có | `setx PYTHONUTF8 1` | tức thì |
 | Pillow | vẽ bảng hình có nhãn giây | tuỳ chọn | `python -m pip install pillow` | 10 giây |
-| Whisper | nghe lại lời trong video để kiểm câu đã xoá | tuỳ chọn | `python -m pip install -U openai-whisper` | 533 giây (~9 phút, ~1 GB) |
+| Whisper | nghe lại lời trong video để kiểm câu đã xoá | tuỳ chọn | `python -m pip install -U openai-whisper` | 533 giây (~9 phút) — lệnh dài: chạy riêng, thời hạn 10 phút hoặc chạy nền |
 
 Cần khoảng **3 GB** đĩa trống. Windows trên chip **ARM** (Snapdragon): bộ dựng video không chạy ⇒ chỉ làm được «Sửa phim bằng sửa chữ».
 

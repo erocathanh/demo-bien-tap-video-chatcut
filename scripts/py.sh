@@ -14,6 +14,6 @@ for c in python3 python "py -3"; do
   fi
 done
 echo "FAIL chưa có Python 3.8+ thật trên máy (lệnh python3 có thể chỉ là lối tắt của Microsoft Store)." >&2
-echo "  Windows: winget install -e --id Python.Python.3.12 --scope user   (xong thoát hẳn Claude rồi mở lại)" >&2
+echo "  Windows: winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user   (xong thoát hẳn Claude rồi mở lại)" >&2
 echo "  macOS:   brew install python" >&2
 exit 1

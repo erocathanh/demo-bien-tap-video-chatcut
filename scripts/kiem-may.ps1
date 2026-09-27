@@ -27,19 +27,19 @@ Write-Output "----------------------------------------"
 
 # 1. Git
 if (Has 'git') { Line '✅' 'Git' ((FirstLine (git --version)) -replace 'git version ', '') 'có' 'ổn' }
-else { Line '❌' 'Git' '-' 'có' 'chưa cài'; $reqMissing = $true; $installs.Add('winget install -e --id Git.Git') }
+else { Line '❌' 'Git' '-' 'có' 'chưa cài'; $reqMissing = $true; $installs.Add('winget install -e --accept-source-agreements --accept-package-agreements --id Git.Git') }
 
 # 2. Node.js
 if (Has 'node') {
   $nv = (FirstLine (node -v)) -replace 'v', ''
   if (VersionGe $nv '18.0') { Line '✅' 'Node.js' $nv 'cần ≥ 18' 'ổn' }
-  else { Line '❌' 'Node.js' $nv 'cần ≥ 18' 'bản cũ quá'; $reqMissing = $true; $canEdit = $false; $canIcon = $false; $installs.Add('winget install -e --id OpenJS.NodeJS.LTS') }
+  else { Line '❌' 'Node.js' $nv 'cần ≥ 18' 'bản cũ quá'; $reqMissing = $true; $canEdit = $false; $canIcon = $false; $installs.Add('winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS') }
 } elseif (Test-Path "$env:ProgramFiles\nodejs\node.exe") {
   Line '⚠️' 'Node.js' 'đã cài' 'cần ≥ 18' 'ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy => thoát hẳn Claude rồi mở lại'
   $reqMissing = $true; $restart = $true; $canEdit = $false; $canIcon = $false
 } else {
   Line '❌' 'Node.js' '-' 'cần ≥ 18' 'chưa cài (xưởng dựng video + công cụ tải phim của ChatCut cần nó)'
-  $reqMissing = $true; $canEdit = $false; $canIcon = $false; $installs.Add('winget install -e --id OpenJS.NodeJS.LTS')
+  $reqMissing = $true; $canEdit = $false; $canIcon = $false; $installs.Add('winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS')
 }
 
 # 3. FFmpeg
@@ -51,7 +51,7 @@ if ((Has 'ffprobe') -and (Has 'ffmpeg')) {
   $reqMissing = $true; $restart = $true; $canIcon = $false
 } else {
   Line '❌' 'FFmpeg' '-' 'có' 'chưa cài (đọc và kiểm tra video)'
-  $reqMissing = $true; $canIcon = $false; $installs.Add('winget install -e --id Gyan.FFmpeg')
+  $reqMissing = $true; $canIcon = $false; $installs.Add('winget install -e --accept-source-agreements --accept-package-agreements --id Gyan.FFmpeg')
 }
 
 # 4. Python 3.8+ (the Microsoft Store stub python3 exits 49 and is rejected by running it)
@@ -71,7 +71,7 @@ if ($py) {
   $reqMissing = $true; $restart = $true; $canIcon = $false
 } else {
   Line '❌' 'Python 3' '-' 'cần ≥ 3.8' 'chưa cài (công cụ phụ: chia phụ đề, làm bảng hình)'
-  $reqMissing = $true; $canIcon = $false; $installs.Add('winget install -e --id Python.Python.3.12 --scope user')
+  $reqMissing = $true; $canIcon = $false; $installs.Add('winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user')
 }
 
 # 5. Pillow + Whisper (optional)
@@ -81,7 +81,11 @@ if ($py) {
   else { Line '➖' 'Pillow' '-' 'tuỳ chọn' 'chưa cài => chỉ thiếu bảng hình soát khung; video vẫn làm được'; $optMissing = $true; $installs.Add("$pyShow -m pip install pillow") }
 }
 if (Has 'whisper') { Line '✅' 'Whisper' 'có' 'tuỳ chọn' 'ổn (nghe lại lời trong video)' }
-else { Line '➖' 'Whisper' '-' 'tuỳ chọn' 'chưa cài => bỏ qua được; chỉ để kiểm lời (~1 GB, ~9 phút)'; $optMissing = $true }
+else {
+  Line '➖' 'Whisper' '-' 'tuỳ chọn' 'chưa cài => bỏ qua được; chỉ để kiểm lời (cài mất khoảng 9 phút trên máy thử Windows; lần dùng đầu tải thêm mô hình ~480 MB)'; $optMissing = $true
+  # Whisper installs on Python 3.10-3.13 only
+  if ($py -and ($pv -match '^3\.1[0-3]\.')) { $installs.Add("$pyShow -m pip install -U openai-whisper   (lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền)") }
+}
 
 # 6. Vietnamese text
 if ($env:PYTHONUTF8 -eq '1') { Line '✅' 'Chữ tiếng Việt' 'PYTHONUTF8=1' '' 'ổn' }

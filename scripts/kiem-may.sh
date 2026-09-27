@@ -54,7 +54,7 @@ if command -v git >/dev/null 2>&1; then
   line "✅" "Git" "$(git --version | first_line | awk '{print $3}')" "có" "ổn"
 else
   line "❌" "Git" "—" "có" "chưa cài"; req_missing=1
-  case "$OSN" in win) add_install "winget install -e --id Git.Git" ;; mac) add_install "xcode-select --install" ;; *) add_install "sudo apt install -y git" ;; esac
+  case "$OSN" in win) add_install "winget install -e --accept-source-agreements --accept-package-agreements --id Git.Git" ;; mac) add_install "xcode-select --install" ;; *) add_install "sudo apt install -y git" ;; esac
 fi
 line "✅" "Bash" "${BASH_VERSION%%(*}" "có" "ổn"
 
@@ -64,13 +64,13 @@ if command -v node >/dev/null 2>&1; then
   nv="$(node -v 2>/dev/null | first_line | tr -d 'v')"
   if vge "$nv" 18; then line "✅" "Node.js" "$nv" "cần ≥ 18" "ổn"
   else line "❌" "Node.js" "$nv" "cần ≥ 18" "bản cũ quá"; req_missing=1; can_icon=0; can_edit=0
-    case "$OSN" in win) add_install "winget install -e --id OpenJS.NodeJS.LTS" ;; mac) add_install "brew install node" ;; *) add_install "cài Node.js 18+ (nodejs.org)" ;; esac
+    case "$OSN" in win) add_install "winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS" ;; mac) add_install "brew install node" ;; *) add_install "cài Node.js 18+ (nodejs.org)" ;; esac
   fi
 elif node_path_hint; then
   line "⚠️" "Node.js" "đã cài" "cần ≥ 18" "ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy ⇒ thoát hẳn Claude rồi mở lại"; req_missing=1; restart_needed=1; can_icon=0; can_edit=0
 else
   line "❌" "Node.js" "—" "cần ≥ 18" "chưa cài (xưởng dựng video + công cụ tải phim của ChatCut cần nó)"; req_missing=1; can_icon=0; can_edit=0
-  case "$OSN" in win) add_install "winget install -e --id OpenJS.NodeJS.LTS" ;; mac) add_install "brew install node" ;; *) add_install "cài Node.js 18+ (nodejs.org)" ;; esac
+  case "$OSN" in win) add_install "winget install -e --accept-source-agreements --accept-package-agreements --id OpenJS.NodeJS.LTS" ;; mac) add_install "brew install node" ;; *) add_install "cài Node.js 18+ (nodejs.org)" ;; esac
 fi
 
 # 3. FFmpeg (ffprobe)
@@ -81,7 +81,7 @@ elif ff_path_hint; then
   line "⚠️" "FFmpeg" "đã cài" "có" "ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy ⇒ thoát hẳn Claude rồi mở lại"; req_missing=1; restart_needed=1; can_icon=0
 else
   line "❌" "FFmpeg" "—" "có" "chưa cài (đọc và kiểm tra video)"; req_missing=1; can_icon=0
-  case "$OSN" in win) add_install "winget install -e --id Gyan.FFmpeg" ;; mac) add_install "brew install ffmpeg" ;; *) add_install "sudo apt install -y ffmpeg" ;; esac
+  case "$OSN" in win) add_install "winget install -e --accept-source-agreements --accept-package-agreements --id Gyan.FFmpeg" ;; mac) add_install "brew install ffmpeg" ;; *) add_install "sudo apt install -y ffmpeg" ;; esac
 fi
 
 # 4. Python 3.8+ (real one: the Windows Store stub exits 49 and is rejected by running it)
@@ -104,7 +104,7 @@ elif py_path_hint; then
   line "⚠️" "Python 3" "đã cài" "cần ≥ 3.8" "ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy ⇒ thoát hẳn Claude rồi mở lại"; req_missing=1; restart_needed=1; can_icon=0
 else
   line "❌" "Python 3" "—" "cần ≥ 3.8" "chưa cài (công cụ phụ: chia phụ đề, làm bảng hình)"; req_missing=1; can_icon=0
-  case "$OSN" in win) add_install "winget install -e --id Python.Python.3.12 --scope user" ;; mac) add_install "brew install python" ;; *) add_install "sudo apt install -y python3 python3-pip" ;; esac
+  case "$OSN" in win) add_install "winget install -e --accept-source-agreements --accept-package-agreements --id Python.Python.3.12 --scope user" ;; mac) add_install "brew install python" ;; *) add_install "sudo apt install -y python3 python3-pip" ;; esac
 fi
 
 # 5. Pillow + Whisper (optional)
@@ -120,7 +120,10 @@ fi
 if command -v whisper >/dev/null 2>&1; then
   line "✅" "Whisper" "có" "tuỳ chọn" "ổn (nghe lại lời trong video)"
 else
-  line "➖" "Whisper" "—" "tuỳ chọn" "chưa cài ⇒ bỏ qua được; chỉ để kiểm lời (~1 GB, ~9 phút)"; opt_missing=1
+  line "➖" "Whisper" "—" "tuỳ chọn" "chưa cài ⇒ bỏ qua được; chỉ để kiểm lời (cài mất khoảng 9 phút trên máy thử Windows; lần dùng đầu tải thêm mô hình ~480 MB)"; opt_missing=1
+  # long install: run it as its own command with a 10-minute limit, or in the background
+  # Whisper installs on Python 3.10-3.13 only; on other versions the line above already says so
+  [ -n "$PY" ] && vge "$pv" 3.10 && ! vge "$pv" 3.14 && add_install "$PY -m pip install -U openai-whisper   (lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền)"
 fi
 
 # 6. Vietnamese text in Python on Windows
@@ -176,6 +179,18 @@ fi
 if [ -d "$SKILL_DIR/.git" ] && command -v git >/dev/null 2>&1; then
   if [ -f "$SKILL_DIR/.gitattributes" ]; then line "✅" "Xuống dòng (git)" "LF" "" "ổn"
   else line "⚠️" "Xuống dòng (git)" "$(git -C "$SKILL_DIR" config core.autocrlf | tr -d '\r')" "" "bản tải về cũ, md5 trong MANIFEST có thể lệch ⇒ tải lại bản mới"; opt_missing=1; fi
+fi
+
+# 13. macOS: the "brew install" lines need Homebrew, which a new Mac does not have
+if [ "$OSN" = mac ] && ! command -v brew >/dev/null 2>&1 && printf '%s' "$installs" | grep -q "brew install"; then
+  if exists_glob /opt/homebrew/bin/brew /usr/local/bin/brew; then
+    line "⚠️" "Homebrew" "đã cài" "" "ĐÃ CÀI nhưng cửa sổ này chưa thấy ⇒ thoát hẳn Claude rồi mở lại"; restart_needed=1
+  else
+    line "❌" "Homebrew" "—" "" "chưa cài — các lệnh «brew install» bên dưới cần nó. Cài Homebrew phải do BẠN tự làm: mở Terminal, dán lệnh dưới, gõ mật khẩu máy khi được hỏi (Claude không gõ mật khẩu thay được)"
+    req_missing=1
+    installs="CÀI (bạn tự dán vào Terminal, gõ mật khẩu máy): /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"
+$installs"
+  fi
 fi
 
 echo "────────────────────────────────────────"
