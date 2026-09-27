@@ -95,6 +95,11 @@ if ($drive) {
   else { Line '❌' 'Ổ đĩa trống' "$freeGb GB" 'cần ≥ 3 GB' 'thiếu chỗ cho bộ dựng video'; $reqMissing = $true; $canIcon = $false }
 }
 
+# 7b. Where the skill lives: OneDrive sync and Vietnamese folder names break long builds (m22)
+if ($SkillDir -match 'OneDrive') { Line '⚠️' 'Chỗ đặt bộ công cụ' 'trong OneDrive' '' 'OneDrive đồng bộ hàng nghìn tệp của bộ dựng video => nên chép sang %USERPROFILE%\.claude\skills' }
+elseif ($SkillDir -match '[^\x00-\x7F]') { Line '⚠️' 'Chỗ đặt bộ công cụ' 'đường dẫn có dấu tiếng Việt' '' 'vài công cụ đọc sai đường có dấu => nên chép sang %USERPROFILE%\.claude\skills' }
+else { Line '✅' 'Chỗ đặt bộ công cụ' '' '' 'ổn' }
+
 # 8. CPU architecture
 if ($arch -eq 'ARM64') { Line '❌' 'Kiến trúc' 'arm64' 'x64' 'Remotion không chạy trên Windows ARM => chỉ làm được «Sửa phim bằng sửa chữ»'; $canIcon = $false; $reqMissing = $true }
 else { Line '✅' 'Kiến trúc' $arch '' 'bộ dựng video chạy được' }

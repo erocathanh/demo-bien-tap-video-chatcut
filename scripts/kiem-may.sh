@@ -39,6 +39,14 @@ vge() { awk -v a="$1" -v b="$2" 'BEGIN{n=split(a,x,".");m=split(b,y,".");for(i=1
 exists_glob() { for f in "$@"; do [ -e "$f" ] && return 0; done; return 1; }
 
 echo "KIỂM MÁY — chỉ xem, không cài gì ($OSN, $ARCH)"
+# 12. Where the skill lives: OneDrive sync and Vietnamese folder names («Tài liệu») break long builds (m22)
+case "$SKILL_DIR" in
+  *OneDrive*) line "⚠️" "Chỗ đặt bộ công cụ" "trong OneDrive" "" "OneDrive đồng bộ hàng nghìn tệp của bộ dựng video ⇒ nên chép sang ~/.claude/skills/ (Windows: %USERPROFILE%\\.claude\\skills)" ;;
+  *) if printf '%s' "$SKILL_DIR" | LC_ALL=C grep -q '[^ -~]'; then
+       line "⚠️" "Chỗ đặt bộ công cụ" "đường dẫn có dấu tiếng Việt" "" "vài công cụ đọc sai đường có dấu ⇒ nên chép sang ~/.claude/skills/"
+     else line "✅" "Chỗ đặt bộ công cụ" "" "" "ổn"; fi ;;
+esac
+
 echo "────────────────────────────────────────"
 
 # 1. Git + shell
@@ -161,7 +169,7 @@ if [ -n "$helper" ]; then
     line "⚠️" "  (tải phim)" "" "" "plugin trên Windows thiếu FFmpeg đi kèm (lỗi plugin P1) ⇒ cần cài FFmpeg"
   fi
 else
-  line "❌" "Plugin ChatCut" "—" "" "chưa cài ⇒ trong Claude: /plugin, cài ChatCut, rồi /mcp → Authenticate"; can_edit=0; can_icon=0; req_missing=1
+  line "❌" "Plugin ChatCut" "—" "" "chưa cài ⇒ trong Claude: /plugin marketplace add ChatCut-Inc/agent-plugin, rồi /plugin install chatcut@chatcut-inc, rồi /mcp → Authenticate"; can_edit=0; can_icon=0; req_missing=1
 fi
 
 # 11. Line endings (only when the skill is a git clone)
