@@ -32,6 +32,9 @@ scan() { # prints "maxrise at_t"
   echo "$max ${at:-none} base=$base"
 }
 
+n=$(awk -v a="$from" -v b="$to" 'BEGIN{printf "%d", (b-a)*30+1}')
+echo "đo $n khung (mỗi khung một lần gọi ffmpeg) — trên Mac vài giây; trên Windows mỗi lần gọi khởi động chậm hơn, có thể mất vài phút (chưa đo)"
+
 fail=0
 if [ -n "$ctrl" ]; then
   read -r cmax cat cbase <<<"$(scan "$ctrl")"
