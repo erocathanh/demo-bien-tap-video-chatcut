@@ -78,21 +78,33 @@ inputs=(); for j in 0 1 2 3 4 5 6 7 8 9; do inputs+=(-i "$tmp/$j.png"); done
 ffmpeg -v error -y "${inputs[@]}" -filter_complex hstack=10 "$sheet" && echo "sheet      $sheet (look at it: edges + b-roll placement)"
 rm -rf "$tmp"
 
+# Normalise text before comparing: lowercase (Vietnamese capitals too — GNU tr only lowers ASCII), punctuation and
+# newlines to spaces, and digits 0-10 to Vietnamese words on BOTH sides, because whisper writes «buổi hai» as «buổi 2».
+# -Mutf8 is required: without it the non-ASCII number words (một, bốn, năm…) never match.
+norm() { perl -Mutf8 -CSD -0777 -pe '$_=lc; tr/\r\n.,?!:;"/ /; s/\b10\b/mười/g; s/\b0\b/không/g; s/\b1\b/một/g; s/\b2\b/hai/g; s/\b3\b/ba/g; s/\b4\b/bốn/g; s/\b5\b/năm/g; s/\b6\b/sáu/g; s/\b7\b/bảy/g; s/\b8\b/tám/g; s/\b9\b/chín/g; s/\s+/ /g; s/^ | $//g'; }
+if [ "$(printf 'Ở buổi 1,' | norm)" != "$(printf 'ở buổi một' | norm)" ] || [ "$(printf 'Buổi 2.' | norm)" != "buổi hai" ]; then
+  echo "FAIL text normaliser self-test (perl -Mutf8) — the removed-phrase check cannot be trusted on this machine"; fail=1
+fi
+
 if [ -n "$removed" ]; then
   if command -v whisper >/dev/null; then
     wd=$(mktemp -d)
-    whisper "$f" --model small --language vi --output_format txt --output_dir "$wd" >/dev/null 2>&1
-    txt=$(cat "$wd"/*.txt 2>/dev/null)
+    wlog="$sheet_dir/${name%.*}-whisper.log"
+    if [ ! -f "$HOME/.cache/whisper/small.pt" ]; then
+      echo "INFO lần đầu: Whisper tải mô hình «small» khoảng 480 MB — có thể mất vài phút, không phải bị treo"
+    fi
+    whisper "$f" --model small --language vi --output_format txt --output_dir "$wd" >"$wlog" 2>&1
+    wrc=$?
+    txt=$(cat "$wd"/*.txt 2>/dev/null | tr -d '\r')
     rm -rf "$wd"
-    # perl lowercases Vietnamese capitals too (GNU tr on Git Bash/Linux only lowers ASCII)
-    norm() { perl -Mutf8 -CSD -0777 -pe '$_=lc; tr/\r\n.,?!/ /; s/\s+/ /g; s/^ | $//g'; }
-    if [ -z "$txt" ]; then echo "FAIL whisper produced no text"; fail=1
+    if [ -z "$txt" ]; then
+      echo "FAIL whisper produced no text (exit $wrc) — last lines of $wlog:"; tail -5 "$wlog" | sed 's/^/  /'; fail=1
     elif printf '%s' "$txt" | norm | grep -qF "$(printf '%s' "$removed" | norm)"; then
       echo "FAIL removed phrase still audible: $removed"; fail=1
     else
       echo "PASS removed phrase not heard (whisper small; it mishears some words, read the text below)"
     fi
-    if [ -n "$kept" ]; then
+    if [ -n "$txt" ] && [ -n "$kept" ]; then
       if printf '%s' "$txt" | norm | grep -qF "$(printf '%s' "$kept" | norm)"; then
         echo "PASS positive control heard: $kept"
       else
