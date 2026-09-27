@@ -50,7 +50,7 @@ Dùng `npm ci` chứ không `npm install`: `npm ci` cài đúng bản đã khoá
 ## 4. Kiểm bộ kiểm — có cả đối chứng âm
 ```bash
 cd ~/.claude/skills/demo-bien-tap-video-chatcut
-bash scripts/verify-export.sh assets/ban-mau-da-ra/vsl-chatcut-broll-codex.mp4 46c7b4d5 "Hẹn bạn xem buổi hai" "gửi tặng skill"
+bash scripts/verify-export.sh assets/ban-mau-da-ra/dien-tap-broll-dong.mp4 5656a249 "Hẹn bạn xem buổi hai" "gửi tặng skill"
 ```
 **Kiểm:** `RESULT PASS`. Đã cài Whisper (công cụ nghe lại lời) thì có thêm «removed phrase not heard» và «positive control heard».
 

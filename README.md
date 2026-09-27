@@ -6,14 +6,14 @@
 > 3. **Nói lời thường** trước và sau mỗi bước: đang làm gì · để làm gì · bao lâu · người dùng có phải bấm gì không. Không dùng từ chuyên môn, không dán log cho người dùng (luật đầy đủ: mục «Thuyết minh» trong `SKILL.md`).
 > 4. **Plugin ChatCut:** chưa có thì hướng dẫn người dùng gõ `/plugin`, cài ChatCut, rồi `/mcp` → ChatCut → **Authenticate** và đăng nhập trên trình duyệt; sau đó mở phiên Claude mới.
 > 5. **Lệnh dài** (`npm ci`, lần render đầu tải thêm ~270 MB) chạy với thời hạn **10 phút** (600000 ms), mỗi lệnh một lần gọi riêng — không gộp bằng `&&`.
-> 6. Trong lúc cài, **mở bản mẫu** `assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4` cho người dùng xem trước.
+> 6. Trong lúc cài, **mở bản mẫu** `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` cho người dùng xem trước.
 > 7. Rồi đọc `SKILL.md` từ bước 0 và làm **«Video icon kể chuyện»** (mặc định), hoặc «Sửa phim bằng sửa chữ» nếu người dùng muốn.
 
 Làm video dọc 1080×1920 bằng cách **nói với Claude**. Bạn không cần biết dựng phim, không cần mở phần mềm nào khác.
 
 | Bạn sẽ làm được | Trông như thế nào (bản mẫu có sẵn trong gói) | Mất bao lâu |
 |---|---|---|
-| **Video icon kể chuyện** — giọng đọc + mỗi câu một cảnh icon + phụ đề | `assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4` (66 giây) | lần đầu khoảng 15–25 phút (gồm cài đặt), lần sau khoảng 5 phút |
+| **Video icon kể chuyện** — giọng đọc + mỗi câu một cảnh icon + phụ đề | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (63 giây) | lần đầu khoảng 15–25 phút (gồm cài đặt), lần sau khoảng 5 phút |
 | **Sửa phim bằng sửa chữ** — gạch một câu là phim tự cắt câu đó, chèn hình minh hoạ đúng câu đang nói | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` (32 giây) | khoảng 2–4 phút |
 
 ## Ba bước

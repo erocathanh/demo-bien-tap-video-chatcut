@@ -32,8 +32,8 @@ bộ kiểm báo sai «Bộ kiểm báo chưa đạt, nhưng phim thật ra đú
      «Máy anh còn thiếu 3 phần mềm (Node.js, FFmpeg, Python), cài khoảng 5 phút. Windows sẽ hỏi quyền — anh bấm Yes. Tôi cài nhé?»
    Chỉ thiếu thứ tuỳ chọn (Whisper, Pillow) ⇒ hỏi có muốn cài không, nói rõ bỏ qua vẫn làm được video.
 3. Trong lúc cài: mở bản mẫu cho người dùng xem — «đây là thứ anh sẽ tự làm được sau khoảng 10 phút»
-     macOS  open "assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4"
-     Windows start "" "$(cygpath -w assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4)"
+     macOS  open "assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4"
+     Windows start "" "$(cygpath -w assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4)"
 4. Cài xong mà kiem-may.sh báo «ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy» ⇒ bảo người dùng tắt HẲN Claude, mở lại, gõ «tiếp tục»;
    rồi chạy lại kiem-may.sh.
 5. Thiếu plugin ChatCut ⇒ hướng dẫn: /plugin → cài ChatCut → /mcp → ChatCut → Authenticate → mở phiên Claude mới.
@@ -57,7 +57,7 @@ Mọi script `.sh` chạy được trên cả hai hệ; công cụ trên Windows
 ## Hai video làm được
 | tên | nói với Claude | bản mẫu | thời gian |
 |---|---|---|---|
-| **Video icon kể chuyện** (mặc định) | «demo tạo video có remotion icon» / «làm video icon kể chuyện» | `assets/ban-mau-da-ra/video-2-tao-lai-ghep-chatcut-v02.mp4` | dựng 30–70 giây + ChatCut khoảng 2–3 phút |
+| **Video icon kể chuyện** (mặc định) | «demo tạo video có remotion icon» / «làm video icon kể chuyện» | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` | dựng 30–70 giây + ChatCut khoảng 2–3 phút |
 | **Sửa phim bằng sửa chữ** | «demo sửa phim bằng sửa chữ» | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` (md5 `5656a249`) | 1 phút 30 giây – 2 phút 17 giây |
 | Video icon có mặt bạn (nâng cao) | cần bạn tự quay video dọc đọc kịch bản | — | xem `references/quy-trinh/video-san-khau-theo-cau.md` nhánh «có mặt bạn» |
 
@@ -91,7 +91,7 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng».
 Đo trên Mac 27/09: dựng 29 giây · tải lên 10 giây · bóc lời có ngay · gạch 1 câu 1996 → 1887 khung · xuất trên mây 22,7 giây · verify-export PASS ·
-cả phần ChatCut khoảng 3 phút. Bản ra: `references/ban-mau/video-icon-ke-chuyen-chatcut-v3-contact.png` (10 khung).
+cả phần ChatCut khoảng 3 phút. Bản ra: `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `81da0023`, 62,98 giây) + bảng khung `-contact.png` cùng thư mục.
 Tự làm video mới từ kịch bản của mình (TTS → mốc chữ → kế hoạch hình → icon → props → dựng): `references/quy-trinh/video-san-khau-theo-cau.md`.
 
 ---

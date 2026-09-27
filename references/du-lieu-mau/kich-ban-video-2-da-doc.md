@@ -1,7 +1,7 @@
 # Kịch bản mẫu — video «3 cấp độ dùng AI của chủ doanh nghiệp» (18 câu, chữ đã đọc thành tiếng)
 
 - Đầu vào mẫu cho `scripts/make_stage_props.py`: bảng 5 cột # · lời · chữ mở · vật vẽ được · tả sân khấu.
-- Chữ trong cột «Lời nói» là chữ đã đọc trong `assets/ban-mau-da-ra/video-2-ba-cap-do-ai-v03b.mp4`. Câu 7 · 14 · 16 là bản sửa cuối của chủ phim.
+- Chữ trong cột «Lời nói» là chữ đã đọc trong video dựng bằng `render.sh stage` (bản dựng sẵn `assets/nguyen-lieu-video-2/video-2-tao-lai.mp4`). Câu 7 · 14 · 16 là bản sửa cuối của chủ phim.
 
 | # | Lời nói | Chữ mở | Vật vẽ được trong câu | Sân khấu (tả hình 1 dòng) |
 | --- | --- | --- | --- | --- |
