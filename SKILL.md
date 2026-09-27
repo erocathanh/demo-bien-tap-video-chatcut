@@ -94,13 +94,15 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
 7  edit_captions enable ⇒ set_sources {"sources":[{"trackId":"V1"}]} ⇒ style + layout đặt chữ DƯỚI thẻ sân khấu ⇒ refresh
      style  {"font":"Be Vietnam Pro","sizePx":56,"fontWeight":"700","color":"#FFFFFF","backgroundColor":"#0B1628","backgroundOpacity":0.9,"backgroundRadius":16}
      layout {"sourceId":"<V1 source>","left":75,"top":1480,"width":930,"height":105}   (kiểu mặc định đặt chữ ở y ~1414, chạm mép thẻ ở y 1440)
+7b read_captions → so từng thẻ với kịch bản (references/du-lieu-mau/kich-ban-video-2-da-doc.md) → edit_captions set_card_text
+     cho thẻ nghe sai (bản mẫu sửa 5 thẻ: «Cách ba» → «Cấp 3», «giai truyền» → «dây chuyền»…) · split_card khi một thẻ dính hai câu
 8  smooth_audio → submit_export {"format":"video","resolution":"1080p"} → track_export (hỏi lại mỗi ≥ 10 giây)
 9  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>"   (link sống 1 ngày)
 10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã xoá, không gạch thì để \"\">" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng».
 Đo trên Mac 27/09: dựng 29 giây · tải lên 10 giây · bóc lời có ngay · gạch 1 câu 1996 → 1887 khung · xuất trên mây 22,7 giây · verify-export PASS ·
-cả phần ChatCut khoảng 3 phút. Bản ra: `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `81da0023`, 62,98 giây) + bảng khung `-contact.png` cùng thư mục.
+cả phần ChatCut khoảng 3 phút. Bản ra: `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `3f7abcb6`, 62,98 giây) + bảng khung `-contact.png` cùng thư mục.
 Tự làm video mới từ kịch bản của mình (TTS → mốc chữ → kế hoạch hình → icon → props → dựng): `references/quy-trinh/video-san-khau-theo-cau.md`.
 
 ---

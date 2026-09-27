@@ -32,6 +32,8 @@ xuất phim đều làm trong ChatCut. Phụ đề chỉ có MỘT lớp, sinh t
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». ChatCut nghe sai vài chữ («Cách ba», «giai truyền») — phụ đề
 sửa theo thẻ bằng `edit_captions set_card_text` hoặc sửa bản bóc lời bằng `manage_transcript` action `fix`.
+Bản mẫu 27/09 đã sửa 5 thẻ theo kịch bản (C2 «đứng ở cấp 1» · C13 «doanh nghiệp» · C25–26 «dây chuyền» · C27 «Cấp 3») và tách thẻ
+«có bản sắc Bạn nạp» trước chữ «Bạn» (`split_card`) rồi xuất lại: 16,9 giây, 0 credit.
 
 ## Nhánh có mặt bạn (nâng cao — cần bạn tự quay)
 ```
@@ -71,7 +73,7 @@ Video quay mặt người thật lên ChatCut ⇒ hỏi chủ video một câu t
 Video mẫu (26/09/2026): 18 câu · 190 chữ · tiếng 66,4 s · 68 sự kiện đồ hoạ = 10,4 / 10 giây (Short mẫu: trung bình 13, dải 7–16) ·
 tối đa 5 vật/cảnh · thẻ trống lâu nhất 0,53 s.
 Dựng `stage-chatcut`: Mac Apple Silicon 29 giây · Windows i9 64–70 giây (bản có phụ đề, cùng cỡ). ChatCut (Mac, 27/09): tải 10 giây ·
-bóc lời có ngay · gạch 1 câu · xuất trên mây 22,7 giây ⇒ bản mẫu `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `81da0023`, 62,98 giây).
+bóc lời có ngay · gạch 1 câu · xuất trên mây 22,7 giây ⇒ bản mẫu `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `3f7abcb6`, 62,98 giây).
 So với bản mẫu: **cùng số khung + cùng độ dài + PSNR ≥ 40 dB** là tương đương; md5 bản dựng Remotion chỉ trùng trên cùng một máy
 (bản dựng sẵn `video-2-khong-phu-de.mp4`: md5 `b97de04e`, dựng trên macOS 26.5 Apple Silicon).
 Bản mẫu duy nhất của `render.sh stage` (có phụ đề in sẵn): `assets/nguyen-lieu-video-2/video-2-tao-lai.mp4` — 1996 khung;

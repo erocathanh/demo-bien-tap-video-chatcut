@@ -4,7 +4,7 @@ Mọi đường dẫn tính từ thư mục gốc của skill (thư mục chứa
 
 | thứ | tệp | số đo |
 |---|---|---|
-| **Video icon kể chuyện** — bản mẫu | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` | 62,98 giây · md5 **`81da0023`** · Mac 27/09: Remotion dựng hình + tiếng, ChatCut gạch 1 câu, phụ đề, xuất · verify-export PASS · bảng khung `-contact.png` cùng thư mục |
+| **Video icon kể chuyện** — bản mẫu | `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` | 62,98 giây · md5 **`3f7abcb6`** · Mac 27/09: Remotion dựng hình + tiếng, ChatCut gạch 1 câu, phụ đề (5 thẻ nghe sai đã sửa theo kịch bản), xuất · verify-export PASS · bảng khung `-contact.png` cùng thư mục |
 | ↳ nguyên liệu đưa lên ChatCut (không phụ đề) | `assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4` | 1996 khung · md5 `b97de04e` (dựng trên macOS 26.5 Apple Silicon) |
 | ↳ bản `render.sh stage` (phụ đề in sẵn, không qua ChatCut) | `assets/nguyen-lieu-video-2/video-2-tao-lai.mp4` | 1996 khung · so bằng PSNR ≥ 40 dB, không so md5 |
 | **Sửa phim bằng sửa chữ** — bản mẫu | `assets/ban-mau-da-ra/dien-tap-broll-dong.mp4` | 32,04 giây · md5 **`5656a249`** · verify-export PASS |
