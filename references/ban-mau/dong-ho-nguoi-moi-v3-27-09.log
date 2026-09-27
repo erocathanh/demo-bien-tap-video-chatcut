@@ -85,3 +85,92 @@
          trống ✅
 
 # tổng: 118 giây · thư mục thử: <thư mục trống>
+
+# ===== chạy lại sau vòng soi 2 (v3.1) =====
+# Sổ bấm giờ — kiểm như người mới, nhánh windows-fixes-27-09 @ b2f8d5e, 27/09/2026 giờ London
+# máy: macOS 26.5 arm64 · node v24.13.0 · ffmpeg version 9.0.1
+# thư mục trống: $W = <thư mục trống> · npm cache TRỐNG (npm_config_cache=$W/npm-cache-trong)
+# khác người mới thật: phần mềm (node, ffmpeg, python, whisper, plugin ChatCut) đã cài sẵn trên Mac này ⇒ bước 1 và 2 chỉ kiểm
+
+15:57:23 BƯỚC 0 git clone (nhánh chưa đẩy ⇒ clone từ kho trên máy thay cho github)
+         ⇒ 1 giây
+         ls: MANIFEST.md README-CAI-MOI-MAC.md README-CAI-MOI-WINDOWS.md README-CAI-MOI.md README.md SKILL.md assets references scripts 
+         tệp: 188 · trên đĩa: 231M
+
+15:57:24 BƯỚC 0.5 bash scripts/kiem-may.sh
+         ⇒ 1 giây
+         rc=0 · 12 dòng ✅ · 0 ❌ · 0 ⚠️
+         ➖ Bộ dựng video chưa cài — sẽ cài ở bước sau (npm ci, 1–3 phút)
+         KẾT LUẬN: «Sửa phim bằng sửa chữ»: được · «Video icon kể chuyện»: được
+
+15:57:25 BƯỚC 1 cài phần mềm — đã có sẵn (xem dòng # ở đầu), bỏ qua
+
+15:57:25 BƯỚC 2 plugin ChatCut — đã cài + đăng nhập trên máy này; đường tải lên đã chạy thật ở việc 11 (13:56–14:00)
+
+15:57:25 BƯỚC 3a cd scripts/remotion && npm ci   (cache trống)
+         ⇒ 9 giây
+         rc=0 · npm notice
+
+15:57:34 BƯỚC 3b bash render.sh broll
+         ⇒ 32 giây
+         render BrollDong 23s
+         PASS broll-1-dong.mp4 1080x1920 frames=91
+         render BrollDong 5s
+         PASS broll-2-dong.mp4 1080x1920 frames=81
+         render BrollDong 4s
+         PASS broll-3-dong.mp4 1080x1920 frames=70
+         RESULT PASS
+
+15:58:06 BƯỚC 4 verify-export trên bản mẫu (đúng lệnh README)
+         ⇒ 16 giây
+         PASS md5 matches known-good render
+         PASS vertical 1080x1920
+         PASS has audio
+         PASS no black frames
+         PASS removed phrase not heard (whisper small; it mishears some words, read the text below)
+         PASS positive control heard: gửi tặng skill
+         RESULT PASS
+
+15:58:22 BƯỚC 4 đối chứng âm 1 — phim CHƯA cắt, «Hẹn bạn xem buổi hai» (phải FAIL still audible)
+         ⇒ 17 giây
+         size       1080x1920 · 36.360000s · audio=aac
+         PASS vertical 1080x1920
+         FAIL removed phrase still audible: Hẹn bạn xem buổi hai
+         RESULT FAIL
+
+15:58:39 BƯỚC 4 đối chứng âm 2 — «Tối nay, ở buổi một» (phải FAIL still audible)
+         ⇒ 17 giây
+         FAIL removed phrase still audible: Tối nay, ở buổi một
+         RESULT FAIL
+
+15:58:56 BƯỚC 4 kiểm cuối: git status --short (phải trống)
+         trống ✅
+
+# ===== kiểm a–i trên chính bản clone này =====
+
+15:58:56 d  ICC: phim mẫu có ICC profile vẫn đọc ra 1080x1920 (xem dòng size ở đối chứng âm 1 phía trên)
+         size       1080x1920 · 36.360000s · audio=aac
+
+15:58:56 e  props (make_stage_props) + đo thẻ trống
+         có phụ đề: md5 832a9dbf (đợi 832a9dbf)
+         không phụ đề: md5 05819814 · tệp trong kho 05819814
+         scenes over 0.6s: 0
+
+15:58:57 f  icon: vẽ lại bằng mã, so từng byte với bộ trong kho
+         trùng 30 · khác 0
+
+15:58:58 g  kiem-may rc (ở bước 0.5): xem trên
+
+15:58:58 i  render.sh stage-chatcut (1996 khung, không phụ đề)
+         ⇒ 30 giây
+         PASS video-2-khong-phu-de.mp4 1080x1920 frames=1996 audio=aac
+         RESULT PASS
+
+15:59:29    so với bản dựng sẵn trong kho: average:inf
+
+15:59:34    kiem-manifest (MANIFEST còn là v2.2 tới commit cuối ⇒ đợi FAIL): RESULT FAIL
+
+15:59:34 h  git status sau mọi bước (phải trống)
+         trống ✅
+
+# tổng: 131 giây · thư mục thử: <thư mục trống>
