@@ -1,7 +1,10 @@
+NOTE (v3.0): this is the prompt for an image tool, kept as a record. The icons that ship in this folder are SVG drawn by code
+(scripts/make_icons_svg.py), not PNG from an image tool. To remake them run: bash scripts/py.sh scripts/make_icons_svg.py <out_dir>
+
 Draw a SET of 13 flat vector-style icons for motion graphics overlays on a vertical video. Each icon is ONE separate PNG,
 TRANSPARENT background (alpha), no drop shadow, no background card, centered with ~10% padding. Native size from the image
 tool is fine (1254x1254 was accepted last time) — do NOT resize.
-Style: MUST match the existing set in ../icon-set-01/ (open xem-8-icon.png there first): flat, rounded corners, 2 tones max per
+Style: MUST match the existing set in ../bo-01-png/ (open xem-8-icon.png there first): flat, rounded corners, 2 tones max per
 icon (3 only where stated), clean silhouettes readable at 200px.
 Palette ONLY: navy #0B1C33, gold #D4AF37, cream #F5F0E6, terracotta #D97757, white #FFFFFF. No other colors.
 No letters, no numbers, no words anywhere. The only allowed glyphs are the ones named below (question mark, chevron, check).
