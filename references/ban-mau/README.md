@@ -18,7 +18,7 @@ Mọi đường dẫn tính từ thư mục gốc của skill (thư mục chứa
 | sổ bấm giờ lượt diễn tập | `dong-ho-dien-tap-25-09.log` (thư mục này) | trọn lượt 1 phút 30 giây |
 | sổ bấm giờ cài trên máy mới | `dong-ho-cai-may-moi-26-09.log` (thư mục này) | Mac, ghi khi thử gói trên thư mục trống (nhắc tới bản mẫu cũ đã bỏ ở v3.0) |
 | sổ bấm giờ cài trên Windows | `dong-ho-cai-may-windows-27-09.log` (thư mục này) | Windows 11 x64 i9, 27/09/2026 — từng bước cài, dựng, tải lên ChatCut, kèm lỗi gặp |
-| góp ý từ lượt thử Windows | `references/gop-y-windows/` | nhật ký lỗi (mã B · M · m · P), đề xuất đường B, 4 ảnh bằng chứng |
+| góp ý từ lượt thử Windows | `references/gop-y-windows/` | nhật ký lỗi (mã B · M · m · P), đề xuất đường B, 4 ảnh bằng chứng, bản báo lỗi tiếng Anh cho ChatCut `BAO-LOI-CHATCUT_v1.0.md` (CHƯA gửi) |
 
 ⚠️ Phim nguồn là phim **buổi 1 (24/09/2026)**: giọng nói «ở buổi một», dải chữ «BUỔI 1 · 24/09/2026».
 Diễn vào ngày khác thì xem mục «Phim nguồn mang ngày cũ» trong `SKILL.md`, đừng chỉ đổi dải chữ.
