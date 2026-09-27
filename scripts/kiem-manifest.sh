@@ -34,7 +34,7 @@ if [ "${1:-}" = "--write" ]; then
   {
     echo "# MANIFEST — demo-bien-tap-video-chatcut ${ver:-v?} ($(TZ=Europe/London date '+%Y-%m-%d %H:%M') London)"
     echo
-    echo "Nội dung lấy từ commit \`$(git rev-parse --short HEAD)\`. Kiểm lại: \`bash scripts/kiem-manifest.sh\`"
+    echo "Băm từ commit \`$(git rev-parse --short HEAD)\` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: \`bash scripts/kiem-manifest.sh\`"
     echo
     echo "md5(8)    cỡ(byte)  tệp"
     git ls-files | while IFS= read -r f; do

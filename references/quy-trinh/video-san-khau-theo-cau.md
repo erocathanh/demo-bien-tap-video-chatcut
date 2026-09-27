@@ -74,7 +74,9 @@ Video mẫu (26/09/2026): 18 câu · 190 chữ · tiếng 66,4 s · 68 sự ki�
 tối đa 5 vật/cảnh · thẻ trống lâu nhất 0,53 s.
 Dựng `stage-chatcut`: Mac Apple Silicon 29 giây · Windows i9 64–70 giây (bản có phụ đề, cùng cỡ). ChatCut (Mac, 27/09): tải 10 giây ·
 bóc lời có ngay · gạch 1 câu · xuất trên mây 22,7 giây ⇒ bản mẫu `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `3f7abcb6`, 62,98 giây).
-So với bản mẫu: **cùng số khung + cùng độ dài + PSNR ≥ 40 dB** là tương đương; md5 bản dựng Remotion chỉ trùng trên cùng một máy
+So với bản mẫu: **cùng số khung + cùng độ dài + PSNR ≥ 40 dB** là tương đương
+(đo PSNR: `ffmpeg -i <bản mới>.mp4 -i <bản mẫu>.mp4 -lavfi psnr -f null - 2>&1 | grep -o "average:[0-9.inf]*"`;
+mức thấp nhất từng đo là 41,31 dB trên b-roll Mac — sát ngưỡng, dưới 40 thì mở bảng khung ra nhìn trước khi kết luận hỏng); md5 bản dựng Remotion chỉ trùng trên cùng một máy
 (bản dựng sẵn `video-2-khong-phu-de.mp4`: md5 `b97de04e`, dựng trên macOS 26.5 Apple Silicon).
 Bản mẫu duy nhất của `render.sh stage` (có phụ đề in sẵn): `assets/nguyen-lieu-video-2/video-2-tao-lai.mp4` — 1996 khung;
 đo 27/09 trên Mac: dựng lại ra md5 khác nhưng PSNR 56,1 dB so với tệp này.

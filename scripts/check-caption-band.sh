@@ -35,11 +35,14 @@ scan() { # prints "maxrise at_t"
 n=$(awk -v a="$from" -v b="$to" 'BEGIN{printf "%d", (b-a)*30+1}')
 echo "đo $n khung (mỗi khung một lần gọi ffmpeg) — trên Mac vài giây; trên Windows mỗi lần gọi khởi động chậm hơn, có thể mất vài phút (chưa đo)"
 
+isnum() { case "$1" in ''|*[!0-9.-]*) return 1 ;; *) return 0 ;; esac; }
 fail=0
 if [ -n "$ctrl" ]; then
   read -r cmax cat cbase <<<"$(scan "$ctrl")"
   echo "control   max rise $cmax at ${cat}s ($cbase)"
-  if awk -v r="$cmax" -v th="$THRESH" 'BEGIN{exit !(r <= th)}'; then
+  if ! isnum "$cmax"; then
+    echo "FAIL could not measure the positive control (ffmpeg gave no reading)"; fail=1
+  elif awk -v r="$cmax" -v th="$THRESH" 'BEGIN{exit !(r <= th)}'; then
     echo "FAIL positive control shows no intrusion: ruler is blind for this window/band"; fail=1
   else
     echo "PASS positive control intrusion detected"
@@ -47,7 +50,9 @@ if [ -n "$ctrl" ]; then
 fi
 read -r max at base <<<"$(scan "$f")"
 echo "file      max rise $max at ${at}s ($base)"
-if awk -v r="$max" -v th="$THRESH" 'BEGIN{exit !(r > th)}'; then
+if ! isnum "$max"; then
+  echo "FAIL could not measure the file (ffmpeg gave no reading) — no verdict on the caption band"; fail=1
+elif awk -v r="$max" -v th="$THRESH" 'BEGIN{exit !(r > th)}'; then
   echo "FAIL overlay intrudes into caption band (rise $max > $THRESH at ${at}s)"; fail=1
 else
   echo "PASS caption band stays flat (rise <= $THRESH)"
