@@ -44,7 +44,7 @@ Cửa sổ Claude đang mở không «nhìn thấy» phần mềm vừa cài. Ch
 Plugin ChatCut bản 1.10.14 có lỗi trên Windows: phim có tiếng tải lên bị hỏng (hình minh hoạ không tiếng thì qua). Khi gặp lỗi này,
 `scripts/upload.sh` tự chép phim vào thư mục **Downloads** và chép sẵn đường dẫn vào bộ nhớ tạm. Bạn chỉ cần:
 bấm vào thẻ phim có chữ **«Click to relink»** trên trang ChatCut → trong cửa sổ hiện ra bấm ô **File name** → **Ctrl+V** → **Enter**. Xong nhắn «xong».
-Lỗi đã báo cho đội ChatCut (`references/gop-y-windows/BAO-LOI-CHATCUT_v1.0.md`); khi họ sửa thì bước bấm tay này sẽ bỏ.
+Lỗi này nằm ở plugin ChatCut (mô tả tiếng Anh ở `references/gop-y-windows/BAO-LOI-CHATCUT_v1.0.md`, **chưa gửi** cho ChatCut). Khi ChatCut sửa thì bước bấm tay này sẽ bỏ.
 
 ## Số đo trên Windows (i9-14900HX, máy mới, 27/09/2026)
 | việc | Windows | Mac (để so) |
