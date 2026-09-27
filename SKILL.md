@@ -36,7 +36,7 @@ bộ kiểm báo sai «Bộ kiểm báo chưa đạt, nhưng phim thật ra đú
      Windows start "" "$(cygpath -w assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4)"
 4. Cài xong mà kiem-may.sh báo «ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy» ⇒ bảo người dùng tắt HẲN Claude, mở lại, gõ «tiếp tục»;
    rồi chạy lại kiem-may.sh.
-5. Thiếu plugin ChatCut ⇒ hướng dẫn: /plugin → cài ChatCut → /mcp → ChatCut → Authenticate → mở phiên Claude mới.
+5. Thiếu plugin ChatCut ⇒ hướng dẫn: /plugin marketplace add ChatCut-Inc/agent-plugin → /plugin install chatcut@chatcut-inc → /mcp → ChatCut → Authenticate → mở phiên Claude mới.
 6. Bộ dựng video chưa cài ⇒ cd scripts/remotion && npm ci   (lệnh riêng, thời hạn 600000 ms)
    rồi bash scripts/remotion/render.sh broll   (lệnh riêng, thời hạn 600000 ms) ⇒ RESULT PASS.
 ```

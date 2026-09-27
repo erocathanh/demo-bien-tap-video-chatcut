@@ -26,7 +26,11 @@ và các dòng `CÀI:` là lệnh cài còn thiếu. **Kiểm:** mã thoát 0 = 
 Theo tệp của hệ máy: [macOS](README-CAI-MOI-MAC.md) · [Windows](README-CAI-MOI-WINDOWS.md). Xong chạy lại `bash scripts/kiem-may.sh`.
 
 ## 2. Plugin ChatCut (để Claude điều khiển trang biên tập ChatCut)
-1. Trong Claude Code gõ `/plugin`, tìm và cài **ChatCut** (nếu không thấy, thêm kho plugin của ChatCut theo hướng dẫn trên chatcut.io rồi tìm lại).
+1. Trong Claude Code gõ lần lượt hai dòng (dòng đầu thêm kho plugin của ChatCut — thiếu nó thì `/plugin` tìm «chatcut» không ra):
+   ```
+   /plugin marketplace add ChatCut-Inc/agent-plugin
+   /plugin install chatcut@chatcut-inc
+   ```
 2. Gõ `/mcp` → chọn ChatCut → **Authenticate** → đăng nhập ChatCut trên trình duyệt (một lần).
 3. **Mở một phiên Claude Code MỚI** — phiên mở trước lúc cài plugin không thấy công cụ ChatCut.
 

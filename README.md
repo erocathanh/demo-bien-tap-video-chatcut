@@ -4,7 +4,7 @@
 > 1. **Tải về đúng chỗ:** `git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut` (Windows: `%USERPROFILE%\.claude\skills\demo-bien-tap-video-chatcut`, chạy trong Git Bash; KHÔNG đặt trong OneDrive, Desktop hay Documents). Máy không có git thì tải `…/archive/refs/heads/main.zip` và giải nén vào cùng chỗ đó.
 > 2. **Kiểm máy trước mọi việc:** `bash scripts/kiem-may.sh` (chỉ đọc, không cài gì). Đọc các dòng `CÀI:` rồi hỏi người dùng **MỘT câu gom**: thiếu mấy thứ, cài mất bao lâu, họ phải bấm gì. Cài xong nếu script báo «cửa sổ Claude này chưa thấy» thì bảo người dùng tắt hẳn Claude, mở lại, gõ «tiếp tục»; rồi chạy lại `kiem-may.sh`.
 > 3. **Nói lời thường** trước và sau mỗi bước: đang làm gì · để làm gì · bao lâu · người dùng có phải bấm gì không. Không dùng từ chuyên môn, không dán log cho người dùng (luật đầy đủ: mục «Thuyết minh» trong `SKILL.md`).
-> 4. **Plugin ChatCut:** chưa có thì hướng dẫn người dùng gõ `/plugin`, cài ChatCut, rồi `/mcp` → ChatCut → **Authenticate** và đăng nhập trên trình duyệt; sau đó mở phiên Claude mới.
+> 4. **Plugin ChatCut:** chưa có thì hướng dẫn người dùng gõ `/plugin marketplace add ChatCut-Inc/agent-plugin` rồi `/plugin install chatcut@chatcut-inc`, rồi `/mcp` → ChatCut → **Authenticate** và đăng nhập trên trình duyệt; sau đó mở phiên Claude mới.
 > 5. **Lệnh dài** (`npm ci`, lần render đầu tải thêm ~270 MB) chạy với thời hạn **10 phút** (600000 ms), mỗi lệnh một lần gọi riêng — không gộp bằng `&&`.
 > 6. Trong lúc cài, **mở bản mẫu** `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` cho người dùng xem trước.
 > 7. Rồi đọc `SKILL.md` từ bước 0 và làm **«Video icon kể chuyện»** (mặc định), hoặc «Sửa phim bằng sửa chữ» nếu người dùng muốn.
