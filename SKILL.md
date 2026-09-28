@@ -219,18 +219,22 @@ SKILL.md                 tệp này · MANIFEST.md mọi tệp + md5 8 ký tự 
 assets/  phim-mau/ (phim buổi 1 có tiếng · nền sạch · phim ngắn 10 s) · b-roll/ (3 ảnh + 3 clip) · icon/ (38 icon)
          ban-mau-da-ra/ (bản ra mẫu + bảng khung) · nguyen-lieu-video-2/ (video icon dựng sẵn, có và không phụ đề + props + mốc chữ)
 references/  mcp-call-sequence.md · nguon-chatcut-docs.md · quy-trinh/ · du-lieu-mau/ · ban-mau/ (md5, sổ bấm giờ) · gop-y-windows/ (lượt thử Windows 27/09 + bản báo lỗi ChatCut, chưa gửi)
-scripts/  kiem-may.sh (+ .ps1) · kiem-manifest.sh · py.sh · upload.sh · verify-export.sh · render-broll-dong.sh · check-caption-band.sh · draw-broll.sh ·
+scripts/  kiem-may.sh (+ .ps1) · kiem-manifest.sh · kiem-lo-duong-dan.mjs · py.sh · upload.sh · verify-export.sh · render-broll-dong.sh · check-caption-band.sh · draw-broll.sh ·
           make_stage_props.py · make_clusters.py · measure_empty_stage.py · make_icons_svg*.py · lam-bang-khung.py · path-length.mjs · remotion/
 ```
 
 ## Người bảo trì — trước khi đẩy bản mới
 ```bash
-# 1. không lộ thư mục người dùng: macOS /Users/<tên>/ · Windows C:\Users\<tên> · Git Bash /c/Users/<tên> (dạng đã che «…» không tính)
-git grep -nE '/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+|/[a-z]/Users/[A-Za-z0-9._-]+' -- .     # phải KHÔNG ra dòng nào
+# 1. không lộ thư mục người dùng (tên thật, kể cả tên có dấu): macOS /Users/<tên> · Windows C:\Users\<tên>, C:/Users/<tên>,
+#    trong JSON C:\\Users\\<tên> · Git Bash /c/Users/<tên> · Linux /home/<tên>. Dạng đã che bằng «…» hay <tên> không tính.
+node scripts/kiem-lo-duong-dan.mjs --self-test            # thước còn nhạy: 14 dạng phải bắt + 10 dạng phải bỏ qua ⇒ RESULT PASS
+node scripts/kiem-lo-duong-dan.mjs                        # toàn bộ tệp trong gói ⇒ RESULT PASS
+node scripts/kiem-lo-duong-dan.mjs --range origin/main..HEAD   # mọi dòng thêm trong các commit sắp đẩy ⇒ RESULT PASS
 # 2. commit cuối: sinh lại danh sách tệp rồi kiểm
 bash scripts/kiem-manifest.sh --write && git add MANIFEST.md && git commit -m "Regenerate MANIFEST.md" && bash scripts/kiem-manifest.sh
 ```
-Đối chứng cho thước 1 (27/09): một tệp thử có đủ ba dạng (Mac, Windows, Git Bash) với tên người thật ⇒ bắt đủ 3 dòng; dạng đã che bằng «…» không bị bắt. Đừng chép ba dòng thử đó vào gói — thước sẽ bắt chính chúng.
+Đối chứng dương cho thước 1 (28/09): bản clone tạm có thêm một dòng JSON `C:\\Users\\<tên có dấu>\\…` và một dòng `/Users/<tên có dấu>/…`
+⇒ cả hai chế độ ra FAIL, bắt đủ 2/2 (dòng regex cũ của v3.1 bắt 0/2). Script tự loại chính nó khỏi phép quét vì nó chứa các chuỗi thử.
 
 ## Giá — theo tài liệu, trích nguyên văn
 *«Manual timeline editing, uploads, project browsing, transcription, and exporting do not consume credits.»* — chatcut.io/docs/credits-policy (đọc 25/09/2026).
