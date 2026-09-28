@@ -39,7 +39,13 @@ fi
 # newest plugin version; old macOS sort has no -V, then fall back to a plain sort
 helpers=$(ls -d "$HOME"/.claude/plugins/cache/chatcut-inc/chatcut/*/skills/asset-import/scripts/upload-media.mjs 2>/dev/null || true)
 helper=$(printf '%s\n' "$helpers" | sort -V 2>/dev/null | tail -1 || true)
-[ -n "$helper" ] || helper=$(printf '%s\n' "$helpers" | sort | tail -1)
+if [ -z "$helper" ] && [ -n "$helpers" ]; then
+  # no sort -V: pick the highest x.y.z folder numerically (a plain sort would put 1.10.9 above 1.10.14)
+  helper=$(printf '%s\n' "$helpers" | node -e 'const l=require("fs").readFileSync(0,"utf8").split("\n").filter(Boolean);
+const v=p=>((p.match(/chatcut\/([0-9.]+)\//)||[,"0"])[1]).split(".").map(Number);
+l.sort((a,b)=>{const x=v(a),y=v(b);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d}return 0});
+console.log(l[l.length-1]||"")')
+fi
 if [ -z "$helper" ]; then
   echo "Không thấy công cụ tải phim của plugin ChatCut (upload-media.mjs). Plugin ChatCut đã cài chưa?" >&2
   exit 3
@@ -92,18 +98,18 @@ relink_fallback() {
     done
     if [ -e "$dst" ]; then echo "  Phim đã có sẵn trong Downloads: $(basename "$dst") — không chép đè." >&2
     else cp -n "$f" "$dst" && echo "  Đã chép phim vào Downloads: $(basename "$dst")" >&2; fi
-    echo "  Đường dẫn: $(cygpath -w "$dst")" >&2
+    echo "  Đường dẫn: $(cygpath -aw "$dst")" >&2
     [ -z "$first" ] && first="$dst"
   done
   # nothing matched (unknown extension, or ffprobe saw no audio): still tell the user how to relink the original
   if [ -z "$first" ]; then
-    echo "  Chọn thẳng tệp gốc khi relink: $(cygpath -w "$1")" >&2
+    echo "  Chọn thẳng tệp gốc khi relink: $(cygpath -aw "$1")" >&2
     first="$1"
   fi
   # the path goes through an environment variable, never inside the PowerShell quote: a name like it's.mp4
   # would break the command (and could inject one)
   local how="nhấn Ctrl+V"
-  if CC_PATH="$(cygpath -w "$first")" powershell.exe -NoProfile -Command 'Set-Clipboard -Value $env:CC_PATH' >/dev/null 2>&1; then
+  if CC_PATH="$(cygpath -aw "$first")" powershell.exe -NoProfile -Command 'Set-Clipboard -Value $env:CC_PATH' >/dev/null 2>&1; then
     echo "  Đường dẫn phim đầu tiên đã nằm sẵn trong bộ nhớ tạm (clipboard)." >&2
   else
     how="dán (hoặc gõ) đường dẫn in ở trên"

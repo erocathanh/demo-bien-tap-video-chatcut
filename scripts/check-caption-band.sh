@@ -12,6 +12,10 @@ set -uo pipefail
 f="${1:?export.mp4}"; from="${2:?from seconds}"; to="${3:?to seconds}"
 top="${4:-1414}"; h="${5:-84}"; ctrl="${6:-}"
 THRESH=1.5
+# an empty or reversed window measures nothing and must not read as "flat"
+if ! awk -v a="$from" -v b="$to" 'BEGIN{exit !(a ~ /^[0-9]+(\.[0-9]+)?$/ && b ~ /^[0-9]+(\.[0-9]+)?$/ && a+0 < b+0)}'; then
+  echo "usage: from and to must be seconds with from < to (got from=$from to=$to)"; exit 2
+fi
 
 band() {
   ffmpeg -hide_banner -ss "$2" -i "$1" -vf "crop=1080:${h}:0:${top},signalstats,metadata=print:key=lavfi.signalstats.YAVG" \

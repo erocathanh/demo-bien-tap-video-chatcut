@@ -176,7 +176,7 @@ if [ -d "$NM" ]; then
   if [ -n "$want" ] && [ -d "$NM/@remotion/$want" ]; then line "✅" "Bộ dựng video" "đã cài" "" "ổn"
   else line "⚠️" "Bộ dựng video" "sai hệ" "" "thư mục node_modules không phải của máy này ⇒ cài lại: cd scripts/remotion && npm ci"; can_icon=0; req_missing=1; fi
 else
-  line "➖" "Bộ dựng video" "chưa cài" "" "sẽ cài ở bước sau (npm ci, 1–3 phút)"
+  line "➖" "Bộ dựng video" "chưa cài" "" "sẽ cài ở bước sau (npm ci — đo: Mac 10 giây, Windows 30 giây; mạng chậm thì lâu hơn)"
 fi
 
 # 10. ChatCut plugin

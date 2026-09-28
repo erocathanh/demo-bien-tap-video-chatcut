@@ -14,7 +14,7 @@ case "$mode" in zoom-in|zoom-out|pan-up) ;; *) echo "mode must be zoom-in, zoom-
 proj="${REMOTION_PROJ:-$(cd "$(dirname "$0")" && pwd)/remotion}"
 [ -f "$proj/src/BrollDong.tsx" ] || { echo "composition missing: $proj/src/BrollDong.tsx" >&2; exit 3; }
 if [ ! -d "$proj/node_modules/remotion" ] || [ ! -e "$proj/node_modules/.bin/remotion" ]; then
-  echo "FAIL chưa cài xong bộ dựng video. Chạy một lần:  cd \"$proj\"  rồi  npm ci   (1–3 phút)" >&2; exit 3
+  echo "FAIL chưa cài xong bộ dựng video. Chạy một lần:  cd \"$proj\"  rồi  npm ci   (một lần; đo: Mac 10 giây, Windows 30 giây)" >&2; exit 3
 fi
 command -v ffprobe >/dev/null 2>&1 || { echo "FAIL thiếu ffprobe (đi kèm FFmpeg) để kiểm video ra" >&2; exit 3; }
 md5of() { if command -v md5 >/dev/null; then md5 -q "$1"; else md5sum "$1" | cut -d" " -f1; fi; }
@@ -26,7 +26,7 @@ printf '{"src":"%s","durationInFrames":%d,"mode":"%s","fadeFrames":0}\n' "$(base
 
 start=$(date +%s)
 # --public-dir points at the image folder so staticFile(src) resolves without copying into public/.
-( cd "$proj" && npx remotion render src/index.ts BrollDong "$out_abs" --props="$props" --public-dir="$(dirname "$img_abs")" --bundle-cache=false --log=error )
+( cd "$proj" && npx remotion render src/index.ts BrollDong "$out_abs" --props="$props" --public-dir="$(dirname "$img_abs")" --bundle-cache=false --timeout=120000 --log=error )
 echo "rendered $(basename "$out") in $(( $(date +%s) - start ))s"
 
 # ffprobe on Windows ends lines with \r, and csv output adds commas for files with an ICC profile: strip both

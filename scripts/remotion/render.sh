@@ -19,7 +19,7 @@ mkdir -p "$OUT"
 cd "$HERE"
 # A half-finished install (npm cut off by a timeout) leaves node_modules/remotion but no CLI entry point.
 if [ ! -d node_modules/remotion ] || [ ! -e node_modules/.bin/remotion ] || [ ! -e node_modules/.package-lock.json ]; then
-  echo "FAIL chưa cài xong bộ dựng video. Chạy:  cd \"$HERE\" && npm ci   (một lần, 1–3 phút)"
+  echo "FAIL chưa cài xong bộ dựng video. Chạy:  cd \"$HERE\" && npm ci   (một lần; đo: Mac 10 giây, Windows 30 giây)"
   exit 3
 fi
 command -v ffprobe >/dev/null 2>&1 || { echo "FAIL thiếu ffprobe (đi kèm FFmpeg) để kiểm video ra"; exit 3; }
