@@ -197,7 +197,7 @@ echo "────────────────────────�
 v1="được"; [ "$can_edit" = 1 ] || v1="CHƯA"
 v2="được"; [ "$can_icon" = 1 ] || v2="CHƯA"
 echo "KẾT LUẬN: «Sửa phim bằng sửa chữ»: $v1 · «Video icon kể chuyện»: $v2"
-[ "$restart_needed" = 1 ] && echo "LƯU Ý: có phần mềm đã cài nhưng cửa sổ Claude này chưa thấy ⇒ thoát hẳn Claude, mở lại, gõ «tiếp tục»."
+[ "$restart_needed" = 1 ] && echo "LƯU Ý: có phần mềm đã cài nhưng cửa sổ Claude này chưa thấy ⇒ thoát hẳn Claude, mở lại, dán lại đúng câu đã gõ lúc đầu (mở lại cuộc trò chuyện cũ hay mở cuộc mới đều được)."
 [ -n "$installs" ] && printf '%s' "$installs"
 
 if [ "$req_missing" = 1 ]; then exit 1; fi

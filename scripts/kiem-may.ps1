@@ -138,7 +138,7 @@ Write-Output "----------------------------------------"
 $v1 = 'được'; if (-not $canEdit) { $v1 = 'CHƯA' }
 $v2 = 'được'; if (-not $canIcon) { $v2 = 'CHƯA' }
 Write-Output "KẾT LUẬN: «Sửa phim bằng sửa chữ»: $v1 · «Video icon kể chuyện»: $v2"
-if ($restart) { Write-Output 'LƯU Ý: có phần mềm đã cài nhưng cửa sổ Claude này chưa thấy => thoát hẳn Claude, mở lại, gõ «tiếp tục».' }
+if ($restart) { Write-Output 'LƯU Ý: có phần mềm đã cài nhưng cửa sổ Claude này chưa thấy => thoát hẳn Claude, mở lại, dán lại đúng câu đã gõ lúc đầu (mở lại cuộc trò chuyện cũ hay mở cuộc mới đều được).' }
 foreach ($i in $installs) { Write-Output "CÀI: $i" }
 
 if ($reqMissing) { exit 1 }

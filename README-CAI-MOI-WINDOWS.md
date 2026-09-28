@@ -35,7 +35,7 @@ nhưng **chưa chạy thử trên Windows thật** — có Git Bash thì ưu ti�
 Cần khoảng **3 GB** đĩa trống. Windows trên chip **ARM** (Snapdragon): bộ dựng video không chạy ⇒ chỉ làm được «Sửa phim bằng sửa chữ».
 
 ## 🔴 Cài xong phải TẮT HẲN Claude rồi mở lại
-Cửa sổ Claude đang mở không «nhìn thấy» phần mềm vừa cài. Chuột phải biểu tượng Claude ở góc phải thanh tác vụ → **Quit**, mở lại, gõ «tiếp tục».
+Cửa sổ Claude đang mở không «nhìn thấy» phần mềm vừa cài. Chuột phải biểu tượng Claude ở góc phải thanh tác vụ → **Quit**, mở lại, rồi **dán lại đúng câu đã gõ lúc đầu** (mở lại cuộc trò chuyện cũ hay mở cuộc mới đều được).
 `kiem-may.sh` phân biệt được «chưa cài» (❌) với «đã cài nhưng cửa sổ này chưa thấy» (⚠️).
 
 ## Mấy điều riêng của Windows
