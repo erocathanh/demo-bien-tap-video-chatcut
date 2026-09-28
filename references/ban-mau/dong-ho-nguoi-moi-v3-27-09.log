@@ -2,6 +2,7 @@
 # máy: macOS 26.5 arm64 · node v24.13.0 · ffmpeg version 9.0.1
 # thư mục trống: $W = <thư mục trống> · npm cache TRỐNG (npm_config_cache=$W/npm-cache-trong)
 # khác người mới thật: phần mềm (node, ffmpeg, python, whisper, plugin ChatCut) đã cài sẵn trên Mac này ⇒ bước 1 và 2 chỉ kiểm
+# lưu ý (thêm 28/09): mô hình Whisper «small» (~480 MB) đã có sẵn trong ~/.cache/whisper — máy mới thật tốn thêm thời gian tải lần đầu ở bước 4
 
 15:16:42 BƯỚC 0 git clone (nhánh chưa đẩy ⇒ clone từ kho trên máy thay cho github)
          ⇒ 1 giây

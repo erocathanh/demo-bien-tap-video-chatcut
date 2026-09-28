@@ -106,7 +106,7 @@ elseif ($SkillDir -match '[^\x00-\x7F]') { Line '⚠️' 'Chỗ đặt bộ côn
 else { Line '✅' 'Chỗ đặt bộ công cụ' '' '' 'ổn' }
 
 # 8. CPU architecture
-if ($arch -eq 'ARM64') { Line '❌' 'Kiến trúc' 'arm64' 'x64' 'Remotion không chạy trên Windows ARM => chỉ làm được «Sửa phim bằng sửa chữ»'; $canIcon = $false; $reqMissing = $true }
+if ($arch -eq 'ARM64') { Line '❌' 'Kiến trúc' 'arm64' 'x64' 'Remotion không chạy trên Windows ARM => chỉ làm được «Sửa phim bằng sửa chữ»; «Video icon kể chuyện» chỉ chạy lại được bằng bản dựng sẵn trong gói (không dựng được video icon mới)'; $canIcon = $false; $reqMissing = $true }
 else { Line '✅' 'Kiến trúc' $arch '' 'bộ dựng video chạy được' }
 
 # 9. Remotion packages for this system

@@ -160,7 +160,7 @@ fi
 
 # 8. CPU architecture (Remotion has no Windows ARM build)
 if [ "$OSN" = win ] && [ "$ARCH" = arm64 ]; then
-  line "❌" "Kiến trúc" "arm64" "x64" "Remotion không chạy trên Windows ARM ⇒ chỉ làm được «Sửa phim bằng sửa chữ»"; can_icon=0; req_missing=1
+  line "❌" "Kiến trúc" "arm64" "x64" "Remotion không chạy trên Windows ARM ⇒ chỉ làm được «Sửa phim bằng sửa chữ»; «Video icon kể chuyện» chỉ chạy lại được bằng bản dựng sẵn trong gói (không dựng được video icon mới)"; can_icon=0; req_missing=1
 else
   line "✅" "Kiến trúc" "$ARCH" "" "bộ dựng video chạy được"
 fi

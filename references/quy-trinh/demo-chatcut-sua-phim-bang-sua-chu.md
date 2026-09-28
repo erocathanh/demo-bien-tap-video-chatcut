@@ -13,7 +13,7 @@ Người dùng gõ MỘT câu cho Claude Code → Claude gọi ChatCut qua MCP �
 
 ## Chuỗi chạy (chi tiết tham số: `references/mcp-call-sequence.md`)
 ```
-0  phiên Claude phải mở SAU khi cài plugin; phiên cũ KHÔNG thấy tool
+0  phiên mở TRƯỚC khi cài plugin có thể chưa thấy công cụ ChatCut (máy thử Windows thấy ngay sau Authenticate) — chưa thấy thì mở phiên mới, dán lại câu ban đầu
 1  create_project → manage_timelines update 1080×1920 (mặc định là NGANG)
 2  import_media create_session → scripts/upload.sh (phim + 3 clip, một lệnh)
 3  edit_item thêm phim vào V1 → read_script → apply_script gạch ~~câu~~
@@ -25,7 +25,7 @@ Số đo 25/09/2026: trọn lượt **2 phút 17 giây** (3 clip động — b�
 Người dùng bấm: macOS 1 câu gõ + 1 lần đồng ý tải lên · Windows thêm 1 lần «Click to relink» cho phim có tiếng (lỗi plugin P5).
 
 ## Bẫy đã gặp
-1. Phiên đang chạy lúc cắm MCP không thấy tool — mở phiên mới.
+1. Phiên đang chạy lúc cắm plugin có thể không thấy công cụ (tuỳ máy) — mở phiên mới, dán lại câu ban đầu.
 2. `codex exec` chạy nền thiếu `</dev/null` ⇒ treo chờ stdin, không báo lỗi. Hết hạn mức ⇒ lỗi nằm ở ĐUÔI log.
 3. B-roll có fade ⇒ nháy tối ở mối nối trong ChatCut. Luôn render `fadeFrames=0`.
 4. Phim nguồn đã in phụ đề ⇒ mép cắt lóe chữ câu đã xoá 1–5 khung; đừng bật phụ đề ChatCut lên phim đã có phụ đề.

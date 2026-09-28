@@ -32,7 +32,7 @@ Trong lúc chờ, Claude mở bản mẫu cho bạn xem trước. Những việc
 - Cách Claude làm từng video, số đo, lỗi đã biết: **[SKILL.md](SKILL.md)**. Danh sách tệp kèm mã kiểm (md5): [MANIFEST.md](MANIFEST.md).
 
 ## Máy dùng được
-macOS (Apple Silicon hoặc Intel) · Windows 10/11 bản x64 · Linux. Windows trên chip ARM (Snapdragon) chỉ làm được «Sửa phim bằng sửa chữ».
+macOS (Apple Silicon hoặc Intel) · Windows 10/11 bản x64 · Linux. Windows trên chip ARM (Snapdragon) chỉ làm được «Sửa phim bằng sửa chữ»; «Video icon kể chuyện» chỉ chạy lại được bằng bản dựng sẵn trong gói (không dựng được video icon mới).
 Cần khoảng 3 GB đĩa trống và mạng internet. Không cần khoá API nào: icon và hình minh hoạ đã vẽ sẵn trong gói.
 
 ## Giấy phép

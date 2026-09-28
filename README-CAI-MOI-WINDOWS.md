@@ -32,7 +32,7 @@ nhưng **chưa chạy thử trên Windows thật** — có Git Bash thì ưu ti�
 | Pillow | vẽ bảng hình có nhãn giây | tuỳ chọn | `python -m pip install pillow` | 10 giây |
 | Whisper | nghe lại lời trong video để kiểm câu đã xoá | tuỳ chọn | `python -m pip install -U openai-whisper` | 533 giây (~9 phút) — lệnh dài: chạy riêng, thời hạn 10 phút hoặc chạy nền |
 
-Cần khoảng **3 GB** đĩa trống. Windows trên chip **ARM** (Snapdragon): bộ dựng video không chạy ⇒ chỉ làm được «Sửa phim bằng sửa chữ».
+Cần khoảng **3 GB** đĩa trống. Windows trên chip **ARM** (Snapdragon): bộ dựng video không chạy ⇒ chỉ làm được «Sửa phim bằng sửa chữ»; «Video icon kể chuyện» chỉ chạy lại được bằng bản dựng sẵn trong gói (không dựng được video icon mới).
 
 ## 🔴 Cài xong phải TẮT HẲN Claude rồi mở lại
 Cửa sổ Claude đang mở không «nhìn thấy» phần mềm vừa cài. Chuột phải biểu tượng Claude ở góc phải thanh tác vụ → **Quit**, mở lại, rồi **dán lại đúng câu đã gõ lúc đầu** (mở lại cuộc trò chuyện cũ hay mở cuộc mới đều được).

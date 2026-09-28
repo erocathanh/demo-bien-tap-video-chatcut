@@ -12,7 +12,7 @@ Trên Windows, mọi lệnh ở đây chạy trong **Git Bash** (cửa sổ dòn
 git clone https://github.com/erocathanh/demo-bien-tap-video-chatcut.git ~/.claude/skills/demo-bien-tap-video-chatcut
 cd ~/.claude/skills/demo-bien-tap-video-chatcut
 ```
-**Kiểm:** `ls` thấy `SKILL.md  README.md  MANIFEST.md  assets  references  scripts`.
+**Kiểm:** `ls` thấy `MANIFEST.md  README-CAI-MOI-MAC.md  README-CAI-MOI-WINDOWS.md  README-CAI-MOI.md  README.md  SKILL.md  assets  references  scripts`.
 Đã có bản cũ (trước v3.0) thì xoá thư mục cũ rồi tải lại — bản cũ trên Windows mang kiểu xuống dòng khác làm lệch mã kiểm.
 
 ## 0.5 Kiểm máy — chỉ xem, không cài gì

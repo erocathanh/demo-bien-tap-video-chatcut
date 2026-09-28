@@ -27,14 +27,16 @@ bộ kiểm báo sai «Bộ kiểm báo chưa đạt, nhưng phim thật ra đú
 
 ## Bước 0 — Claude tự làm trước mọi việc
 ```
+0. SKILL_DIR=~/.claude/skills/demo-bien-tap-video-chatcut   (thư mục chứa tệp này; mọi lệnh dưới dùng đường tuyệt đối theo nó,
+                                                           vì tool Bash giữ nguyên thư mục giữa các lần gọi)
 1. bash "$SKILL_DIR/scripts/kiem-may.sh"   chỉ đọc, vài giây (Mac đo dưới 1 giây). Mã thoát 0 đủ · 1 thiếu bắt buộc · 2 chỉ thiếu tuỳ chọn.
 2. Có dòng «CÀI:» ⇒ hỏi người dùng MỘT câu gom, ví dụ:
      «Máy anh còn thiếu 3 phần mềm (Node.js, FFmpeg, Python), cài khoảng 5 phút. Windows sẽ hỏi quyền — anh bấm Yes. Tôi cài nhé?»
      (5 phút là số đo Windows 27/09: Node.js 33 giây · FFmpeg 185 giây · Python 80 giây.)
    Chỉ thiếu thứ tuỳ chọn (Whisper, Pillow) ⇒ hỏi có muốn cài không, nói rõ bỏ qua vẫn làm được video.
 3. Trong lúc cài: mở bản mẫu cho người dùng xem — «đây là thứ anh sẽ tự làm được hôm nay»
-     macOS  open "assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4"
-     Windows start "" "$(cygpath -w assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4)"
+     macOS  open "$SKILL_DIR/assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4"
+     Windows start "" "$(cygpath -aw "$SKILL_DIR/assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4")"
 4. Cài xong mà kiem-may.sh báo «ĐÃ CÀI nhưng cửa sổ Claude này chưa thấy» ⇒ bảo người dùng tắt HẲN Claude, mở lại, DÁN LẠI câu ban đầu
    (Claude Code trong Terminal: `claude --continue`); rồi chạy lại kiem-may.sh.
 5. Thiếu plugin ChatCut ⇒ đưa người dùng tự gõ: /plugin marketplace add ChatCut-Inc/agent-plugin → /plugin install chatcut@chatcut-inc → /mcp → ChatCut → Authenticate.
@@ -42,7 +44,6 @@ bộ kiểm báo sai «Bộ kiểm báo chưa đạt, nhưng phim thật ra đú
 6. Bộ dựng video chưa cài ⇒ hai lệnh riêng, đường TUYỆT ĐỐI (tool Bash giữ nguyên thư mục giữa các lần gọi):
      npm ci --prefix "$SKILL_DIR/scripts/remotion"        (thời hạn 600000 ms)
      bash "$SKILL_DIR/scripts/remotion/render.sh" broll    (thời hạn 600000 ms) ⇒ RESULT PASS
-   $SKILL_DIR = thư mục chứa tệp này, thường là ~/.claude/skills/demo-bien-tap-video-chatcut.
 ```
 Lệnh cài từng hệ: [README-CAI-MOI-MAC.md](README-CAI-MOI-MAC.md) · [README-CAI-MOI-WINDOWS.md](README-CAI-MOI-WINDOWS.md). Không cài gì khi người dùng chưa đồng ý.
 
@@ -55,7 +56,7 @@ Lệnh cài từng hệ: [README-CAI-MOI-MAC.md](README-CAI-MOI-MAC.md) · [READ
 | khung trình duyệt trong app Claude | Cmd+Shift+B | Ctrl+Shift+B |
 | cài xong | thường dùng ngay | **tắt hẳn Claude rồi mở lại** (cửa sổ cũ không thấy phần mềm mới) |
 | tải phim có tiếng lên ChatCut | tự động | có thể phải bấm «Click to relink» một lần (lỗi plugin P5) — `upload.sh` tự chép phim ra Downloads + chép đường dẫn, xem mục «Sửa phim bằng sửa chữ» ④ |
-| bộ dựng video | Apple Silicon và Intel | chỉ x64 (Windows ARM: không có bộ dựng ⇒ chỉ làm «Sửa phim bằng sửa chữ») |
+| bộ dựng video | Apple Silicon và Intel | chỉ x64 (Windows ARM: không có bộ dựng ⇒ chỉ làm được «Sửa phim bằng sửa chữ»; «Video icon kể chuyện» chỉ chạy lại được bằng bản dựng sẵn trong gói (không dựng được video icon mới)) |
 Mọi script `.sh` chạy được trên cả hai hệ; công cụ trên Windows in xuống dòng kiểu CRLF nên script luôn bỏ ký tự `\r` trước khi so.
 
 ## Hai video làm được
