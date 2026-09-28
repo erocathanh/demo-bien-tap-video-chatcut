@@ -28,7 +28,9 @@ xuất phim đều làm trong ChatCut. Phụ đề chỉ có MỘT lớp, sinh t
      layout {"sourceId":"<V1 source>","left":75,"top":1480,"width":930,"height":105}
      (thẻ sân khấu toàn màn kết thúc ở y 1440; kiểu mặc định của ChatCut đặt chữ ở y ~1414 ⇒ chạm thẻ)
 7  smooth_audio → submit_export {"format":"video","resolution":"1080p"} → track_export (≥ 10 giây mỗi lần hỏi)
-8  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>" → bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã gạch>" "làm thuê cho máy"
+8  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>" → bash scripts/verify-export.sh out/<tên>.mp4 "" "<đoạn Whisper nghe đúng của câu đã gạch>" "làm thuê cho máy"
+   câu mẫu: gạch «Nó giống như việc bạn tự tra cứu thông tin trên mạng» · điền «tra cứu thông tin trên mạng» (Whisper nghe «bạn» thành «bằng»)
+   đối chứng âm: cùng lệnh trên assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4 (CHƯA cắt) PHẢI ra FAIL still audible
 ```
 Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». ChatCut nghe sai vài chữ («Cách ba», «giai truyền») — phụ đề
 sửa theo thẻ bằng `edit_captions set_card_text` hoặc sửa bản bóc lời bằng `manage_transcript` action `fix`.

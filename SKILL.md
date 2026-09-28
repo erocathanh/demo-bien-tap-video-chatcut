@@ -98,9 +98,12 @@ phụ đề chỉ có MỘT lớp, sinh từ bản bóc lời nên sửa đượ
      cho thẻ nghe sai (bản mẫu sửa 5 thẻ: «Cách ba» → «Cấp 3», «giai truyền» → «dây chuyền»…) · split_card khi một thẻ dính hai câu
 8  smooth_audio → submit_export {"format":"video","resolution":"1080p"} → track_export (hỏi lại mỗi ≥ 10 giây)
 9  curl -fsSL --create-dirs -o "out/<tên>.mp4" "<downloadUrl>"   (link sống 1 ngày)
-10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<câu đã xoá, không gạch thì để \"\">" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
+10 bash scripts/verify-export.sh out/<tên>.mp4 "" "<đoạn đặc trưng của câu đã gạch, không gạch thì để \"\">" "làm thuê cho máy"  ⇒ RESULT PASS · mở video cho người dùng xem
 ```
-Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng».
+Câu Whisper nghe đúng để làm đối chứng dương: «làm thuê cho máy». Câu dễ gạch khi thử: «Nó giống như việc bạn tự tra cứu thông tin trên mạng»,
+nhưng ô «câu đã xoá» của bước 10 chỉ điền đoạn **«tra cứu thông tin trên mạng»**: Whisper nghe «bạn» thành «bằng», nên điền cả câu thì phim CHƯA cắt
+vẫn báo PASS nhầm. Đối chứng âm (đo 28/09): `bash scripts/verify-export.sh assets/nguyen-lieu-video-2/video-2-khong-phu-de.mp4 "" "tra cứu thông tin trên mạng" "làm thuê cho máy"`
+trên phim chưa cắt PHẢI ra `FAIL removed phrase still audible`; bản mẫu đã cắt ra PASS. Gạch câu khác thì chọn đoạn Whisper nghe đúng (xem dòng «heard:»).
 Đo trên Mac 27/09: dựng 29 giây · tải lên 10 giây · bóc lời có ngay · gạch 1 câu 1996 → 1887 khung · xuất trên mây 22,7 giây · verify-export PASS ·
 cả phần ChatCut khoảng 3 phút. Bản ra: `assets/ban-mau-da-ra/video-icon-ke-chuyen-chatcut-v3.mp4` (md5 `3f7abcb6`, 62,98 giây) + bảng khung `-contact.png` cùng thư mục.
 Tự làm video mới từ kịch bản của mình (TTS → mốc chữ → kế hoạch hình → icon → props → dựng): `references/quy-trinh/video-san-khau-theo-cau.md`.
