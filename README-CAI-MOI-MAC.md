@@ -11,8 +11,8 @@
 | Node.js ≥ 18 | chạy xưởng dựng video + công cụ tải phim của ChatCut | bắt buộc | `brew install node` | có sẵn trên máy thử |
 | FFmpeg | đọc và kiểm tra video (dài bao lâu, có tiếng không, có khung đen không) | bắt buộc | `brew install ffmpeg` | có sẵn trên máy thử |
 | Python 3.8+ | công cụ phụ: chia phụ đề, làm bảng hình | bắt buộc cho «Video icon kể chuyện» | có sẵn, hoặc `brew install python` | có sẵn |
-| Pillow | vẽ bảng hình có nhãn giây để soát | tuỳ chọn | `python3 -m pip install pillow` | vài giây |
-| Whisper | nghe lại lời trong video để kiểm câu đã xoá (cần Python 3.10–3.13) | tuỳ chọn | `python3 -m pip install -U openai-whisper` — lệnh dài: chạy riêng, thời hạn 10 phút hoặc chạy nền | Windows đo 533 giây; lần dùng đầu tải thêm mô hình ~480 MB |
+| Pillow | vẽ bảng hình có nhãn giây để soát | tuỳ chọn | `python3 -m venv ~/.claude/skills/demo-bien-tap-video-chatcut/.venv && ~/.claude/skills/demo-bien-tap-video-chatcut/.venv/bin/python -m pip install pillow` — cài vào Python riêng của skill (Python của Homebrew từ chối `pip install`, lỗi «externally-managed»); `scripts/py.sh` tự dùng Python riêng này | vài giây |
+| Whisper | nghe lại lời trong video để kiểm câu đã xoá | tuỳ chọn | `brew install openai-whisper` — gói Homebrew tự mang Python và PyTorch riêng, không vướng lỗi «externally-managed», không kén bản Python; lệnh dài: chạy riêng, thời hạn 10 phút hoặc chạy nền | Windows đo 533 giây; lần dùng đầu tải thêm mô hình ~480 MB |
 
 Máy Mac Intel: plugin ChatCut không kèm sẵn FFmpeg cho máy này ⇒ bắt buộc cài FFmpeg trước khi tải phim.
 

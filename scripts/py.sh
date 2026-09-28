@@ -4,8 +4,16 @@
 # Why: on Windows `python3` is often the Microsoft Store stub (exit 49) even after Python is installed,
 # and Python writes cp1252 by default there, which breaks Vietnamese text. Tries python3 first so macOS keeps
 # the interpreter that has whisper/Pillow installed.
+# If the skill has its own Python (.venv, made by the Pillow install line of kiem-may on macOS), use it first:
+# Homebrew's Python refuses pip installs (PEP 668 "externally managed"), a venv does not.
 set -uo pipefail
 export PYTHONUTF8=1
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+for v in "$SKILL_DIR/.venv/bin/python" "$SKILL_DIR/.venv/Scripts/python.exe"; do
+  if [ -x "$v" ] && "$v" -c "import sys; sys.exit(sys.version_info < (3,8))" >/dev/null 2>&1; then
+    exec "$v" "$@"
+  fi
+done
 for c in python3 python "py -3"; do
   # shellcheck disable=SC2086
   if $c -c "import sys; sys.exit(sys.version_info < (3,8))" >/dev/null 2>&1; then

@@ -97,7 +97,7 @@ if [ -n "$PY" ]; then
   note="ổn (lệnh: $PY)"
   if [ "$OSN" = win ] && [ "$PY" != python3 ]; then note="ổn (lệnh: $PY — trên máy này python3 chỉ là lối tắt Store)"; fi
   line "✅" "Python 3" "$pv" "cần ≥ 3.8" "$note"
-  if ! vge "$pv" 3.10 || vge "$pv" 3.14; then
+  if [ "$OSN" != mac ] && { ! vge "$pv" 3.10 || vge "$pv" 3.14; }; then
     line "➖" "  (Whisper)" "" "3.10–3.13" "bản Python này có thể không cài được Whisper — không ảnh hưởng video"
   fi
 elif py_path_hint; then
@@ -108,22 +108,38 @@ else
 fi
 
 # 5. Pillow + Whisper (optional)
-if [ -n "$PY" ]; then
+# scripts/py.sh prefers the skill's own .venv when it exists, so Pillow is looked for there first.
+VPY=""
+for v in "$SKILL_DIR/.venv/bin/python" "$SKILL_DIR/.venv/Scripts/python.exe"; do [ -x "$v" ] && { VPY="$v"; break; }; done
+if [ -n "$PY" ] || [ -n "$VPY" ]; then
+  PYC="${VPY:-$PY}"
   # shellcheck disable=SC2086
-  if plv="$($PY -c 'import PIL;print(PIL.__version__)' 2>/dev/null | first_line)" && [ -n "$plv" ]; then
-    line "✅" "Pillow" "$plv" "tuỳ chọn" "ổn (làm bảng hình có nhãn giây)"
+  if plv="$($PYC -c 'import PIL;print(PIL.__version__)' 2>/dev/null | first_line)" && [ -n "$plv" ]; then
+    where=""; [ -n "$VPY" ] && where=" — trong Python riêng của skill (.venv)"
+    line "✅" "Pillow" "$plv" "tuỳ chọn" "ổn (làm bảng hình có nhãn giây)$where"
   else
     line "➖" "Pillow" "—" "tuỳ chọn" "chưa cài ⇒ chỉ thiếu bảng hình soát khung; video vẫn làm được"; opt_missing=1
-    add_install "$PY -m pip install pillow"
+    if [ "$OSN" = mac ]; then
+      # macOS: Homebrew's Python refuses "pip install" (PEP 668). A venv inside the skill works with any Python 3.8+.
+      add_install "$PY -m venv \"$SKILL_DIR/.venv\" && \"$SKILL_DIR/.venv/bin/python\" -m pip install pillow   # Python riêng của skill, tránh lỗi externally-managed"
+    else
+      add_install "$PY -m pip install pillow"
+    fi
   fi
 fi
 if command -v whisper >/dev/null 2>&1; then
   line "✅" "Whisper" "có" "tuỳ chọn" "ổn (nghe lại lời trong video)"
 else
   line "➖" "Whisper" "—" "tuỳ chọn" "chưa cài ⇒ bỏ qua được; chỉ để kiểm lời (cài mất khoảng 9 phút trên máy thử Windows; lần dùng đầu tải thêm mô hình ~480 MB)"; opt_missing=1
-  # long install: run it as its own command with a 10-minute limit, or in the background
-  # Whisper installs on Python 3.10-3.13 only; on other versions the line above already says so
-  [ -n "$PY" ] && vge "$pv" 3.10 && ! vge "$pv" 3.14 && add_install "$PY -m pip install -U openai-whisper   (lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền)"
+  # long install: run it as its own command with a 10-minute limit, or in the background.
+  # The text after "#" is a shell comment, so every CÀI line still runs exactly as printed.
+  if [ "$OSN" = mac ]; then
+    # Homebrew's formula brings its own Python + PyTorch: no PEP 668 error, no 3.10-3.13 limit (this is how the test Mac has it)
+    add_install "brew install openai-whisper   # lâu, tải nhiều (có PyTorch) — chạy riêng, thời hạn 10 phút hoặc chạy nền; chưa đo thời gian"
+  else
+    # pip: Whisper installs on Python 3.10-3.13 only; on other versions the Python line above already says so
+    [ -n "$PY" ] && vge "$pv" 3.10 && ! vge "$pv" 3.14 && add_install "$PY -m pip install -U openai-whisper   # lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền"
+  fi
 fi
 
 # 6. Vietnamese text in Python on Windows

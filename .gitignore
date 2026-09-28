@@ -5,3 +5,4 @@ scripts/remotion/out/
 references/ghi-chu-noi-bo.md
 __pycache__/
 /out/
+.venv/

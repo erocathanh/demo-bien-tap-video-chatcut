@@ -84,7 +84,8 @@ if (Has 'whisper') { Line '✅' 'Whisper' 'có' 'tuỳ chọn' 'ổn (nghe lại
 else {
   Line '➖' 'Whisper' '-' 'tuỳ chọn' 'chưa cài => bỏ qua được; chỉ để kiểm lời (cài mất khoảng 9 phút trên máy thử Windows; lần dùng đầu tải thêm mô hình ~480 MB)'; $optMissing = $true
   # Whisper installs on Python 3.10-3.13 only
-  if ($py -and ($pv -match '^3\.1[0-3]\.')) { $installs.Add("$pyShow -m pip install -U openai-whisper   (lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền)") }
+  if ($py -and ($pv -match '^3\.1[0-3]\.')) { $installs.Add("$pyShow -m pip install -U openai-whisper   # lâu: khoảng 9 phút — chạy riêng, thời hạn 10 phút hoặc chạy nền") }
+  elseif ($py) { Line '➖' '  (Whisper)' '' '3.10–3.13' 'bản Python này có thể không cài được Whisper — không ảnh hưởng video' }
 }
 
 # 6. Vietnamese text
