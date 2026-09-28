@@ -175,3 +175,66 @@
          trống ✅
 
 # tổng: 131 giây · thư mục thử: <thư mục trống>
+
+# ===== chạy lại sau v3.1.1 — nhánh fixes-v3.1.1-28-09 @ 546fd18, 28/09/2026 giờ London
+# máy: macOS 26.5 arm64 · node v24.13.0 · npm cache TRỐNG · phần mềm + mô hình Whisper có sẵn
+
+09:26:47 BƯỚC 0 git clone
+         ⇒ 0 giây
+         ls: MANIFEST.md README-CAI-MOI-MAC.md README-CAI-MOI-WINDOWS.md README-CAI-MOI.md README.md SKILL.md assets references scripts 
+
+09:26:47 BƯỚC 0.5 kiem-may
+         ⇒ 1 giây
+         rc=0 · 12 ✅ · 0 ❌
+         KẾT LUẬN: «Sửa phim bằng sửa chữ»: được · «Video icon kể chuyện»: được
+
+09:26:48 BƯỚC 3a npm ci --prefix (cache trống)
+         rc=0
+         ⇒ 9 giây
+
+09:26:57 BƯỚC 3b render.sh broll
+         PASS broll-1-dong.mp4 1080x1920 frames=91
+         PASS broll-2-dong.mp4 1080x1920 frames=81
+         PASS broll-3-dong.mp4 1080x1920 frames=70
+         RESULT PASS
+         ⇒ 31 giây
+
+09:27:28 BƯỚC 4 verify-export bản mẫu (lệnh README)
+         PASS removed phrase not heard (whisper small; it mishears some words, read the text below)
+         PASS positive control heard: gửi tặng skill
+         RESULT PASS
+         ⇒ 22 giây
+
+09:27:50 BƯỚC 4 đối chứng âm 1 + 2 (phim chưa cắt, phải FAIL)
+         FAIL removed phrase still audible: Hẹn bạn xem buổi hai
+         RESULT FAIL
+         FAIL removed phrase still audible: Tối nay, ở buổi một
+         RESULT FAIL
+
+09:28:38 F3 video icon: phim CHƯA cắt + «tra cứu thông tin trên mạng» (phải FAIL)
+         FAIL removed phrase still audible: tra cứu thông tin trên mạng
+         RESULT FAIL
+
+09:29:22 F3 video icon: bản mẫu đã cắt 3f7abcb6 (phải PASS)
+         PASS removed phrase not heard (whisper small; it mishears some words, read the text below)
+         RESULT PASS
+
+09:29:56 S1 rà lộ đường dẫn: self-test · toàn gói · các dòng mới so với main
+         RESULT PASS
+         scanned 188 tracked files · personal paths found: 0
+         RESULT PASS
+         scanned lines added in 227a8db..HEAD · personal paths found: 0
+         RESULT PASS
+
+09:29:56 i  render.sh stage-chatcut
+         PASS video-2-khong-phu-de.mp4 1080x1920 frames=1996 audio=aac
+         RESULT PASS
+         ⇒ 31 giây
+
+09:30:27 kiem-manifest (MANIFEST còn là v3.1 tới commit cuối ⇒ đợi FAIL)
+         RESULT FAIL
+
+09:30:32 git status sau mọi bước (phải trống)
+         trống ✅
+
+# tổng: 227 giây
