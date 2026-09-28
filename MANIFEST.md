@@ -1,15 +1,15 @@
-# MANIFEST — demo-bien-tap-video-chatcut v3.1 (2026-09-27 15:59 London)
+# MANIFEST — demo-bien-tap-video-chatcut v3.1.1 (2026-09-28 09:30 London)
 
-Băm từ commit `11ed644` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
+Băm từ commit `920431d` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
 
 md5(8)    cỡ(byte)  tệp
 6ad044b2         71  .gitattributes
-09e7034e        117  .gitignore
-57e93761       3269  README-CAI-MOI-MAC.md
-14f07e3b       6420  README-CAI-MOI-WINDOWS.md
-2c8ffb56       5645  README-CAI-MOI.md
-73a9a601       6145  README.md
-c5ecab8c      26852  SKILL.md
+71c4e694        124  .gitignore
+212c7ade       3643  README-CAI-MOI-MAC.md
+e0c4295c       6666  README-CAI-MOI-WINDOWS.md
+5b257e40       5714  README-CAI-MOI.md
+486571cb       6498  README.md
+863fa366      29457  SKILL.md
 945846a3    2211558  assets/b-roll/broll-1-dong.mp4
 40ed58a5        100  assets/b-roll/broll-1.props.json
 4ce52276    1775700  assets/b-roll/broll-2-dong.mp4
@@ -88,12 +88,12 @@ cb1b5b47     582956  assets/phim-mau/loi.mp3
 41bfa445    1951330  assets/phim-mau/nen-sach-khong-phu-de.mp4
 1daf71fd    3431633  assets/phim-mau/phim-buoi-1-co-tieng.mp4
 d34e5295    1094818  assets/phim-mau/phim-ngan-10s-3-cau.mp4
-910249ef       4390  references/ban-mau/README.md
+fd391519       4610  references/ban-mau/README.md
 0d13bf9f     466650  references/ban-mau/broll-codex-3-tam.png
 c82b8921       4309  references/ban-mau/dong-ho-cai-may-moi-26-09.log
 cc9e96b5      15818  references/ban-mau/dong-ho-cai-may-windows-27-09.log
 d2baf0c8        126  references/ban-mau/dong-ho-dien-tap-25-09.log
-7e4a5c24       7844  references/ban-mau/dong-ho-nguoi-moi-v3-27-09.log
+f7b403ec      10495  references/ban-mau/dong-ho-nguoi-moi-v3-27-09.log
 526672ea       1181  references/du-lieu-mau/de-codex-broll-vsl.txt
 652ba22e       5395  references/du-lieu-mau/ke-hoach-hinh-video-2.json
 893040dd       4657  references/du-lieu-mau/kich-ban-video-2-da-doc.md
@@ -114,14 +114,15 @@ e45f282a    1670520  references/gop-y-windows/bang-chung/phu-de-broll-12-khung-m
 7cf079f3     439201  references/gop-y-windows/bang-chung/quy-trinh-a-windows-contact.png
 98c83a02       4027  references/mcp-call-sequence.md
 1c6ed99a       1159  references/nguon-chatcut-docs.md
-eba34247       2894  references/quy-trinh/demo-chatcut-sua-phim-bang-sua-chu.md
+de56e523       3074  references/quy-trinh/demo-chatcut-sua-phim-bang-sua-chu.md
 ee358dcf       2322  references/quy-trinh/tom-tat-luat-mau-07-08.md
-a895ee29       9507  references/quy-trinh/video-san-khau-theo-cau.md
-0f7309e4       3044  scripts/check-caption-band.sh
+72fccae5       9865  references/quy-trinh/video-san-khau-theo-cau.md
+a5fe87a8       3337  scripts/check-caption-band.sh
 20e63122       2673  scripts/draw-broll.sh
+6ee491a6       5675  scripts/kiem-lo-duong-dan.mjs
 fe5ccc09       4132  scripts/kiem-manifest.sh
-db6233ce       9733  scripts/kiem-may.ps1
-35c1e662      13130  scripts/kiem-may.sh
+1869e9ad      10121  scripts/kiem-may.ps1
+25fef4fa      14592  scripts/kiem-may.sh
 eb7297d8       2970  scripts/lam-bang-khung.py
 bf6c61f8       5665  scripts/make_clusters.py
 b63e9d5e       8079  scripts/make_icons_svg.py
@@ -129,7 +130,7 @@ a2da87d3       8789  scripts/make_icons_svg_set03.py
 0730d818      14737  scripts/make_stage_props.py
 2bdb3199        937  scripts/measure_empty_stage.py
 f76185da       1940  scripts/path-length.mjs
-c46283f4       1045  scripts/py.sh
+d4d1021a       1501  scripts/py.sh
 f1eb5108     106190  scripts/remotion/package-lock.json
 3783273a        600  scripts/remotion/package.json
 aaea0416        113  scripts/remotion/props/broll-1.json
@@ -176,7 +177,7 @@ ba6db3c0        541  scripts/remotion/public/icons/icon-35-relax.svg
 41bfa445    1951330  scripts/remotion/public/nen-sach.mp4
 fcde9b09    1064492  scripts/remotion/public/tieng-video-2-moi.mp3
 3810fe12        117  scripts/remotion/remotion.config.ts
-eacb05ff       4323  scripts/remotion/render.sh
+4faab996       4347  scripts/remotion/render.sh
 83b5d603       3603  scripts/remotion/src/BrollDong.tsx
 06a547a8       2730  scripts/remotion/src/CaptionOverVideo.tsx
 1b2cbb19      10876  scripts/remotion/src/IconOverlay.tsx
@@ -187,6 +188,6 @@ b4acabfd       4169  scripts/remotion/src/IconStory.tsx
 95bc8aff        404  scripts/remotion/src/fonts.ts
 d92d9dee        109  scripts/remotion/src/index.ts
 db41ee37        427  scripts/remotion/tsconfig.json
-e970f917       3599  scripts/render-broll-dong.sh
-17e625a1       7290  scripts/upload.sh
+a9a17beb       3653  scripts/render-broll-dong.sh
+3c0006e6       7747  scripts/upload.sh
 3760ac20       7218  scripts/verify-export.sh
