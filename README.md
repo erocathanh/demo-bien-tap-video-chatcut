@@ -1,8 +1,8 @@
-# demo-bien-tap-video-chatcut
+# demo-bien-tap-video-chatcut — TĂNG TỐC SẢN XUẤT VÀ BIÊN TẬP VIDEO
 
 > 🤖 AI agent: đọc mục **«Dành cho AI agent»** ở cuối tệp này trước khi làm gì khác.
 
-Làm video dọc 1080×1920 bằng cách **nói với Claude**. Bạn không cần biết dựng phim, không cần mở phần mềm nào khác.
+Gói này giúp bạn tăng tốc sản xuất và biên tập video: làm video dọc 1080×1920 bằng cách **nói với Claude**. Bạn không cần biết dựng phim, không cần mở phần mềm nào khác.
 
 | Bạn sẽ làm được | Trông như thế nào (bản mẫu có sẵn trong gói) | Mất bao lâu |
 |---|---|---|
