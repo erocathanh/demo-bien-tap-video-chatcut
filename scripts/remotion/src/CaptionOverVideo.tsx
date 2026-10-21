@@ -26,7 +26,8 @@ const CaptionBar: React.FC<{ cue: CaptionCue; frame: number }> = ({ cue, frame }
     extrapolateRight: "clamp",
   });
   return (
-    <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 320 }}>
+    // caption block centred 1/4 up from the bottom (Owner rule 21/10/2026 for 9:16): the band 960-1920 has its centre at 1440
+    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingTop: 960 }}>
       <div
         style={{
           maxWidth: "86%",
@@ -48,8 +49,10 @@ const CaptionBar: React.FC<{ cue: CaptionCue; frame: number }> = ({ cue, frame }
           }}
         >
           {cue.words.map((w, i) => (
+            // <wbr/> between words: a long cue may wrap at word boundaries, a short one renders exactly as before
+            <React.Fragment key={i}>
+            {i > 0 ? <wbr /> : null}
             <span
-              key={i}
               style={{
                 color: w.hot ? GOLD : CREAM,
                 opacity: t >= w.reveal ? 1 : 0.22,
@@ -60,6 +63,7 @@ const CaptionBar: React.FC<{ cue: CaptionCue; frame: number }> = ({ cue, frame }
             >
               {w.text}
             </span>
+            </React.Fragment>
           ))}
         </span>
       </div>

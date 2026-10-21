@@ -357,7 +357,9 @@ export const IconStage: React.FC<IconStageProps> = ({ scenes, captions, audio, f
       {scene && frame - scene.from >= (scene.blank ?? 0)
         ? scene.items.map((it, i) => <Item key={`${scene.id}-${i}`} it={it} f={frame - scene.from} theme={theme} />)
         : null}
-      {cap ? <Caption cap={cap} frame={frame} y={split ? 60 : 79} theme={theme} /> : null}
+      {/* caption 79 % in both layouts: 1/4 up from the bottom for 9:16 (Owner rule 21/10/2026); split used 60 %, on the
+          head of the person in the bottom-half clip */}
+      {cap ? <Caption cap={cap} frame={frame} y={79} theme={theme} /> : null}
     </AbsoluteFill>
   );
 };
