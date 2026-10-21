@@ -1,6 +1,6 @@
-# MANIFEST — demo-bien-tap-video-chatcut v3.1.2 (2026-10-08 20:41 London)
+# MANIFEST — demo-bien-tap-video-chatcut v3.1.4 (2026-10-21 15:12 London)
 
-Băm từ commit `e1f4f35` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
+Băm từ commit `8e57982` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
 
 md5(8)    cỡ(byte)  tệp
 6ad044b2         71  .gitattributes
@@ -9,7 +9,7 @@ md5(8)    cỡ(byte)  tệp
 e0c4295c       6666  README-CAI-MOI-WINDOWS.md
 5b257e40       5714  README-CAI-MOI.md
 22afc8bf       6619  README.md
-1771b04d      30076  SKILL.md
+e526ba6c      31510  SKILL.md
 945846a3    2211558  assets/b-roll/broll-1-dong.mp4
 40ed58a5        100  assets/b-roll/broll-1.props.json
 4ce52276    1775700  assets/b-roll/broll-2-dong.mp4
@@ -179,10 +179,10 @@ fcde9b09    1064492  scripts/remotion/public/tieng-video-2-moi.mp3
 3810fe12        117  scripts/remotion/remotion.config.ts
 4faab996       4347  scripts/remotion/render.sh
 83b5d603       3603  scripts/remotion/src/BrollDong.tsx
-06a547a8       2730  scripts/remotion/src/CaptionOverVideo.tsx
+f26adaf2       3049  scripts/remotion/src/CaptionOverVideo.tsx
 1b2cbb19      10876  scripts/remotion/src/IconOverlay.tsx
 c13f350f      10536  scripts/remotion/src/IconOverlayParts.tsx
-a29cff03      15215  scripts/remotion/src/IconStage.tsx
+2c79606e      15380  scripts/remotion/src/IconStage.tsx
 b4acabfd       4169  scripts/remotion/src/IconStory.tsx
 85338562       1489  scripts/remotion/src/Root.tsx
 95bc8aff        404  scripts/remotion/src/fonts.ts
