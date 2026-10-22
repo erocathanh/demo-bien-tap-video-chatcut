@@ -5,7 +5,7 @@ description: Tăng tốc sản xuất và biên tập video - làm video dọc 1
 
 # demo-bien-tap-video-chatcut — tăng tốc sản xuất và biên tập video bằng cách nói với Claude
 
-> 👤 **Phụ trách:** claude-video-ai-builder · 📅 **Tạo:** 2026-09-25 · 🔄 **Bản:** v3.1.4
+> 👤 **Phụ trách:** claude-video-ai-builder · 📅 **Tạo:** 2026-09-25 · 🔄 **Bản:** v3.1.5
 > Mọi đường dẫn tính từ thư mục chứa tệp này (gọi là `$SKILL_DIR`). Người dùng đọc `README.md`; tệp này là việc của Claude.
 
 ## 🗣️ Thuyết minh — áp cho MỌI bước (đọc trước tiên)
@@ -167,6 +167,12 @@ sửa theo **thẻ** (`read_captions` / `edit_captions`).
 ```
 Bản ra: `assets/ban-mau-da-ra/dien-tap-broll-dong-phu-de-broll.mp4` (md5 `29735955`, 32,04 giây).
 
+**Ngoại lệ có chủ của luật phụ đề 1/4** (anh chốt round-14 câu ③ Ⓒ lúc 07:37 22/10; luật gốc anh đặt 11:12 21/10: phụ đề video dọc ở khoảng 1/4 từ dưới lên, tức tâm 0,75):
+- Phụ đề trên cảnh b-roll ở công thức ③ giữ y 1255–1360, tâm 0,68 chiều cao.
+- Lý do: nó phải trùng phụ đề in sẵn trong phim mẫu của buổi học. Chỉ dời được khi dựng lại phim mẫu, rồi đo lại bài demo.
+- Chỗ này cao hơn mức 1/4, nên không bị nút và chữ chú thích của nền tảng ở đáy màn che.
+- Preset phụ đề của «Video icon kể chuyện» có tâm 0,798, đã nằm trong dải 1/4, nên không phải ngoại lệ.
+
 ### ④ Hỏng thì làm gì
 | dấu hiệu | nói với người dùng / làm gì |
 |---|---|
@@ -248,3 +254,4 @@ bash scripts/kiem-manifest.sh --write && git add MANIFEST.md && git commit -m "R
 - **2026-10-08** v3.1.2 — claude-video-studio-pm (thay claude-video-ai-builder vắng ghế; lệnh Owner qua claude-giao-trinh-eeat 18:4x 08/10 «nhấn mạnh là TĂNG TỐC SẢN XUẤT VÀ BIÊN TẬP VIDEO»): tiêu đề + câu mở README, tiêu đề + mô tả SKILL đổi sang «tăng tốc sản xuất và biên tập video»; thêm hai từ khoá gợi «tăng tốc sản xuất video», «tăng tốc biên tập video». Không đổi quy trình.
 - **2026-10-21** v3.1.3 — claude-video-ai-builder (giao việc claude-video-studio-pm 11:26 21/10, luật anh Thanh 11:12 21/10 «phụ đề video dọc 9:16 ở khoảng 1/4 từ dưới lên»): `scripts/remotion/src/CaptionOverVideo.tsx` đặt tâm khối phụ đề ở y 1440 (trước cách đáy 320 px, tâm 0,803; sau 0,750, đo bằng hai khung dựng có và không có phụ đề); `scripts/remotion/src/IconStage.tsx` cảnh chia đôi dùng y 79 % như cảnh đầy (trước 60 %, đè lên đầu người trong nửa dưới; sau 0,790). Hai preset phụ đề ChatCut trong tệp này GIỮ NGUYÊN, chờ anh quyết: «Video icon kể chuyện» (tâm 0,798, đã trong dải) và b-roll (tâm 0,68, khớp phụ đề in sẵn của phim mẫu y 1255–1360). Bản lùi: `/Users/erocathanh/Development/sao-luu-phu-de-1-4-20261021/`.
 - **2026-10-21** v3.1.4 — claude-video-ai-builder (PM claude-video-studio-pm gật 12:24 21/10): `scripts/remotion/src/CaptionOverVideo.tsx` xuống dòng được khi khúc phụ đề dài — thêm `<wbr/>` giữa các chữ (trước đây các chữ là span liền nhau, không có chỗ ngắt, khúc dài tràn ra khỏi khung). Đo: khúc 5 chữ trùng từng điểm ảnh với trước khi vá (0 điểm khác); khúc 14 chữ xuống ba dòng, nằm trong x 76–1003, tâm 0,750. Bản lùi: `/Users/erocathanh/Development/sao-luu-phu-de-1-4-20261021/`.
+- **2026-10-22** v3.1.5 — claude-video-ai-builder, thi hành round-14 câu ③ Ⓒ (anh chốt 07:37 22/10; claude-video-studio-pm giao 06:39:44Z): ghi ngoại lệ có chủ của luật phụ đề 1/4 cho phụ đề b-roll ở công thức ③ (tâm 0,68, trùng phụ đề in sẵn của phim mẫu), kèm lý do nêu ở câu ③. Preset «Video icon kể chuyện» (tâm 0,798) nằm trong dải, không phải ngoại lệ, nên hết chờ. Thông số phụ đề KHÔNG đổi. Bản lùi: `/Users/erocathanh/Development/sao-luu-references-skill-20261022/demo-bien-tap-video-chatcut-SKILL.md.v3.1.4` (md5 e526ba6c) · `demo-bien-tap-video-chatcut-MANIFEST.md.v3.1.4` (md5 dad77970).
