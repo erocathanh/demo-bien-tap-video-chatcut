@@ -1,6 +1,6 @@
-# MANIFEST — demo-bien-tap-video-chatcut v3.1.5 (2026-10-22 07:59 London)
+# MANIFEST — demo-bien-tap-video-chatcut v3.1.6 (2026-11-03 08:11 London)
 
-Băm từ commit `3066f57` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
+Băm từ commit `89a9fa5` — commit ngay trước commit ghi tệp này (tệp này tự nó không nằm trong danh sách). Kiểm lại: `bash scripts/kiem-manifest.sh`
 
 md5(8)    cỡ(byte)  tệp
 6ad044b2         71  .gitattributes
@@ -9,7 +9,7 @@ md5(8)    cỡ(byte)  tệp
 e0c4295c       6666  README-CAI-MOI-WINDOWS.md
 5b257e40       5714  README-CAI-MOI.md
 22afc8bf       6619  README.md
-569dbaf1      32943  SKILL.md
+940944e6      33609  SKILL.md
 945846a3    2211558  assets/b-roll/broll-1-dong.mp4
 40ed58a5        100  assets/b-roll/broll-1.props.json
 4ce52276    1775700  assets/b-roll/broll-2-dong.mp4
